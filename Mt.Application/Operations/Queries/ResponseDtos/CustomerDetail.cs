@@ -1,6 +1,7 @@
 ﻿namespace Mt.Application.Operations.Queries.ResponseDtos
 {
-    class CustomerDetail
+    public class CustomerDetail
     {
+
     }
 }
