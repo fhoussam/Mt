@@ -5,8 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Operations\Commands\" />
-    <Folder Include="Operations\Queries\RequestDtos\" />
+    <Compile Remove="Operations\Queries\RequestDtos\**" />
+    <EmbeddedResource Remove="Operations\Queries\RequestDtos\**" />
+    <None Remove="Operations\Queries\RequestDtos\**" />
   </ItemGroup>
 
   <ItemGroup>

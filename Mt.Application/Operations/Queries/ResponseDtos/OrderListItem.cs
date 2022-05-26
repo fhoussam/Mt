@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mt.Application.Operations.Queries.ResponseDtos
 {
-    class OrderListItem
+    public class OrderListItem
     {
+        public string ContactName { get; set; }
+        public DateTime? OrderDate { get; set; }
+        public int ProductsCount { get; set; }
     }
 }
