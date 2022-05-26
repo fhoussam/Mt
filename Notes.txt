@@ -1,5 +1,25 @@
-blc :
+*shorts
+
+ef/sql
 	scaffolding db context : dotnet ef dbcontext scaffold "Data Source=DESKTOP-AA9JR1F\SQLEXPRESS;Initial Catalog=NORTHWND;Integrated Security=True" Microsoft.EntityFrameworkCore.SqlServer --context-dir Persistence --output-dir Models --context NorthWindDbContext
 	services.AddMediatR(); ambigious and required going from both packages (mediatr and dependency injection) version 10 down to 6
 	ssms would connect, had to use sql manager to start the sql server instance which was shut down
 	sql server manager can be found here : "C:\Users\ferta\OneDrive\Desktop\SQLServerManager14.msc - Shortcut.lnk"
+
+powershell : 
+	starting script with admin grants : executing script with admin grants : if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit }
+	to run from solution explorer, install vs pluging : Run With PowerShell
+
+****************************************************
+
+*scenarios 
+
+powershell :
+	understanding why powershell script wont work :
+		created a ps script with a basic ping command 
+		executing script open ps window and closes it immediately 
+		to debug what is going on, we use win + R and then put the following command
+		PowerShell -NoExit "C:\Users\ferta\source\repos\fhoussam\Mt\StartAngular.ps1"
+		Error message is clearer and we understood that we dont have some kind of access
+		turned out we needed to execute the following command to allow ps to execute on ther machine 
+		run ps with admin mode and run : set-executionpolicy remotesigned
