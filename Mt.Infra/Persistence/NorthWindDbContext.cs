@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Mt.Application.Persistence;
 using Mt.Domain.Entities;
+using System.Threading.Tasks;
 
 #nullable disable
 
@@ -15,6 +16,11 @@ namespace Mt.Infra.Persistence
         public NorthWindDbContext(DbContextOptions<NorthWindDbContext> options)
             : base(options)
         {
+        }
+
+        public async Task SaveChangesAsync() 
+        {
+            await base.SaveChangesAsync();
         }
 
         public virtual DbSet<AlphabeticalListOfProduct> AlphabeticalListOfProducts { get; set; }

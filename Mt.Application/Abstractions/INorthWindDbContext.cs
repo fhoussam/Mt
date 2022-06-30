@@ -5,6 +5,7 @@ namespace Mt.Application.Persistence
 {
     public interface INorthWindDbContext
     {
+        System.Threading.Tasks.Task SaveChangesAsync();
         DbSet<AlphabeticalListOfProduct> AlphabeticalListOfProducts { get; set; }
         DbSet<Category> Categories { get; set; }
         DbSet<CategorySalesFor1997> CategorySalesFor1997s { get; set; }

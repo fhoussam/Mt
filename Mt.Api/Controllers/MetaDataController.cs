@@ -18,10 +18,18 @@ namespace Mt.Api.Controllers
         }
 
         [HttpGet]
-        [Route("metaDataType")]
-        public async Task<IActionResult> Get(MetaDataTypes metaDataType)
+        [Route("countries")]
+        public async Task<IActionResult> GetCountries()
         {
-            var result = await _mediator.Send(new GetMetaDataQuery(metaDataType));
+            var result = await _mediator.Send(new GetMetaDataQuery(MetaDataTypes.Countries));
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("cities")]
+        public async Task<IActionResult> GetCities()
+        {
+            var result = await _mediator.Send(new GetMetaDataQuery(MetaDataTypes.Cities));
             return Ok(result);
         }
     }

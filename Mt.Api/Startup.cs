@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Mt.Application.Persistence;
 using Mt.Infra.Persistence;
+using System.Text.Json.Serialization;
 
 namespace Mt.Api
 {
@@ -28,7 +29,12 @@ namespace Mt.Api
 
             services.AddMediatR();
 
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(opts =>
+            {
+                var enumConverter = new JsonStringEnumConverter();
+                opts.JsonSerializerOptions.Converters.Add(enumConverter);
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Mt.Api", Version = "v1" });

@@ -29,7 +29,7 @@ namespace Mt.Application.Operations.Commands
 
             public async Task<Unit> Handle(EditCustomerCommand request, CancellationToken cancellationToken)
             {
-                if (string.IsNullOrEmpty(request.Id))
+                if (!string.IsNullOrEmpty(request.Id))
                 {
                     var toEdit = _context.Customers.Find(request.Id);
                     toEdit.EditCustomer
@@ -55,6 +55,8 @@ namespace Mt.Application.Operations.Commands
                     );
                     await _context.Customers.AddAsync(toAdd);
                 }
+
+                await _context.SaveChangesAsync();
 
                 return Unit.Value;
             }
