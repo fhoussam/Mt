@@ -29,6 +29,8 @@ namespace Mt.Api
 
             services.AddMediatR();
 
+            services.AddCors();
+
             services.AddControllers().AddJsonOptions(opts =>
             {
                 var enumConverter = new JsonStringEnumConverter();
@@ -52,6 +54,8 @@ namespace Mt.Api
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors(x => x.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
 
             app.UseRouting();
 
