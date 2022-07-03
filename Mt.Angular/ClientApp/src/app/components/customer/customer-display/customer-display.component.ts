@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { CustomerDetailModel } from '../../../models/customer-detail-model';
 import { CustomerService } from '../../../services/customer.service';
 
@@ -7,13 +7,18 @@ import { CustomerService } from '../../../services/customer.service';
     templateUrl: './customer-display.component.html',
     styleUrls: ['./customer-display.component.css']
 })
-export class CustomerDisplayComponent implements OnInit {
+export class CustomerDisplayComponent implements OnChanges {
 
     constructor(private customerService: CustomerService) { }
-    customer: CustomerDetailModel 
+    customer: CustomerDetailModel
+    @Input() id: string;
+    @Output() onActivateEditMode = new EventEmitter<void>();
 
-    ngOnInit() {
-        this.customerService.getCustomerById("ALFKI").subscribe(x => this.customer = x);
+    ngOnChanges() {
+        this.customerService.getCustomerById(this.id).subscribe(x => this.customer = x);
     }
 
+    activateEditMode() {
+        this.onActivateEditMode.emit();
+    }
 }

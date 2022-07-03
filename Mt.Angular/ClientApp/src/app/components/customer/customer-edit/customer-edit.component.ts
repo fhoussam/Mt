@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { CustomerEditModel } from '../../../models/customer-edit-model';
 import { CustomerService } from '../../../services/customer.service';
 
@@ -7,17 +7,22 @@ import { CustomerService } from '../../../services/customer.service';
     templateUrl: './customer-edit.component.html',
     styleUrls: ['./customer-edit.component.css']
 })
-export class CustomerEditComponent implements OnInit {
+export class CustomerEditComponent implements OnChanges {
 
     constructor(private customerService: CustomerService) { }
     customer: CustomerEditModel;
-    id = "VICTE";
+    @Input() id: string;
+    @Output() onCancelEdit = new EventEmitter<void>();
 
-    ngOnInit() {
+    ngOnChanges() {
         this.customerService.getCustomerByIdForEdit(this.id).subscribe(x => this.customer = x);
     }
 
     editCustomer() {
         this.customerService.editCustomer(this.id, this.customer).subscribe(x=> console.log("customer data saved"));
+    }
+
+    cancelEdit() {
+        this.onCancelEdit.emit();
     }
 }

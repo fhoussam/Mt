@@ -10,7 +10,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let customer of customers">
+            <tr 
+                *ngFor="let customer of customers" 
+                (click)="selectCustomer(customer.customerId)" 
+                style="cursor:pointer"
+                [ngClass]="{'tr-selected': customer.customerId === selectedId}"
+                >
                 <td>{{customer.customerId}}</td>
                 <td>{{customer.companyName}}</td>
                 <td>{{customer.contactName}}</td>
@@ -19,7 +24,6 @@
             </tr>
         </tbody>
     </table>
-    <app-customer-display class="col-md-6" style="display:none"></app-customer-display>
-    <app-customer-edit class="col-md-5"></app-customer-edit>
+    <app-customer-display *ngIf="!editMode && selectedId" [id]="selectedId" (onActivateEditMode)="setEditMode(true)" class="col-md-6"></app-customer-display>
+    <app-customer-edit *ngIf="editMode && selectedId" [id]="selectedId" (onCancelEdit)="setEditMode(false)" class="col-md-5"></app-customer-edit>
 </div>
-

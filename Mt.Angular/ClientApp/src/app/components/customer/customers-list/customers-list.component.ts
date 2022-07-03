@@ -10,9 +10,19 @@ import { CustomerService } from '../../../services/customer.service';
 export class CustomersListComponent implements OnInit {
 
     constructor(private customerService: CustomerService) { }
-    customers: CustomerListModel[]
+    customers: CustomerListModel[];
+    selectedId: string;
+    editMode: boolean;
 
     ngOnInit() {
         this.customerService.getCustomers().subscribe(x => this.customers = x);
+    }
+
+    selectCustomer(selectedId: string) {
+        this.selectedId = selectedId;
+    }
+
+    setEditMode(activated:boolean) {
+        this.editMode = activated;
     }
 }
