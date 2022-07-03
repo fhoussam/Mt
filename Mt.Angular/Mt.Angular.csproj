@@ -24,11 +24,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\models\customer-detail-model.ts" />
+    <None Remove="ClientApp\src\app\models\customer-edit-model.ts" />
     <None Remove="ClientApp\src\app\models\customer-list-model.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\models\customer-edit-model.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\models\customer-list-model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\customer-detail-model.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

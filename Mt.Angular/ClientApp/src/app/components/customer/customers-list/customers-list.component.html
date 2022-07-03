@@ -1,23 +1,25 @@
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Company Name</th>
-            <th scope="col">Contact Name</th>
-            <th scope="col">Contact Title</th>
-            <th scope="col">Country</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let customer of customers">
-            <td>{{customer.customerId}}</td>
-            <td>{{customer.companyName}}</td>
-            <td>{{customer.contactName}}</td>
-            <td>{{customer.contactTitle}}</td>
-            <td>{{customer.country}}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="row">
+    <table class="table table-bordered col-md-6">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Company Name</th>
+                <th scope="col">Contact Name</th>
+                <th scope="col">Contact Title</th>
+                <th scope="col">Country</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let customer of customers">
+                <td>{{customer.customerId}}</td>
+                <td>{{customer.companyName}}</td>
+                <td>{{customer.contactName}}</td>
+                <td>{{customer.contactTitle}}</td>
+                <td>{{customer.country}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <app-customer-display class="col-md-6" style="display:none"></app-customer-display>
+    <app-customer-edit class="col-md-5"></app-customer-edit>
+</div>
 
-<app-customer-display></app-customer-display>
-<app-customer-edit></app-customer-edit>

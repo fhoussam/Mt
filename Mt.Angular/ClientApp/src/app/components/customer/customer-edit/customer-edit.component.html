@@ -1,1 +1,53 @@
-<p>customer-edit works!</p>
+<form *ngIf="customer">
+    <div class="form-group row">
+        <label for="staticEmail" class="col-md-4 col-form-label">Company Name</label>
+        <div class="col-md-8">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Company Name"
+                   name="CompanyName"
+                   [(ngModel)]="customer.companyName">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="staticEmail" class="col-md-4 col-form-label">City</label>
+        <div class="col-md-8">
+            <input type="text"
+                   class="form-control"
+                   placeholder="City"
+                   name="city"
+                   [(ngModel)]="customer.city">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="staticEmail" class="col-md-4 col-form-label">Country</label>
+        <div class="col-md-8">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Country"
+                   name="Country"
+                   [(ngModel)]="customer.country">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="staticEmail" class="col-md-4 col-form-label">Postal Code</label>
+        <div class="col-md-8">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Postal Code"
+                   name="PostalCode"
+                   [(ngModel)]="customer.postalCode">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="staticEmail" class="col-md-4 col-form-label">Contact Name</label>
+        <div class="col-md-8">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Contact Name"
+                   name="ContactName"
+                   [(ngModel)]="customer.contactName">
+        </div>
+    </div>
+    <button type="button" (click)="editCustomer()" class="btn btn-primary">Save</button>
+</form>

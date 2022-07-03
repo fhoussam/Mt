@@ -26,6 +26,14 @@ namespace Mt.Api.Controllers
         }
 
         [HttpGet]
+        [Route("{id}/edit")]
+        public async Task<IActionResult> Edit([FromRoute] string id)
+        {
+            var result = await _mediator.Send(new GetCustomersByIdForEditQuery(id));
+            return Ok(result);
+        }
+
+        [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> GetById([FromRoute] string id)
         {

@@ -29,7 +29,7 @@ namespace Mt.Application.Operations.Queries
                     CustomerId = x.CustomerId,
                     ContactName = x.ContactName,
                     Country = x.Country
-                }).Take(10).ToArrayAsync();
+                }).Take(5).ToArrayAsync();
 
                 return result;
             }
