@@ -12,10 +12,13 @@ export class CustomersListComponent implements OnInit {
     constructor(private customerService: CustomerService) { }
     customers: CustomerListModel[];
     selectedId: string;
-    editMode: boolean;
+    editMode: boolean = true;
 
     ngOnInit() {
-        this.customerService.getCustomers().subscribe(x => this.customers = x);
+        this.customerService.getCustomers().subscribe(x => {
+            this.customers = x;
+            this.selectedId = this.customers[0].customerId;
+        });
     }
 
     selectCustomer(selectedId: string) {

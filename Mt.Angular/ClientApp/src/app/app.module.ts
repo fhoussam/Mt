@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -10,6 +10,11 @@ import { HomeComponent } from './home/home.component';
 import { CustomersListComponent } from './components/customer/customers-list/customers-list.component';
 import { CustomerEditComponent } from './components/customer/customer-edit/customer-edit.component';
 import { CustomerDisplayComponent } from './components/customer/customer-display/customer-display.component';
+import { InitLoadService } from './services/init-load.service';
+
+export function get_settings(initLoadService: InitLoadService) {
+    return () => initLoadService.getSettings();
+}
 
 @NgModule({
     declarations: [
@@ -29,7 +34,9 @@ import { CustomerDisplayComponent } from './components/customer/customer-display
             { path: 'customers', component: CustomersListComponent },
         ])
     ],
-    providers: [],
+    providers: [
+        { provide: APP_INITIALIZER, useFactory: get_settings, deps: [InitLoadService], multi: true }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
