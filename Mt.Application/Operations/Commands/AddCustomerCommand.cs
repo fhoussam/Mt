@@ -1,36 +1,35 @@
 ﻿using MediatR;
 using Mt.Application.Operations.Commands.RequestDtos;
 using Mt.Application.Persistence;
+using Mt.Domain.Entities;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Mt.Application.Operations.Commands
 {
-    public class EditCustomerCommand :IRequest<Unit>
+    public class AddCustomerCommand : IRequest<Unit>
     {
-        public EditCustomerCommand(string id, EditCustomerRequestDto customerValues)
+        public AddCustomerCommand(AddCustomerRequestDto customerValues)
         {
-            Id = id;
             CustomerValues = customerValues;
         }
 
-        public string Id { get; set; }
-        public EditCustomerRequestDto CustomerValues { get; set; }
+        public AddCustomerRequestDto CustomerValues { get; set; }
 
-        public class EditCustomerCommandHandler : IRequestHandler<EditCustomerCommand, Unit>
+        public class AddCustomerCommandHandler : IRequestHandler<AddCustomerCommand, Unit>
         {
             private readonly INorthWindDbContext _context;
 
-            public EditCustomerCommandHandler(INorthWindDbContext context)
+            public AddCustomerCommandHandler(INorthWindDbContext context)
             {
                 _context = context;
             }
 
-            public async Task<Unit> Handle(EditCustomerCommand request, CancellationToken cancellationToken)
+            public async Task<Unit> Handle(AddCustomerCommand request, CancellationToken cancellationToken)
             {
-                var toEdit = _context.Customers.Find(request.Id);
-                toEdit.EditCustomer
+                var toAdd = Customer.CreateCustomer
                 (
+                    request.CustomerValues.CustomerId,
                     request.CustomerValues.CompanyName,
                     request.CustomerValues.City,
                     request.CustomerValues.Country,
@@ -38,7 +37,7 @@ namespace Mt.Application.Operations.Commands
                     request.CustomerValues.ContactName
                 );
 
-                _context.Customers.Update(toEdit);
+                await _context.Customers.AddAsync(toAdd);
                 await _context.SaveChangesAsync();
                 return Unit.Value;
             }

@@ -29,6 +29,7 @@ namespace Mt.Application.Operations.Queries
                 var rawCustomer = await _context.Customers.FindAsync(request.Id);
                 var result = new EditCustomerRequestDto() 
                 {
+                    CustomerId = rawCustomer.CustomerId,
                     CompanyName = rawCustomer.CompanyName,
                     City = rawCustomer.City,
                     Country = rawCustomer.Country,

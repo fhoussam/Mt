@@ -1,5 +1,15 @@
 <form *ngIf="customer">
     <div class="form-group row">
+        <label for="staticEmail" class="col-md-4 col-form-label">Customer Id</label>
+        <div class="col-md-8">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Customer Id"
+                   name="CustomerId"
+                   [(ngModel)]="customer.customerId">
+        </div>
+    </div>
+    <div class="form-group row">
         <label for="staticEmail" class="col-md-4 col-form-label">Company Name</label>
         <div class="col-md-8">
             <input type="text"
@@ -13,9 +23,9 @@
         <label for="staticEmail" class="col-md-4 col-form-label">City</label>
         <div class="col-md-8">
             <select class="form-control"
-                   placeholder="City"
-                   name="city"
-                   [(ngModel)]="customer.city">
+                    placeholder="City"
+                    name="city"
+                    [(ngModel)]="customer.city">
                 <option *ngFor="let city of cities" value="{{city}}">{{city}}</option>
             </select>
         </div>
@@ -36,9 +46,9 @@
         <div class="col-md-8">
             <input type="text"
                    class="form-control"
-                   placeholder="Country"
-                   name="Country"
-                   [(ngModel)]="customer.country">
+                   placeholder="Postal Code"
+                   name="postalCode"
+                   [(ngModel)]="customer.postalCode">
         </div>
     </div>
     <div class="form-group row">

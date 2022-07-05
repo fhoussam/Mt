@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Mt.Api.Middlewares;
 using Mt.Application.Persistence;
 using Mt.Infra.Persistence;
 using System.Text.Json.Serialization;
@@ -54,6 +55,8 @@ namespace Mt.Api
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCustomExcptionHandler();
 
             app.UseCors(x => x.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
 

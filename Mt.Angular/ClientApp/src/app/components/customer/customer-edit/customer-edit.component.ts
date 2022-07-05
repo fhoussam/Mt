@@ -8,25 +8,34 @@ import { CustomerService } from '../../../services/customer.service';
     templateUrl: './customer-edit.component.html',
     styleUrls: ['./customer-edit.component.css']
 })
-export class CustomerEditComponent implements OnChanges {
+export class CustomerEditComponent implements OnChanges, OnInit {
 
     constructor(private customerService: CustomerService) { }
-    customer: CustomerEditModel;
+    customer: CustomerEditModel = new CustomerEditModel();
     cities: string[];
     countries: string[];
     @Input() id: string;
     @Output() onCancelEdit = new EventEmitter<void>();
+    @Output() onSave = new EventEmitter<void>();
+
+    ngOnInit(): void {
+        this.cities = APP_SETTINGS.cities;
+        this.countries = APP_SETTINGS.countries;
+    }
 
     ngOnChanges() {
-        this.customerService.getCustomerByIdForEdit(this.id).subscribe(x => {
-            this.customer = x;
-            this.cities = APP_SETTINGS.cities;
-            this.countries = APP_SETTINGS.countries;
-        });
+        if (this.id) {
+            this.customerService.getCustomerByIdForEdit(this.id).subscribe(x => {
+                this.customer = x;
+            });
+        }
     }
 
     editCustomer() {
-        this.customerService.editCustomer(this.id, this.customer).subscribe(x => console.log("customer data saved"));
+        this.customerService.editCustomer(this.id, this.customer).subscribe(x => {
+            this.onSave.emit();
+            console.log("customer data saved");
+        });
     }
 
     cancelEdit() {

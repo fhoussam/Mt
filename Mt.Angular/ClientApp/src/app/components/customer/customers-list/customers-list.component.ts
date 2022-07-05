@@ -13,12 +13,18 @@ export class CustomersListComponent implements OnInit {
     customers: CustomerListModel[];
     selectedId: string;
     editMode: boolean = true;
+    addModalTitle = "New Customer";
+    addModalActive = false;
 
     ngOnInit() {
         this.customerService.getCustomers().subscribe(x => {
             this.customers = x;
             this.selectedId = this.customers[0].customerId;
         });
+    }
+
+    toggleAddModal(active: boolean) {
+        this.addModalActive = active;
     }
 
     selectCustomer(selectedId: string) {

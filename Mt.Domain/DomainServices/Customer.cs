@@ -16,6 +16,7 @@
             ContactName = contactName;
         }
         public static Customer CreateCustomer(
+            string customerId,
             string companyName,
             string city,
             string country,
@@ -23,6 +24,7 @@
             string contactName)
         {
             var customer = new Customer();
+            customer.CustomerId = customerId;
             customer.CompanyName = companyName;
             customer.City = city;
             customer.Country = country;

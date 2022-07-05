@@ -1,3 +1,11 @@
+<div>
+    <app-modal *ngIf="addModalActive" [title]="addModalTitle" (dismiss)="toggleAddModal(false)">
+        <app-customer-edit (onCancelEdit)="toggleAddModal(false)" (onSave)="toggleAddModal(false)" class="col-md-5"></app-customer-edit>
+    </app-modal>
+</div>
+
+<button type="button" (click)="toggleAddModal(true)" class="btn btn-primary">New</button>
+<hr />
 <div class="row">
     <table class="table table-bordered col-md-6">
         <thead>
@@ -10,12 +18,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr 
-                *ngFor="let customer of customers" 
-                (click)="selectCustomer(customer.customerId)" 
+            <tr *ngFor="let customer of customers"
+                (click)="selectCustomer(customer.customerId)"
                 style="cursor:pointer"
-                [ngClass]="{'tr-selected': customer.customerId === selectedId}"
-                >
+                [ngClass]="{'tr-selected': customer.customerId === selectedId}">
                 <td>{{customer.customerId}}</td>
                 <td>{{customer.companyName}}</td>
                 <td>{{customer.contactName}}</td>

@@ -11,6 +11,7 @@ import { CustomersListComponent } from './components/customer/customers-list/cus
 import { CustomerEditComponent } from './components/customer/customer-edit/customer-edit.component';
 import { CustomerDisplayComponent } from './components/customer/customer-display/customer-display.component';
 import { InitLoadService } from './services/init-load.service';
+import { ModalComponent } from './components/shared/modal/modal.component';
 
 export function get_settings(initLoadService: InitLoadService) {
     return () => initLoadService.getSettings();
@@ -23,7 +24,8 @@ export function get_settings(initLoadService: InitLoadService) {
         HomeComponent,
         CustomersListComponent,
         CustomerEditComponent,
-        CustomerDisplayComponent
+        CustomerDisplayComponent,
+        ModalComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

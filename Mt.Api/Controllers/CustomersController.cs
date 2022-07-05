@@ -48,5 +48,12 @@ namespace Mt.Api.Controllers
             var result = await _mediator.Send(new EditCustomerCommand(id, customerValues));
             return Ok(result);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] AddCustomerRequestDto customerValues)
+        {
+            var result = await _mediator.Send(new AddCustomerCommand(customerValues));
+            return Ok(result);
+        }
     }
 }
