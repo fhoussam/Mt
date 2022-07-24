@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Mt.Application.Persistence;
+using Mt.Domain.Abstractions;
 using Mt.Domain.Entities;
+using System;
 using System.Threading.Tasks;
 
 #nullable disable
@@ -20,6 +22,23 @@ namespace Mt.Infra.Persistence
 
         public async Task SaveChangesAsync() 
         {
+            var currentDate = DateTime.Now;
+
+            foreach (var item in ChangeTracker.Entries())
+            {
+                if (item.Entity is ITimeTracked castedItem)
+                {
+                    if (item.State == EntityState.Added)
+                    {
+                        castedItem.CreationDate = currentDate;
+                    }
+                    else if (item.State == EntityState.Modified)
+                    {
+                        castedItem.ModificationDate = currentDate;
+                    }
+                }
+            }
+
             await base.SaveChangesAsync();
         }
 

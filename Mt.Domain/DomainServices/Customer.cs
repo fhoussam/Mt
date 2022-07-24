@@ -1,7 +1,12 @@
-﻿namespace Mt.Domain.Entities
+﻿using Mt.Domain.Abstractions;
+using System;
+
+namespace Mt.Domain.Entities
 {
-    partial class Customer
+    partial class Customer : ITimeTracked
     {
+        public DateTime CreationDate { get; set; }
+        public DateTime? ModificationDate { get; set; }
         public void EditCustomer(
             string companyName,
             string city,

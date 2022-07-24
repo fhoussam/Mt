@@ -22,14 +22,18 @@ namespace Mt.Application.Operations.Queries
 
             public async Task<IEnumerable<CustomerListItem>> Handle(GetCustomersQuery request, CancellationToken cancellationToken)
             {
-                var result = await _northWindDbContext.Customers.Select(x => new CustomerListItem()
+                var result = await _northWindDbContext
+                    .Customers
+                    .OrderByDescending(x=> x.CreationDate)
+                    .Select(x => new CustomerListItem()
                 { 
                     CompanyName = x.CompanyName,
                     ContactTitle = x.ContactTitle,
                     CustomerId = x.CustomerId,
                     ContactName = x.ContactName,
                     Country = x.Country
-                }).Take(5).ToArrayAsync();
+                }).Take(5)
+                .ToArrayAsync();
 
                 return result;
             }
