@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { CustomerListModel } from '../../../models/customer-list-model';
 import { CustomerService } from '../../../services/customer.service';
 
@@ -9,7 +9,7 @@ import { CustomerService } from '../../../services/customer.service';
 })
 export class CustomersListComponent implements OnInit {
 
-    constructor(private customerService: CustomerService) { }
+    constructor(private customerService: CustomerService, private renderer: Renderer2) { }
     customers: CustomerListModel[];
     selectedId: string;
     editMode: boolean = true;
@@ -21,6 +21,14 @@ export class CustomersListComponent implements OnInit {
             this.customers = x;
             this.selectedId = this.customers[0].customerId;
         });
+    }
+
+    setRowBgColor(el: any) {
+        this.renderer.addClass(el, 'tr-hover');
+    }
+
+    setBackBgColor(el: any) {
+        this.renderer.removeClass(el, 'tr-hover');
     }
 
     toggleAddModal(active: boolean) {

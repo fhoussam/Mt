@@ -15,8 +15,8 @@ export class CustomerEditComponent implements OnChanges, OnInit {
     cities: string[];
     countries: string[];
     @Input() id: string;
-    @Output() onCancelEdit = new EventEmitter<void>();
-    @Output() onSave = new EventEmitter<void>();
+    @Output() Cancel = new EventEmitter<void>();
+    @Output() Ok = new EventEmitter<void>();
 
     ngOnInit(): void {
         this.cities = APP_SETTINGS.cities;
@@ -33,12 +33,12 @@ export class CustomerEditComponent implements OnChanges, OnInit {
 
     editCustomer() {
         this.customerService.editCustomer(this.id, this.customer).subscribe(x => {
-            this.onSave.emit();
+            this.Ok.emit();
             console.log("customer data saved");
         });
     }
 
     cancelEdit() {
-        this.onCancelEdit.emit();
+        this.Cancel.emit();
     }
 }

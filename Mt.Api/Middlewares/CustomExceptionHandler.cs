@@ -21,11 +21,11 @@ namespace Mt.Api.Middlewares
             {
                 await _next(httpContext);
             }
-            catch (NotFoundException)
+            catch (NotFoundException e)
             {
                 httpContext.Response.StatusCode = 404;
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException e)
             {
                 httpContext.Response.StatusCode = 400;
             }

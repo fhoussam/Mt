@@ -10,6 +10,9 @@ powershell :
 	starting script with admin grants : executing script with admin grants : if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit }
 	to run from solution explorer, install vs pluging : Run With PowerShell
 
+Angular
+	when using a reference to a directive, delcaring it with # is what should done but passing it as param with # is not
+
 ****************************************************
 
 *scenarios 

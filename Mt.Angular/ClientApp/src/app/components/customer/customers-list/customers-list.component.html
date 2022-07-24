@@ -1,6 +1,6 @@
 <div>
     <app-modal *ngIf="addModalActive" [title]="addModalTitle" (dismiss)="toggleAddModal(false)">
-        <app-customer-edit (onCancelEdit)="toggleAddModal(false)" (onSave)="toggleAddModal(false)" class="col-md-5"></app-customer-edit>
+        <app-customer-edit (Cancel)="toggleAddModal(false)" (Ok)="toggleAddModal(false)" class="col-md-5"></app-customer-edit>
     </app-modal>
 </div>
 
@@ -19,7 +19,10 @@
         </thead>
         <tbody>
             <tr *ngFor="let customer of customers"
+                #customerTableRow
                 (click)="selectCustomer(customer.customerId)"
+                (mouseenter)="setRowBgColor(customerTableRow)"
+                (mouseout)="setBackBgColor(customerTableRow)"
                 style="cursor:pointer"
                 [ngClass]="{'tr-selected': customer.customerId === selectedId}">
                 <td>{{customer.customerId}}</td>
@@ -31,5 +34,5 @@
         </tbody>
     </table>
     <app-customer-display *ngIf="!editMode && selectedId" [id]="selectedId" (onActivateEditMode)="setEditMode(true)" class="col-md-6"></app-customer-display>
-    <app-customer-edit *ngIf="editMode && selectedId" [id]="selectedId" (onCancelEdit)="setEditMode(false)" class="col-md-5"></app-customer-edit>
+    <app-customer-edit *ngIf="editMode && selectedId" [id]="selectedId" (Cancel)="setEditMode(false)" class="col-md-5"></app-customer-edit>
 </div>
