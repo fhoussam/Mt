@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Mt.Application.Abstractions;
 using Mt.Application.Operations.Queries.ResponseDtos;
 using Mt.Application.Persistence;
 using System.Collections.Generic;
@@ -9,9 +10,12 @@ using System.Threading.Tasks;
 
 namespace Mt.Application.Operations.Queries
 {
-    public class GetCustomersQuery : IRequest<IEnumerable<CustomerListItem>>
+    public class GetCustomersQuery : IRequest<PageList<CustomerListItem>>, IPager
     {
-        public class GetCustomersQueryHandler : IRequestHandler<GetCustomersQuery, IEnumerable<CustomerListItem>>
+        public int PageIndex { get; set; }
+        public int PageSize { get; set; }
+
+        public class GetCustomersQueryHandler : IRequestHandler<GetCustomersQuery, PageList<CustomerListItem>>
         {
             private readonly INorthWindDbContext _northWindDbContext;
 
@@ -20,22 +24,29 @@ namespace Mt.Application.Operations.Queries
                 _northWindDbContext = northWindDbContext;
             }
 
-            public async Task<IEnumerable<CustomerListItem>> Handle(GetCustomersQuery request, CancellationToken cancellationToken)
+            public async Task<PageList<CustomerListItem>> Handle(GetCustomersQuery request, CancellationToken cancellationToken)
             {
-                var result = await _northWindDbContext
+                var content = await _northWindDbContext
                     .Customers
-                    .OrderByDescending(x=> x.CreationDate)
+                    .Skip(request.PageIndex * request.PageSize).Take(request.PageSize)
+                    .OrderByDescending(x => x.CreationDate)
                     .Select(x => new CustomerListItem()
-                { 
-                    CompanyName = x.CompanyName,
-                    ContactTitle = x.ContactTitle,
-                    CustomerId = x.CustomerId,
-                    ContactName = x.ContactName,
-                    Country = x.Country
-                }).Take(5)
+                    {
+                        CompanyName = x.CompanyName,
+                        ContactTitle = x.ContactTitle,
+                        CustomerId = x.CustomerId,
+                        ContactName = x.ContactName,
+                        Country = x.Country
+                    })
                 .ToArrayAsync();
 
-                return result;
+                var totalCount = await _northWindDbContext.Customers.CountAsync();
+
+                return new PageList<CustomerListItem>()
+                {
+                    Content = content,
+                    TotalCount = totalCount
+                };
             }
         }
     }

@@ -30,7 +30,8 @@ namespace Mt.Api.Middlewares
                 httpContext.Response.StatusCode = 400;
             }
             catch (Exception e)
-            { 
+            {
+                httpContext.Response.StatusCode = 500;
                 //log exception here
             }
         }

@@ -5,6 +5,7 @@ ef/sql
 	services.AddMediatR(); ambigious and required going from both packages (mediatr and dependency injection) version 10 down to 6
 	ssms would connect, had to use sql manager to start the sql server instance which was shut down
 	sql server manager can be found here : "C:\Users\ferta\OneDrive\Desktop\SQLServerManager14.msc - Shortcut.lnk"
+	error "The number of rows provided for a FETCH clause must be greater then zero" appears when skip and take accepts a zero
 
 powershell : 
 	starting script with admin grants : executing script with admin grants : if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit }
@@ -12,6 +13,7 @@ powershell :
 
 Angular
 	when using a reference to a directive, delcaring it with # is what should done but passing it as param with # is not
+	refreshPageCount works when init but not in ctor
 
 ****************************************************
 

@@ -12,6 +12,7 @@ import { CustomerEditComponent } from './components/customer/customer-edit/custo
 import { CustomerDisplayComponent } from './components/customer/customer-display/customer-display.component';
 import { InitLoadService } from './services/init-load.service';
 import { ModalComponent } from './components/shared/modal/modal.component';
+import { PagerComponent } from './components/shared/pager/pager.component';
 
 export function get_settings(initLoadService: InitLoadService) {
     return () => initLoadService.getSettings();
@@ -25,7 +26,8 @@ export function get_settings(initLoadService: InitLoadService) {
         CustomersListComponent,
         CustomerEditComponent,
         CustomerDisplayComponent,
-        ModalComponent
+        ModalComponent,
+        PagerComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

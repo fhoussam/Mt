@@ -7,32 +7,40 @@
 <button type="button" (click)="toggleAddModal(true)" class="btn btn-primary">New</button>
 <hr />
 <div class="row">
-    <table class="table table-bordered col-md-6">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Company Name</th>
-                <th scope="col">Contact Name</th>
-                <th scope="col">Contact Title</th>
-                <th scope="col">Country</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let customer of customers"
-                #customerTableRow
-                (click)="selectCustomer(customer.customerId)"
-                (mouseenter)="setRowBgColor(customerTableRow)"
-                (mouseout)="setBackBgColor(customerTableRow)"
-                style="cursor:pointer"
-                [ngClass]="{'tr-selected': customer.customerId === selectedId}">
-                <td>{{customer.customerId}}</td>
-                <td>{{customer.companyName}}</td>
-                <td>{{customer.contactName}}</td>
-                <td>{{customer.contactTitle}}</td>
-                <td>{{customer.country}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="col-md-6">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Company Name</th>
+                    <th scope="col">Contact Name</th>
+                    <th scope="col">Contact Title</th>
+                    <th scope="col">Country</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let customer of customers"
+                    #customerTableRow
+                    (click)="selectCustomer(customer.customerId)"
+                    (mouseenter)="setRowBgColor(customerTableRow)"
+                    (mouseout)="setBackBgColor(customerTableRow)"
+                    style="cursor:pointer"
+                    [ngClass]="{'tr-selected': customer.customerId === selectedId}">
+                    <td>{{customer.customerId}}</td>
+                    <td>{{customer.companyName}}</td>
+                    <td>{{customer.contactName}}</td>
+                    <td>{{customer.contactTitle}}</td>
+                    <td>{{customer.country}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <app-pager 
+                   *ngIf="customers" 
+                   (ChangePagerSettings)="onChangePagerSettings($event)" 
+                   totalCount="97" 
+                   selectedPageSize="5">
+        </app-pager>
+    </div>
     <app-customer-display *ngIf="!editMode && selectedId" [id]="selectedId" (onActivateEditMode)="setEditMode(true)" class="col-md-6"></app-customer-display>
     <app-customer-edit *ngIf="editMode && selectedId" [id]="selectedId" (Cancel)="setEditMode(false)" class="col-md-5"></app-customer-edit>
 </div>

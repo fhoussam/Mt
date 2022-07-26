@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { CustomerListModel } from '../../../models/customer-list-model';
+import { PagerSetting } from '../../../models/PagerSetting';
 import { CustomerService } from '../../../services/customer.service';
 
 @Component({
@@ -15,10 +16,16 @@ export class CustomersListComponent implements OnInit {
     editMode: boolean = true;
     addModalTitle = "New Customer";
     addModalActive = false;
+    totalCount: number;
 
     ngOnInit() {
-        this.customerService.getCustomers().subscribe(x => {
-            this.customers = x;
+        this.loadCustomers(0, 5);
+    }
+
+    loadCustomers(pageIndex, pageSize) {
+        this.customerService.getCustomers(pageIndex, pageSize).subscribe(x => {
+            this.customers = x.content;
+            this.totalCount = x.totalCount;
             this.selectedId = this.customers[0].customerId;
         });
     }
@@ -41,5 +48,13 @@ export class CustomersListComponent implements OnInit {
 
     setEditMode(activated:boolean) {
         this.editMode = activated;
+    }
+
+    onChangePagerSettings(pagerSetting: PagerSetting) {
+        
+        if (pagerSetting.pageSize === undefined)
+            pagerSetting.pageSize = 5;
+
+        this.loadCustomers(pagerSetting.pageIndex, pagerSetting.pageSize);
     }
 }

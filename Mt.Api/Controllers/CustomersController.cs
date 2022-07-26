@@ -19,9 +19,9 @@ namespace Mt.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] GetCustomersQuery getCustomersQuery)
         {
-            var result = await _mediator.Send(new GetCustomersQuery());
+            var result = await _mediator.Send(getCustomersQuery);
             return Ok(result);
         }
 

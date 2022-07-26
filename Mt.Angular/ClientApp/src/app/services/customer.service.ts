@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { CustomerDetailModel } from '../models/customer-detail-model';
 import { CustomerEditModel } from '../models/customer-edit-model';
 import { CustomerListModel } from '../models/customer-list-model';
+import { PagedList } from '../models/PagedList';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,8 @@ export class CustomerService {
         return CustomerService.baseUrl + path;
     }
 
-    getCustomers(): Observable<CustomerListModel[]> {
-        return this.http.get<CustomerListModel[]>(this.fullUrl("customers"));
+    getCustomers(pageIndex: number, pageSize: number): Observable<PagedList<CustomerListModel>> {
+        return this.http.get<PagedList<CustomerListModel>>(this.fullUrl("customers?PageIndex=" + pageIndex + "&PageSize=" + pageSize));
     }
 
     getCustomerById(id: string): Observable<CustomerDetailModel> {
