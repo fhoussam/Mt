@@ -31,46 +31,22 @@ namespace Mt.Application.Operations.Queries
 
             public async Task<PageList<CustomerListItem>> Handle(GetCustomersQuery request, CancellationToken cancellationToken)
             {
-                if (!Enum.TryParse<CustomersSortFields>(request.SortField, true, out var sortField))
-                    sortField = CustomersSortFields.Unknown;
-
                 request.Desc = request.Desc ?? false;
+                Expression<Func<Customer, object>> expression = getSortExpression(request.SortField);
 
-                Expression<Func<Customer, object>> expression = x => x.CreationDate;
-
-                switch (sortField)
-                {
-                    case CustomersSortFields.CompanyName:
-                        expression = x => x.CompanyName;
-                        break;
-                    case CustomersSortFields.ContactTitle:
-                        expression = x => x.ContactTitle;
-                        break;
-                    case CustomersSortFields.CustomerId:
-                        expression = x => x.CustomerId;
-                        break;
-                    case CustomersSortFields.ContactName:
-                        expression = x => x.ContactName;
-                        break;
-                    case CustomersSortFields.Country:
-                        expression = x => x.Country;
-                        break;
-                }
-
-                var query = _northWindDbContext
+                var content = await _northWindDbContext
                     .Customers
                     .OrderBy(expression, request.Desc.Value)
-                    .Skip(request.PageIndex * request.PageSize).Take(request.PageSize);
-
-                var content = await query.Select(x => new CustomerListItem()
-                {
-                    CompanyName = x.CompanyName,
-                    ContactTitle = x.ContactTitle,
-                    CustomerId = x.CustomerId,
-                    ContactName = x.ContactName,
-                    Country = x.Country
-                })
-                .ToArrayAsync();
+                    .Skip(request.PageIndex * request.PageSize).Take(request.PageSize)
+                    .Select(x => new CustomerListItem()
+                    {
+                        CompanyName = x.CompanyName,
+                        ContactTitle = x.ContactTitle,
+                        CustomerId = x.CustomerId,
+                        ContactName = x.ContactName,
+                        Country = x.Country
+                    })
+                    .ToArrayAsync();
 
                 var totalCount = await _northWindDbContext.Customers.CountAsync();
 
@@ -79,6 +55,35 @@ namespace Mt.Application.Operations.Queries
                     Content = content,
                     TotalCount = totalCount
                 };
+
+                static Expression<Func<Customer, object>> getSortExpression(string sortField)
+                {
+                    if (!Enum.TryParse<CustomersSortFields>(sortField, true, out var parsedSortField))
+                        parsedSortField = CustomersSortFields.Unknown;
+
+                    Expression<Func<Customer, object>> expression = x => x.CreationDate;
+
+                    switch (parsedSortField)
+                    {
+                        case CustomersSortFields.CompanyName:
+                            expression = x => x.CompanyName;
+                            break;
+                        case CustomersSortFields.ContactTitle:
+                            expression = x => x.ContactTitle;
+                            break;
+                        case CustomersSortFields.CustomerId:
+                            expression = x => x.CustomerId;
+                            break;
+                        case CustomersSortFields.ContactName:
+                            expression = x => x.ContactName;
+                            break;
+                        case CustomersSortFields.Country:
+                            expression = x => x.Country;
+                            break;
+                    }
+
+                    return expression;
+                }
             }
         }
     }
