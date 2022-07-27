@@ -5,4 +5,14 @@
         Countries = 1,
         Cities = 2,
     }
+
+    public enum CustomersSortFields
+    {
+        CompanyName,
+        ContactTitle,
+        CustomerId,
+        ContactName,
+        Country,
+        Unknown
+    }
 }

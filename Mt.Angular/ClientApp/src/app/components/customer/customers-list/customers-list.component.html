@@ -1,4 +1,4 @@
-<div>
+﻿<div>
     <app-modal *ngIf="addModalActive" [title]="addModalTitle" (dismiss)="toggleAddModal(false)">
         <app-customer-edit (Cancel)="toggleAddModal(false)" (Ok)="toggleAddModal(false)" class="col-md-5"></app-customer-edit>
     </app-modal>
@@ -12,10 +12,26 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Company Name</th>
-                    <th scope="col">Contact Name</th>
-                    <th scope="col">Contact Title</th>
-                    <th scope="col">Country</th>
+                    <th scope="col" (click)="setSortField('companyName')" style="cursor:pointer">
+                        <span>Company Name</span>
+                        <span *ngIf="desc && sortField === 'companyName'">⮝</span>
+                        <span *ngIf="!desc && sortField === 'companyName'">⮟</span>
+                    </th>
+                    <th scope="col" (click)="setSortField('contactName')" style="cursor:pointer">
+                        <span>Contact Name</span>
+                        <span *ngIf="desc && sortField === 'contactName'">⮝</span>
+                        <span *ngIf="!desc && sortField === 'contactName'">⮟</span>
+                    </th>
+                    <th scope="col" (click)="setSortField('contactTitle')" style="cursor:pointer">
+                        <span>Contact Title</span>
+                        <span *ngIf="desc && sortField === 'contactTitle'">⮝</span>
+                        <span *ngIf="!desc && sortField === 'contactTitle'">⮟</span>
+                    </th>
+                    <th scope="col" (click)="setSortField('country')" style="cursor:pointer">
+                        <span>Country</span>
+                        <span *ngIf="desc && sortField === 'country'">⮝</span>
+                        <span *ngIf="!desc && sortField === 'country'">⮟</span>
+                    </th>
                 </tr>
             </thead>
             <tbody>

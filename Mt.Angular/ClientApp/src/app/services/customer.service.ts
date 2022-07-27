@@ -17,8 +17,13 @@ export class CustomerService {
         return CustomerService.baseUrl + path;
     }
 
-    getCustomers(pageIndex: number, pageSize: number): Observable<PagedList<CustomerListModel>> {
-        return this.http.get<PagedList<CustomerListModel>>(this.fullUrl("customers?PageIndex=" + pageIndex + "&PageSize=" + pageSize));
+    getCustomers(pageIndex: number, pageSize: number, sortField: string = null, desc: boolean = null): Observable<PagedList<CustomerListModel>> {
+        let url = "customers?PageIndex=" + pageIndex + "&PageSize=" + pageSize + "&SortField=" + sortField;
+
+        if (desc != null)
+            url += "&Desc=" + desc;
+
+        return this.http.get<PagedList<CustomerListModel>>(this.fullUrl(url));
     }
 
     getCustomerById(id: string): Observable<CustomerDetailModel> {

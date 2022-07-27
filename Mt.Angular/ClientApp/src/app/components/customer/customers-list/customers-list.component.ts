@@ -17,13 +17,29 @@ export class CustomersListComponent implements OnInit {
     addModalTitle = "New Customer";
     addModalActive = false;
     totalCount: number;
+    sortField: string;
+    desc: boolean = false;
+    pagerSetting: PagerSetting;
 
     ngOnInit() {
-        this.loadCustomers(0, 5);
+        this.pagerSetting = new PagerSetting();
+        this.reload();
     }
 
-    loadCustomers(pageIndex, pageSize) {
-        this.customerService.getCustomers(pageIndex, pageSize).subscribe(x => {
+    setSortField(sortField: string) {
+
+        if (sortField === this.sortField) {
+            this.desc = !this.desc;
+        }
+        else {
+            this.sortField = sortField;
+        }
+        
+        this.reload();
+    }
+
+    reload() {
+        this.customerService.getCustomers(this.pagerSetting.pageIndex, this.pagerSetting.pageSize, this.sortField, this.desc).subscribe(x => {
             this.customers = x.content;
             this.totalCount = x.totalCount;
             this.selectedId = this.customers[0].customerId;
@@ -55,6 +71,8 @@ export class CustomersListComponent implements OnInit {
         if (pagerSetting.pageSize === undefined)
             pagerSetting.pageSize = 5;
 
-        this.loadCustomers(pagerSetting.pageIndex, pagerSetting.pageSize);
+        this.pagerSetting = pagerSetting;
+
+        this.reload();
     }
 }
