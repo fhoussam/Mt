@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { PagerSetting } from '../../../models/PagerSetting';
 
 @Component({
@@ -6,7 +6,7 @@ import { PagerSetting } from '../../../models/PagerSetting';
     templateUrl: './pager.component.html',
     styleUrls: ['./pager.component.css']
 })
-export class PagerComponent implements OnInit {
+export class PagerComponent implements OnInit, OnChanges {
 
     @Input() totalCount: number;
     @Input() selectedPageSize: number;
@@ -59,6 +59,10 @@ export class PagerComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {
+        this.refreshPageCount();
+    }
+
+    ngOnChanges() {
         this.refreshPageCount();
     }
 }

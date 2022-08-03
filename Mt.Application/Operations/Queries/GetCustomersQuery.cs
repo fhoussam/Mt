@@ -19,6 +19,10 @@ namespace Mt.Application.Operations.Queries
         public int PageSize { get; set; }
         public string SortField { get; set; }
         public bool? Desc { get; set; }
+        public string City { get; set; }
+        public string CompanyName { get; set; }
+        public string Country { get; set; }
+        public string CustomerId { get; set; }
 
         public class GetCustomersQueryHandler : IRequestHandler<GetCustomersQuery, PageList<CustomerListItem>>
         {
@@ -32,11 +36,17 @@ namespace Mt.Application.Operations.Queries
             public async Task<PageList<CustomerListItem>> Handle(GetCustomersQuery request, CancellationToken cancellationToken)
             {
                 request.Desc = request.Desc ?? false;
-                Expression<Func<Customer, object>> expression = getSortExpression(request.SortField);
+                Expression<Func<Customer, object>> sortExpression = getSortExpression(request.SortField);
+                Expression<Func<Customer, bool>> whereExpression = x => true
+                        && (x.City == request.City || string.IsNullOrEmpty(request.City))
+                        && (x.Country == request.Country || string.IsNullOrEmpty(request.Country))
+                        && (x.CompanyName.Contains(request.CompanyName) || string.IsNullOrEmpty(request.CompanyName))
+                        && (x.CustomerId.StartsWith(request.CustomerId) || string.IsNullOrEmpty(request.CustomerId));
 
                 var content = await _northWindDbContext
                     .Customers
-                    .OrderBy(expression, request.Desc.Value)
+                    .Where(whereExpression)
+                    .OrderBy(sortExpression, request.Desc.Value)
                     .Skip(request.PageIndex * request.PageSize).Take(request.PageSize)
                     .Select(x => new CustomerListItem()
                     {
@@ -48,7 +58,7 @@ namespace Mt.Application.Operations.Queries
                     })
                     .ToArrayAsync();
 
-                var totalCount = await _northWindDbContext.Customers.CountAsync();
+                var totalCount = await _northWindDbContext.Customers.Where(whereExpression).CountAsync();
 
                 return new PageList<CustomerListItem>()
                 {

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { CustomerDetailModel } from '../models/customer-detail-model';
 import { CustomerEditModel } from '../models/customer-edit-model';
 import { CustomerListModel } from '../models/customer-list-model';
+import { CustomerSearch } from '../models/customer-search-model';
 import { PagedList } from '../models/PagedList';
 
 @Injectable({
@@ -17,11 +18,32 @@ export class CustomerService {
         return CustomerService.baseUrl + path;
     }
 
-    getCustomers(pageIndex: number, pageSize: number, sortField: string = null, desc: boolean = null): Observable<PagedList<CustomerListModel>> {
+    getCustomers(pageIndex: number, pageSize: number, customerSearch: CustomerSearch, sortField: string = null, desc: boolean = null): Observable<PagedList<CustomerListModel>> {
         let url = "customers?PageIndex=" + pageIndex + "&PageSize=" + pageSize + "&SortField=" + sortField;
 
         if (desc != null)
             url += "&Desc=" + desc;
+
+        const isEmptyString = (data: any): boolean => data == '';
+
+        if (customerSearch != null) {
+
+            if (!isEmptyString(customerSearch.city)) {
+                url += "&city=" + customerSearch.city;
+            }
+
+            if (!isEmptyString(customerSearch.companyName)) {
+                url += "&companyName=" + customerSearch.companyName;
+            }
+
+            if (!isEmptyString(customerSearch.country)) {
+                url += "&country=" + customerSearch.country;
+            }
+
+            if (!isEmptyString(customerSearch.customerId)) {
+                url += "&customerId=" + customerSearch.customerId;
+            }
+        }
 
         return this.http.get<PagedList<CustomerListModel>>(this.fullUrl(url));
     }

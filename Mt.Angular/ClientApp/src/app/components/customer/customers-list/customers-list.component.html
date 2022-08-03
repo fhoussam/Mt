@@ -4,7 +4,9 @@
     </app-modal>
 </div>
 
+<app-customer-search (search)="search($event)" (reset)="reset()"></app-customer-search>
 <button type="button" (click)="toggleAddModal(true)" class="btn btn-primary">New</button>
+
 <hr />
 <div class="row">
     <div class="col-md-6">
@@ -50,10 +52,10 @@
                 </tr>
             </tbody>
         </table>
-        <app-pager 
-                   *ngIf="customers" 
-                   (ChangePagerSettings)="onChangePagerSettings($event)" 
-                   totalCount="97" 
+        <app-pager
+                   *ngIf="customers"
+                   (ChangePagerSettings)="onChangePagerSettings($event)"
+                   [totalCount]="totalCount"
                    selectedPageSize="5">
         </app-pager>
     </div>

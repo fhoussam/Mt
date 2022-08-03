@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/co
 import { CustomerListModel } from '../../../models/customer-list-model';
 import { PagerSetting } from '../../../models/PagerSetting';
 import { CustomerService } from '../../../services/customer.service';
+import { CustomerSearch } from '../../../models/customer-search-model';
 
 @Component({
     selector: 'app-customers-list',
@@ -11,6 +12,7 @@ import { CustomerService } from '../../../services/customer.service';
 export class CustomersListComponent implements OnInit {
 
     constructor(private customerService: CustomerService, private renderer: Renderer2) { }
+
     customers: CustomerListModel[];
     selectedId: string;
     editMode: boolean = true;
@@ -20,6 +22,7 @@ export class CustomersListComponent implements OnInit {
     sortField: string;
     desc: boolean = false;
     pagerSetting: PagerSetting;
+    customerSearch = new CustomerSearch();
 
     ngOnInit() {
         this.pagerSetting = new PagerSetting();
@@ -39,7 +42,7 @@ export class CustomersListComponent implements OnInit {
     }
 
     reload() {
-        this.customerService.getCustomers(this.pagerSetting.pageIndex, this.pagerSetting.pageSize, this.sortField, this.desc).subscribe(x => {
+        this.customerService.getCustomers(this.pagerSetting.pageIndex, this.pagerSetting.pageSize, this.customerSearch, this.sortField, this.desc).subscribe(x => {
             this.customers = x.content;
             this.totalCount = x.totalCount;
             this.selectedId = this.customers[0].customerId;
@@ -74,5 +77,14 @@ export class CustomersListComponent implements OnInit {
         this.pagerSetting = pagerSetting;
 
         this.reload();
+    }
+
+    search(customerSearch: CustomerSearch) {
+        this.customerSearch = customerSearch;
+        this.reload();
+    }
+
+    reset() {
+
     }
 }

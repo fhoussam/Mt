@@ -31,6 +31,7 @@
     <None Remove="ClientApp\src\app\models\customer-detail-model.ts" />
     <None Remove="ClientApp\src\app\models\customer-edit-model.ts" />
     <None Remove="ClientApp\src\app\models\customer-list-model.ts" />
+    <None Remove="ClientApp\src\app\models\customer-search-model.ts" />
     <None Remove="ClientApp\src\app\models\PagedList.ts" />
   </ItemGroup>
 
@@ -45,6 +46,12 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\models\customer-list-model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\customer-detail-model.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Update="ClientApp\src\app\models\customer-search-model.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
