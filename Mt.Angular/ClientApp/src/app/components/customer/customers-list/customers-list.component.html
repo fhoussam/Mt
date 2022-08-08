@@ -1,64 +1,84 @@
-﻿<div>
-    <app-modal *ngIf="addModalActive" [title]="addModalTitle" (dismiss)="toggleAddModal(false)">
-        <app-customer-edit (Cancel)="toggleAddModal(false)" (Ok)="toggleAddModal(false)" class="col-md-5"></app-customer-edit>
-    </app-modal>
-</div>
-
-<app-customer-search (search)="search($event)" (reset)="reset()"></app-customer-search>
-<button type="button" (click)="toggleAddModal(true)" class="btn btn-primary">New</button>
-
-<hr />
-<div class="row">
-    <div class="col-md-6">
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row">
+        <p class="col-md-6" style="font-size: 25px;"><b>Search</b></p>
+        <div class="col-md-6" style="text-align:right">
+          <button type="button" (click)="toggleAddModal(true)" class="btn btn-primary">New</button>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <app-customer-search (search)="search($event)" (reset)="reset()"></app-customer-search>
+      <hr />
+      <div class="row centered-content">
         <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col" (click)="setSortField('companyName')" style="cursor:pointer">
-                        <span>Company Name</span>
-                        <span *ngIf="desc && sortField === 'companyName'">⮝</span>
-                        <span *ngIf="!desc && sortField === 'companyName'">⮟</span>
-                    </th>
-                    <th scope="col" (click)="setSortField('contactName')" style="cursor:pointer">
-                        <span>Contact Name</span>
-                        <span *ngIf="desc && sortField === 'contactName'">⮝</span>
-                        <span *ngIf="!desc && sortField === 'contactName'">⮟</span>
-                    </th>
-                    <th scope="col" (click)="setSortField('contactTitle')" style="cursor:pointer">
-                        <span>Contact Title</span>
-                        <span *ngIf="desc && sortField === 'contactTitle'">⮝</span>
-                        <span *ngIf="!desc && sortField === 'contactTitle'">⮟</span>
-                    </th>
-                    <th scope="col" (click)="setSortField('country')" style="cursor:pointer">
-                        <span>Country</span>
-                        <span *ngIf="desc && sortField === 'country'">⮝</span>
-                        <span *ngIf="!desc && sortField === 'country'">⮟</span>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let customer of customers"
-                    #customerTableRow
-                    (click)="selectCustomer(customer.customerId)"
-                    (mouseenter)="setRowBgColor(customerTableRow)"
-                    (mouseout)="setBackBgColor(customerTableRow)"
-                    style="cursor:pointer"
-                    [ngClass]="{'tr-selected': customer.customerId === selectedId}">
-                    <td>{{customer.customerId}}</td>
-                    <td>{{customer.companyName}}</td>
-                    <td>{{customer.contactName}}</td>
-                    <td>{{customer.contactTitle}}</td>
-                    <td>{{customer.country}}</td>
-                </tr>
-            </tbody>
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col" (click)="setSortField('companyName')" style="cursor:pointer">
+                <span>Company Name</span>
+                <span *ngIf="desc && sortField === 'companyName'">⮝</span>
+                <span *ngIf="!desc && sortField === 'companyName'">⮟</span>
+              </th>
+              <th scope="col" (click)="setSortField('contactName')" style="cursor:pointer">
+                <span>Contact Name</span>
+                <span *ngIf="desc && sortField === 'contactName'">⮝</span>
+                <span *ngIf="!desc && sortField === 'contactName'">⮟</span>
+              </th>
+              <th scope="col" (click)="setSortField('contactTitle')" style="cursor:pointer">
+                <span>Contact Title</span>
+                <span *ngIf="desc && sortField === 'contactTitle'">⮝</span>
+                <span *ngIf="!desc && sortField === 'contactTitle'">⮟</span>
+              </th>
+              <th scope="col" (click)="setSortField('country')" style="cursor:pointer">
+                <span>Country</span>
+                <span *ngIf="desc && sortField === 'country'">⮝</span>
+                <span *ngIf="!desc && sortField === 'country'">⮟</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let customer of customers"
+                #customerTableRow
+                (click)="selectCustomer(customer.customerId)"
+                (mouseenter)="setRowBgColor(customerTableRow)"
+                (mouseout)="setBackBgColor(customerTableRow)"
+                style="cursor:pointer"
+                [ngClass]="{'tr-selected': customer.customerId === selectedId}">
+              <td>{{customer.customerId}}</td>
+              <td>{{customer.companyName}}</td>
+              <td>{{customer.contactName}}</td>
+              <td>{{customer.contactTitle}}</td>
+              <td>{{customer.country}}</td>
+            </tr>
+          </tbody>
         </table>
-        <app-pager
-                   *ngIf="customers"
+        <app-pager *ngIf="customers"
                    (ChangePagerSettings)="onChangePagerSettings($event)"
                    [totalCount]="totalCount"
-                   selectedPageSize="5">
+                   [selectedPageSize]=5>
         </app-pager>
+      </div>
     </div>
-    <app-customer-display *ngIf="!editMode && selectedId" [id]="selectedId" (onActivateEditMode)="setEditMode(true)" class="col-md-6"></app-customer-display>
-    <app-customer-edit *ngIf="editMode && selectedId" [id]="selectedId" (Cancel)="setEditMode(false)" class="col-md-5"></app-customer-edit>
+  </div>
 </div>
+
+<div>
+  <app-modal *ngIf="addModalActive" [title]="addModalTitle" (dismiss)="toggleAddModal(false)">
+    <app-customer-edit (Cancel)="toggleAddModal(false)" (Ok)="toggleAddModal(false)" class="col-md-5"></app-customer-edit>
+  </app-modal>
+</div>
+
+<div class="container">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#">Profile</a></li>
+    <li><a href="#">Orders</a></li>
+  </ul>
+  <br>
+  <div>
+    <app-customer-display *ngIf="!editMode && selectedId" [id]="selectedId" (onActivateEditMode)="setEditMode(true)"></app-customer-display>
+    <app-customer-edit *ngIf="editMode && selectedId" [id]="selectedId" (Cancel)="setEditMode(false)"></app-customer-edit>
+  </div>
+</div>
+

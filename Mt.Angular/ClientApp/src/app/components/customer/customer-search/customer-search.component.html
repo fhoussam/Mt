@@ -1,47 +1,53 @@
-<div class="form-group row">
+<div class="col-md-6">
+  <div class="form-group row">
     <label for="staticEmail" class="col-md-4 col-form-label">Customer Id</label>
     <div class="col-md-8">
-        <input type="text"
-               class="form-control"
-               placeholder="Customer Id"
-               name="CustomerId"
-               [readonly]="id"
-               [(ngModel)]="customerSearch.customerId">
+      <input type="text"
+             class="form-control"
+             placeholder="Customer Id"
+             name="CustomerId"
+             [readonly]="id"
+             [(ngModel)]="customerSearch.customerId">
     </div>
-</div>
-<div class="form-group row">
+  </div>
+  <div class="form-group row">
     <label for="staticEmail" class="col-md-4 col-form-label">Company Name</label>
     <div class="col-md-8">
-        <input type="text"
-               class="form-control"
-               placeholder="Company Name"
-               name="CompanyName"
-               [(ngModel)]="customerSearch.companyName">
+      <input type="text"
+             class="form-control"
+             placeholder="Company Name"
+             name="CompanyName"
+             [(ngModel)]="customerSearch.companyName">
     </div>
+  </div>
 </div>
-<div class="form-group row">
+
+<div class="col-md-6">
+  <div class="form-group row">
     <label for="staticEmail" class="col-md-4 col-form-label">City</label>
     <div class="col-md-8">
-        <select class="form-control"
-                placeholder="City"
-                name="city"
-                [(ngModel)]="customerSearch.city">
-            <option *ngFor="let city of cities" value="{{city}}">{{city}}</option>
-        </select>
+      <select class="form-control"
+              placeholder="City"
+              name="city"
+              [(ngModel)]="customerSearch.city">
+        <option *ngFor="let city of cities" value="{{city}}">{{city}}</option>
+      </select>
     </div>
-</div>
-<div class="form-group row">
+  </div>
+  <div class="form-group row">
     <label for="staticEmail" class="col-md-4 col-form-label">Country</label>
     <div class="col-md-8">
-        <select class="form-control"
-                placeholder="Country"
-                name="country"
-                [(ngModel)]="customerSearch.country">
-            <option *ngFor="let country of countries" value="{{country}}">{{country}}</option>
-        </select>
+      <select class="form-control"
+              placeholder="Country"
+              name="country"
+              [(ngModel)]="customerSearch.country">
+        <option *ngFor="let country of countries" value="{{country}}">{{country}}</option>
+      </select>
     </div>
+  </div>
 </div>
-<div class="form-group">
-    <button type="button" (click)="triggerSearch()" class="btn btn-primary">Search</button>
-    <button type="button" (click)="triggerReset()" class="btn btn-secondary">Reset</button>
+
+<div class="custom-btn-group">
+  <button type="button" (click)="triggerSearch()" class="btn btn-primary">Search</button>
+  <button type="button" (click)="triggerReset()" class="btn btn-secondary">Reset</button>
 </div>

@@ -14,7 +14,7 @@ export class CustomersListComponent implements OnInit {
     constructor(private customerService: CustomerService, private renderer: Renderer2) { }
 
     customers: CustomerListModel[];
-    selectedId: string;
+    selectedId: string = "";
     editMode: boolean = true;
     addModalTitle = "New Customer";
     addModalActive = false;

@@ -1,18 +1,16 @@
 <div class="row">
-    <div class="btn-toolbar col-md-7" role="toolbar" aria-label="Toolbar with button groups">
-        <div class="btn-group mr-2" role="group" aria-label="First group">
-            <button type="button" class="btn btn-secondary" (click)="goToFirst()" [disabled]="pageSetting.pageIndex == 0"><<</button>
-            <button type="button" class="btn btn-secondary" (click)="goToPrevious()" [disabled]="pageSetting.pageIndex == 0"><</button>
-            <button type="button" class="btn btn-secondary" (click)="goToNext()" [disabled]="pageSetting.pageIndex + 1 == pageCount">></button>
-            <button type="button" class="btn btn-secondary" (click)="goToLast()" [disabled]="pageSetting.pageIndex + 1 == pageCount">>></button>
-        </div>
-        <p>Page {{pageSetting.pageIndex + 1}} of {{pageCount}}</p>
-    </div>
-    <div class="col-md-5" style="text-align: -webkit-right;">
-        <select class="form-control" (change)="emitPageSize($event)" style="width: 50%;">
-            <option value="5" selected>5</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-        </select>
-    </div>
+  <div class="btn-group col-md-5">
+    <button type="button" class="btn btn-secondary" (click)="goToFirst()" [disabled]="pageSetting.pageIndex == 0"><<</button>
+    <button type="button" class="btn btn-secondary" (click)="goToPrevious()" [disabled]="pageSetting.pageIndex == 0"><</button>
+    <button type="button" class="btn btn-secondary" (click)="goToNext()" [disabled]="pageSetting.pageIndex + 1 == pageCount">></button>
+    <button type="button" class="btn btn-secondary" (click)="goToLast()" [disabled]="pageSetting.pageIndex + 1 == pageCount">>></button>
+    <p class="col-md-3">Page <b>{{pageSetting.pageIndex + 1}}</b> of {{pageCount}}</p>
+  </div>
+  <div class="col-md-7" style="text-align: -webkit-right;">
+    <select class="form-control" (change)="emitPageSize($event)" style="width: 15%;">
+      <option value="5" selected>5</option>
+      <option value="10">10</option>
+      <option value="20">20</option>
+    </select>
+  </div>
 </div>

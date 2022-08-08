@@ -32,7 +32,7 @@ export class CustomerEditComponent implements OnChanges, OnInit {
     }
 
     editCustomer() {
-        this.customerService.editCustomer(this.id, this.customer).subscribe(x => {
+        this.customerService.editCustomer(this.id, this.customer).subscribe((x: any) => {
             this.Ok.emit();
             console.log("customer data saved");
         });

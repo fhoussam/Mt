@@ -18,7 +18,7 @@ export class CustomerService {
         return CustomerService.baseUrl + path;
     }
 
-    getCustomers(pageIndex: number, pageSize: number, customerSearch: CustomerSearch, sortField: string = null, desc: boolean = null): Observable<PagedList<CustomerListModel>> {
+    getCustomers(pageIndex: number, pageSize: number, customerSearch: CustomerSearch, sortField?: string, desc?: boolean): Observable<PagedList<CustomerListModel>> {
         let url = "customers?PageIndex=" + pageIndex + "&PageSize=" + pageSize + "&SortField=" + sortField;
 
         if (desc != null)

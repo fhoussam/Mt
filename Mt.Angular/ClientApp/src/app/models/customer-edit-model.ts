@@ -1,9 +1,9 @@
-﻿export class CustomerEditModel
+export class CustomerEditModel
 {
-    CustomerId: string;
-    CompanyName: string;
-    City: string;
-    Country: string;
-    PostalCode: string;
-    ContactName: string;
+    customerId: string;
+    companyName: string;
+    city: string;
+    country: string;
+    postalCode: string;
+    contactName: string;
 }
