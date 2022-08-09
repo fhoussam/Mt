@@ -1,69 +1,71 @@
 <form *ngIf="customer">
-  <div class="form-group row">
-    <label for="staticEmail" class="col-md-4 col-form-label">Customer Id</label>
-    <div class="col-md-8">
-      <input type="text"
-             class="form-control"
-             placeholder="Customer Id"
-             name="CustomerId"
-             [readonly]="id"
-             [(ngModel)]="customer.customerId">
+  <div style="padding:15px">
+    <div class="form-group row">
+      <label for="staticEmail" class="col-md-4 col-form-label">Customer Id</label>
+      <div class="col-md-8">
+        <input type="text"
+               class="form-control"
+               placeholder="Customer Id"
+               name="CustomerId"
+               [readonly]="customer.customerId"
+               [(ngModel)]="customer.customerId">
+      </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <label for="staticEmail" class="col-md-4 col-form-label">Company Name</label>
-    <div class="col-md-8">
-      <input type="text"
-             class="form-control"
-             placeholder="Company Name"
-             name="CompanyName"
-             [(ngModel)]="customer.companyName">
+    <div class="form-group row">
+      <label for="staticEmail" class="col-md-4 col-form-label">Company Name</label>
+      <div class="col-md-8">
+        <input type="text"
+               class="form-control"
+               placeholder="Company Name"
+               name="CompanyName"
+               [(ngModel)]="customer.companyName">
+      </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <label for="staticEmail" class="col-md-4 col-form-label">City</label>
-    <div class="col-md-8">
-      <select class="form-control"
-              placeholder="City"
-              name="city"
-              [(ngModel)]="customer.city">
-        <option *ngFor="let city of cities" value="{{city}}">{{city}}</option>
-      </select>
+    <div class="form-group row">
+      <label for="staticEmail" class="col-md-4 col-form-label">City</label>
+      <div class="col-md-8">
+        <select class="form-control"
+                placeholder="City"
+                name="city"
+                [(ngModel)]="customer.city">
+          <option *ngFor="let city of cities" value="{{city}}">{{city}}</option>
+        </select>
+      </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <label for="staticEmail" class="col-md-4 col-form-label">Country</label>
-    <div class="col-md-8">
-      <select class="form-control"
-              placeholder="Country"
-              name="country"
-              [(ngModel)]="customer.country">
-        <option *ngFor="let country of countries" value="{{country}}">{{country}}</option>
-      </select>
+    <div class="form-group row">
+      <label for="staticEmail" class="col-md-4 col-form-label">Country</label>
+      <div class="col-md-8">
+        <select class="form-control"
+                placeholder="Country"
+                name="country"
+                [(ngModel)]="customer.country">
+          <option *ngFor="let country of countries" value="{{country}}">{{country}}</option>
+        </select>
+      </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <label for="staticEmail" class="col-md-4 col-form-label">Postal Code</label>
-    <div class="col-md-8">
-      <input type="text"
-             class="form-control"
-             placeholder="Postal Code"
-             name="postalCode"
-             [(ngModel)]="customer.postalCode">
+    <div class="form-group row">
+      <label for="staticEmail" class="col-md-4 col-form-label">Postal Code</label>
+      <div class="col-md-8">
+        <input type="text"
+               class="form-control"
+               placeholder="Postal Code"
+               name="postalCode"
+               [(ngModel)]="customer.postalCode">
+      </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <label for="staticEmail" class="col-md-4 col-form-label">Contact Name</label>
-    <div class="col-md-8">
-      <input type="text"
-             class="form-control"
-             placeholder="Contact Name"
-             name="ContactName"
-             [(ngModel)]="customer.contactName">
+    <div class="form-group row">
+      <label for="staticEmail" class="col-md-4 col-form-label">Contact Name</label>
+      <div class="col-md-8">
+        <input type="text"
+               class="form-control"
+               placeholder="Contact Name"
+               name="ContactName"
+               [(ngModel)]="customer.contactName">
+      </div>
     </div>
-  </div>
-  <div class="custom-form-group">
-    <button type="button" (click)="editCustomer()" class="btn btn-primary">Save</button>
-    <button type="button" (click)="cancelEdit()" class="btn btn-secondary">Cancel</button>
+    <div class="custom-form-group">
+      <button type="button" (click)="editCustomer()" class="btn btn-primary">Save</button>
+      <button type="button" (click)="cancelEdit()" class="btn btn-secondary">Cancel</button>
+    </div>
   </div>
 </form>

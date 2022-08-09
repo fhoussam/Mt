@@ -1,6 +1,12 @@
+<div>
+  <app-modal *ngIf="addModalActive" [title]="addModalTitle" (dismiss)="toggleAddModal(false)">
+    <app-customer-edit (Cancel)="toggleAddModal(false)" (Ok)="toggleAddModal(false)" class="col-md-5"></app-customer-edit>
+  </app-modal>
+</div>
+
 <div class="container">
   <div class="panel panel-default">
-    <div class="panel-heading">
+    <div class="panel-heading" style="cursor:pointer" (click)="toggleSearchAreaOpen()">
       <div class="row">
         <p class="col-md-6" style="font-size: 25px;"><b>Search</b></p>
         <div class="col-md-6" style="text-align:right">
@@ -8,9 +14,8 @@
         </div>
       </div>
     </div>
-    <div class="panel-body">
+    <div class="panel-body collapse" [ngClass]="{'in': collapsed}">
       <app-customer-search (search)="search($event)" (reset)="reset()"></app-customer-search>
-      <hr />
       <div class="row centered-content">
         <table class="table table-bordered">
           <thead>
@@ -41,7 +46,7 @@
           <tbody>
             <tr *ngFor="let customer of customers"
                 #customerTableRow
-                (click)="selectCustomer(customer.customerId)"
+                (dblclick)="selectCustomer(customer.customerId)"
                 (mouseenter)="setRowBgColor(customerTableRow)"
                 (mouseout)="setBackBgColor(customerTableRow)"
                 style="cursor:pointer"
@@ -62,15 +67,7 @@
       </div>
     </div>
   </div>
-</div>
 
-<div>
-  <app-modal *ngIf="addModalActive" [title]="addModalTitle" (dismiss)="toggleAddModal(false)">
-    <app-customer-edit (Cancel)="toggleAddModal(false)" (Ok)="toggleAddModal(false)" class="col-md-5"></app-customer-edit>
-  </app-modal>
-</div>
-
-<div class="container">
   <ul class="nav nav-tabs">
     <li class="active"><a href="#">Profile</a></li>
     <li><a href="#">Orders</a></li>

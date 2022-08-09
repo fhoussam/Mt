@@ -5,86 +5,90 @@ import { CustomerService } from '../../../services/customer.service';
 import { CustomerSearch } from '../../../models/customer-search-model';
 
 @Component({
-    selector: 'app-customers-list',
-    templateUrl: './customers-list.component.html',
-    styleUrls: ['./customers-list.component.css']
+  selector: 'app-customers-list',
+  templateUrl: './customers-list.component.html',
+  styleUrls: ['./customers-list.component.css']
 })
 export class CustomersListComponent implements OnInit {
 
-    constructor(private customerService: CustomerService, private renderer: Renderer2) { }
+  constructor(private customerService: CustomerService, private renderer: Renderer2) { }
 
-    customers: CustomerListModel[];
-    selectedId: string = "";
-    editMode: boolean = true;
-    addModalTitle = "New Customer";
-    addModalActive = false;
-    totalCount: number;
-    sortField: string;
-    desc: boolean = false;
-    pagerSetting: PagerSetting;
-    customerSearch = new CustomerSearch();
+  customers: CustomerListModel[];
+  selectedId: string = "";
+  editMode: boolean = true;
+  addModalTitle = "New Customer";
+  addModalActive = false;
+  totalCount: number;
+  sortField: string;
+  desc: boolean = false;
+  pagerSetting: PagerSetting;
+  customerSearch = new CustomerSearch();
+  collapsed: boolean = true;
 
-    ngOnInit() {
-        this.pagerSetting = new PagerSetting();
-        this.reload();
+  ngOnInit() {
+    this.pagerSetting = new PagerSetting();
+    this.reload();
+  }
+
+  setSortField(sortField: string) {
+
+    if (sortField === this.sortField) {
+      this.desc = !this.desc;
+    }
+    else {
+      this.sortField = sortField;
     }
 
-    setSortField(sortField: string) {
+    this.reload();
+  }
 
-        if (sortField === this.sortField) {
-            this.desc = !this.desc;
-        }
-        else {
-            this.sortField = sortField;
-        }
-        
-        this.reload();
-    }
+  reload() {
+    this.customerService.getCustomers(this.pagerSetting.pageIndex, this.pagerSetting.pageSize, this.customerSearch, this.sortField, this.desc).subscribe(x => {
+      this.customers = x.content;
+      this.totalCount = x.totalCount;
+    });
+  }
 
-    reload() {
-        this.customerService.getCustomers(this.pagerSetting.pageIndex, this.pagerSetting.pageSize, this.customerSearch, this.sortField, this.desc).subscribe(x => {
-            this.customers = x.content;
-            this.totalCount = x.totalCount;
-            this.selectedId = this.customers[0].customerId;
-        });
-    }
+  setRowBgColor(el: any) {
+    this.renderer.addClass(el, 'tr-hover');
+  }
 
-    setRowBgColor(el: any) {
-        this.renderer.addClass(el, 'tr-hover');
-    }
+  setBackBgColor(el: any) {
+    this.renderer.removeClass(el, 'tr-hover');
+  }
 
-    setBackBgColor(el: any) {
-        this.renderer.removeClass(el, 'tr-hover');
-    }
+  toggleAddModal(active: boolean) {
+    this.addModalActive = active;
+  }
 
-    toggleAddModal(active: boolean) {
-        this.addModalActive = active;
-    }
+  selectCustomer(selectedId: string) {
+    this.selectedId = selectedId;
+  }
 
-    selectCustomer(selectedId: string) {
-        this.selectedId = selectedId;
-    }
+  setEditMode(activated: boolean) {
+    this.editMode = activated;
+  }
 
-    setEditMode(activated:boolean) {
-        this.editMode = activated;
-    }
+  onChangePagerSettings(pagerSetting: PagerSetting) {
 
-    onChangePagerSettings(pagerSetting: PagerSetting) {
-        
-        if (pagerSetting.pageSize === undefined)
-            pagerSetting.pageSize = 5;
+    if (pagerSetting.pageSize === undefined)
+      pagerSetting.pageSize = 5;
 
-        this.pagerSetting = pagerSetting;
+    this.pagerSetting = pagerSetting;
 
-        this.reload();
-    }
+    this.reload();
+  }
 
-    search(customerSearch: CustomerSearch) {
-        this.customerSearch = customerSearch;
-        this.reload();
-    }
+  search(customerSearch: CustomerSearch) {
+    this.customerSearch = customerSearch;
+    this.reload();
+  }
 
-    reset() {
+  reset() {
 
-    }
+  }
+
+  toggleSearchAreaOpen() {
+    this.collapsed = !this.collapsed;
+  }
 }
