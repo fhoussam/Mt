@@ -70,8 +70,8 @@
 
   <div *ngIf="selectedId">
     <ul class="nav nav-tabs">
-      <li [ngClass]="{'active': customerTabMenu.profile}"><a (click)="customerTabMenu.displayProfile()">Profile</a></li>
-      <li [ngClass]="{'active': customerTabMenu.orders}"><a (click)="customerTabMenu.displayOrders()">Orders</a></li>
+      <li style="cursor:pointer" [ngClass]="{'active': customerTabMenu.profile}"><a (click)="customerTabMenu.displayProfile()">Profile</a></li>
+      <li style="cursor:pointer" [ngClass]="{'active': customerTabMenu.orders}"><a (click)="customerTabMenu.displayOrders()">Orders</a></li>
     </ul>
     <br>
     <div>
