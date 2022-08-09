@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { CustomerDetailModel } from '../../../models/customer-detail-model';
-import { CustomerService } from '../../../services/customer.service';
+import { MtAngularHttpService } from '../../../services/mt-angular-http.service';
 
 @Component({
     selector: 'app-customer-display',
@@ -9,7 +9,7 @@ import { CustomerService } from '../../../services/customer.service';
 })
 export class CustomerDisplayComponent implements OnChanges {
 
-    constructor(private customerService: CustomerService) { }
+    constructor(private customerService: MtAngularHttpService) { }
     customer: CustomerDetailModel
     @Input() id: string;
     @Output() onActivateEditMode = new EventEmitter<void>();

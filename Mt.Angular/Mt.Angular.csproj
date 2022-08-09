@@ -32,11 +32,13 @@
     <None Remove="ClientApp\src\app\models\customer-edit-model.ts" />
     <None Remove="ClientApp\src\app\models\customer-list-model.ts" />
     <None Remove="ClientApp\src\app\models\customer-search-model.ts" />
+    <None Remove="ClientApp\src\app\models\customer-tab-menu.ts" />
     <None Remove="ClientApp\src\app\models\PagedList.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Remove="ClientApp\src\app\models\APP_SETTINGS.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\models\customer-order-list-model.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\models\PagerSetting.ts" />
   </ItemGroup>
 

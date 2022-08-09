@@ -1,8 +1,9 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { CustomerListModel } from '../../../models/customer-list-model';
 import { PagerSetting } from '../../../models/PagerSetting';
-import { CustomerService } from '../../../services/customer.service';
 import { CustomerSearch } from '../../../models/customer-search-model';
+import { MtAngularHttpService } from '../../../services/mt-angular-http.service';
+import { CustomerTabMenu } from '../../../models/customer-tab-menu';
 
 @Component({
   selector: 'app-customers-list',
@@ -11,7 +12,7 @@ import { CustomerSearch } from '../../../models/customer-search-model';
 })
 export class CustomersListComponent implements OnInit {
 
-  constructor(private customerService: CustomerService, private renderer: Renderer2) { }
+  constructor(private customerService: MtAngularHttpService, private renderer: Renderer2) { }
 
   customers: CustomerListModel[];
   selectedId: string = "";
@@ -24,6 +25,7 @@ export class CustomersListComponent implements OnInit {
   pagerSetting: PagerSetting;
   customerSearch = new CustomerSearch();
   collapsed: boolean = true;
+  customerTabMenu = new CustomerTabMenu();
 
   ngOnInit() {
     this.pagerSetting = new PagerSetting();
@@ -46,6 +48,7 @@ export class CustomersListComponent implements OnInit {
     this.customerService.getCustomers(this.pagerSetting.pageIndex, this.pagerSetting.pageSize, this.customerSearch, this.sortField, this.desc).subscribe(x => {
       this.customers = x.content;
       this.totalCount = x.totalCount;
+      this.selectedId = this.customers[0].customerId;
     });
   }
 

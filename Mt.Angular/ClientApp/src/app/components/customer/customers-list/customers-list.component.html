@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div class="panel-body collapse" [ngClass]="{'in': collapsed}">
+    <div class="panel-body collapse" [ngClass]="{'in': !collapsed}">
       <app-customer-search (search)="search($event)" (reset)="reset()"></app-customer-search>
       <div class="row centered-content">
         <table class="table table-bordered">
@@ -68,14 +68,21 @@
     </div>
   </div>
 
-  <ul class="nav nav-tabs">
-    <li class="active"><a href="#">Profile</a></li>
-    <li><a href="#">Orders</a></li>
-  </ul>
-  <br>
-  <div>
-    <app-customer-display *ngIf="!editMode && selectedId" [id]="selectedId" (onActivateEditMode)="setEditMode(true)"></app-customer-display>
-    <app-customer-edit *ngIf="editMode && selectedId" [id]="selectedId" (Cancel)="setEditMode(false)"></app-customer-edit>
+  <div *ngIf="selectedId">
+    <ul class="nav nav-tabs">
+      <li [ngClass]="{'active': customerTabMenu.profile}"><a (click)="customerTabMenu.displayProfile()">Profile</a></li>
+      <li [ngClass]="{'active': customerTabMenu.orders}"><a (click)="customerTabMenu.displayOrders()">Orders</a></li>
+    </ul>
+    <br>
+    <div>
+      <div *ngIf="customerTabMenu.profile">
+        <app-customer-display *ngIf="!editMode" [id]="selectedId" (onActivateEditMode)="setEditMode(true)"></app-customer-display>
+        <app-customer-edit *ngIf="editMode" [id]="selectedId" (Cancel)="setEditMode(false)"></app-customer-edit>
+      </div>
+      <div *ngIf="customerTabMenu.orders">
+        <app-customer-orders [id]="selectedId"></app-customer-orders>
+      </div>
+    </div>
   </div>
 </div>
 

@@ -1,0 +1,22 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col" style="cursor:pointer">
+        <span>Contact Name</span>
+      </th>
+      <th scope="col" style="cursor:pointer">
+        <span>Order Date</span>
+      </th>
+      <th scope="col" style="cursor:pointer">
+        <span>Product Count</span>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{order.contactName}}</td>
+      <td>{{order.orderDate}}</td>
+      <td>{{order.productsCount}}</td>
+    </tr>
+  </tbody>
+</table>
