@@ -10,9 +10,9 @@
                required
                ngModel
                #customerIdValidator="ngModel"
-               [readonly]="id.length != 0">
+               [readonly]="id?.length != 0">
       </div>
-      <ul *ngIf="!customerIdValidator.valid" class="col-md-4">
+      <ul *ngIf="!customerIdValidator.valid && f.touched" class="col-md-4">
         <li *ngIf="customerIdValidator.errors.required">
           <span class="validation-error">Customer Id is required</span>
         </li>
@@ -29,7 +29,7 @@
                #companyNameValidator="ngModel"
                name="companyName">
       </div>
-      <ul *ngIf="!companyNameValidator.valid" class="col-md-4">
+      <ul *ngIf="!companyNameValidator.valid && f.touched" class="col-md-4">
         <li *ngIf="companyNameValidator.errors.required">
           <span class="validation-error">Company Name is required</span>
         </li>
@@ -47,7 +47,7 @@
           <option *ngFor="let city of cities" value="{{city}}">{{city}}</option>
         </select>
       </div>
-      <ul *ngIf="!cityValidator.valid" class="col-md-4">
+      <ul *ngIf="!cityValidator.valid && f.touched" class="col-md-4">
         <li *ngIf="cityValidator.errors.required">
           <span class="validation-error">City is required</span>
         </li>
@@ -65,7 +65,7 @@
           <option *ngFor="let country of countries" value="{{country}}">{{country}}</option>
         </select>
       </div>
-      <ul *ngIf="!countryvalidator.valid" class="col-md-4">
+      <ul *ngIf="!countryvalidator.valid && f.touched" class="col-md-4">
         <li *ngIf="countryvalidator.errors.required">
           <span class="validation-error">Country is required</span>
         </li>
@@ -82,7 +82,7 @@
                required
                name="postalCode">
       </div>
-      <ul *ngIf="!postalCodevalidator.valid" class="col-md-4">
+      <ul *ngIf="!postalCodevalidator.valid && f.touched" class="col-md-4">
         <li *ngIf="postalCodevalidator.errors.required">
           <span class="validation-error">Postal code is required</span>
         </li>
@@ -99,7 +99,7 @@
                required
                name="contactName">
       </div>
-      <ul *ngIf="!contactName.valid" class="col-md-4">
+      <ul *ngIf="!contactName.valid && f.touched" class="col-md-4">
         <li *ngIf="contactName.errors.required">
           <span class="validation-error">Contact name is required</span>
         </li>
