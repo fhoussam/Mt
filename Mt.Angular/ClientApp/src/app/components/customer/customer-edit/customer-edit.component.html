@@ -13,7 +13,7 @@
                [readonly]="id?.length != 0">
       </div>
       <ul *ngIf="!customerIdValidator.valid && f.touched" class="col-md-4">
-        <li *ngIf="customerIdValidator.errors.required">
+        <li *ngIf="customerIdValidator.errors?.required">
           <span class="validation-error">Customer Id is required</span>
         </li>
       </ul>
@@ -25,13 +25,20 @@
                class="form-control"
                placeholder="Company Name"
                required
+               minlength="5"
+               maxlength="50"
                ngModel
                #companyNameValidator="ngModel"
                name="companyName">
       </div>
       <ul *ngIf="!companyNameValidator.valid && f.touched" class="col-md-4">
-        <li *ngIf="companyNameValidator.errors.required">
+        <li *ngIf="companyNameValidator.errors?.required">
           <span class="validation-error">Company Name is required</span>
+        </li>
+        <li *ngIf="companyNameValidator.errors?.minlength">
+          <span class="validation-error">
+            Should be minimum of {{companyNameValidator.errors?.minlength.requiredLength}} catacters !
+          </span>
         </li>
       </ul>
     </div>
@@ -40,18 +47,12 @@
       <div class="col-md-4">
         <select class="form-control"
                 placeholder="City"
-                required
                 ngModel
                 #cityValidator="ngModel"
                 name="city">
           <option *ngFor="let city of cities" value="{{city}}">{{city}}</option>
         </select>
       </div>
-      <ul *ngIf="!cityValidator.valid && f.touched" class="col-md-4">
-        <li *ngIf="cityValidator.errors.required">
-          <span class="validation-error">City is required</span>
-        </li>
-      </ul>
     </div>
     <div class="form-group row">
       <label for="staticEmail" class="col-md-4 col-form-label">Country</label>
@@ -66,7 +67,7 @@
         </select>
       </div>
       <ul *ngIf="!countryvalidator.valid && f.touched" class="col-md-4">
-        <li *ngIf="countryvalidator.errors.required">
+        <li *ngIf="countryvalidator.errors?.required">
           <span class="validation-error">Country is required</span>
         </li>
       </ul>
@@ -79,12 +80,12 @@
                placeholder="Postal Code"
                ngModel
                #postalCodevalidator="ngModel"
-               required
+               pattern="[A-Z0-9 -]*"
                name="postalCode">
       </div>
       <ul *ngIf="!postalCodevalidator.valid && f.touched" class="col-md-4">
-        <li *ngIf="postalCodevalidator.errors.required">
-          <span class="validation-error">Postal code is required</span>
+        <li *ngIf="postalCodevalidator.errors?.pattern">
+          <span class="validation-error">Only big letters or numbers</span>
         </li>
       </ul>
     </div>
@@ -95,18 +96,22 @@
                class="form-control"
                placeholder="Contact Name"
                ngModel
+               minlength="5"
+               maxlength="50"
+               #contactNameValidator="ngModel"
                #contactName="ngModel"
-               required
                name="contactName">
       </div>
-      <ul *ngIf="!contactName.valid && f.touched" class="col-md-4">
-        <li *ngIf="contactName.errors.required">
-          <span class="validation-error">Contact name is required</span>
+      <ul *ngIf="!contactNameValidator.valid && f.touched" class="col-md-4">
+        <li *ngIf="contactNameValidator.errors?.minlength">
+          <span class="validation-error">
+            Should be minimum of {{contactNameValidator.errors?.minlength.requiredLength}} catacters !
+          </span>
         </li>
       </ul>
     </div>
     <div class="custom-form-group">
-      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!f.valid && f.touched">Save</button>
       <button type="button" (click)="cancelEdit()" class="btn btn-secondary">Cancel</button>
     </div>
   </div>

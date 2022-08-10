@@ -34,7 +34,6 @@ export class CustomerEditComponent implements OnChanges, OnInit, AfterViewInit {
     if (this.id) {
       this.customerService.getCustomerByIdForEdit(this.id).subscribe(x => {
         this.editForm.reset();
-        console.log('editform reset !');
         this.editForm.form.patchValue(x);
         this.previousState = x;
       });
@@ -51,6 +50,7 @@ export class CustomerEditComponent implements OnChanges, OnInit, AfterViewInit {
   }
 
   cancelEdit() {
-    this.Cancel.emit();
+    //this.Cancel.emit();
+    console.log(this.editForm);
   }
 }
