@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { APP_SETTINGS } from '../../../models/APP_SETTINGS';
 import { CustomerEditModel } from '../../../models/customer-edit-model';
-import { CustomerTabMenu } from '../../../models/customer-tab-menu';
 import { MtAngularHttpService } from '../../../services/mt-angular-http.service';
 
 @Component({
@@ -9,15 +9,21 @@ import { MtAngularHttpService } from '../../../services/mt-angular-http.service'
   templateUrl: './customer-edit.component.html',
   styleUrls: ['./customer-edit.component.css']
 })
-export class CustomerEditComponent implements OnChanges, OnInit {
+export class CustomerEditComponent implements OnChanges, OnInit, AfterViewInit {
 
   constructor(private customerService: MtAngularHttpService) { }
-  customer: CustomerEditModel = new CustomerEditModel();
+
+  previousState: CustomerEditModel;
   cities: string[];
   countries: string[];
   @Input() id: string;
   @Output() Cancel = new EventEmitter<void>();
   @Output() Ok = new EventEmitter<void>();
+  @ViewChild('f', { static: false }) editForm: NgForm;
+
+  ngAfterViewInit(): void {
+    console.log(this.editForm.setValue(new CustomerEditModel()));
+  }
 
   ngOnInit(): void {
     this.cities = APP_SETTINGS.cities;
@@ -27,13 +33,17 @@ export class CustomerEditComponent implements OnChanges, OnInit {
   ngOnChanges() {
     if (this.id) {
       this.customerService.getCustomerByIdForEdit(this.id).subscribe(x => {
-        this.customer = x;
+        this.editForm.reset();
+        this.editForm.form.patchValue(x);
+        this.previousState = x;
       });
     }
   }
 
   editCustomer() {
-    this.customerService.editCustomer(this.id, this.customer).subscribe((x: any) => {
+    let customer = new CustomerEditModel();
+    Object.assign(customer, this.editForm.value);
+    this.customerService.editCustomer(this.id, customer).subscribe((x: any) => {
       this.Ok.emit();
       console.log("customer data saved");
     });

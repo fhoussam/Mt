@@ -32,9 +32,9 @@ namespace Mt.Application.Operations.Queries
                 switch (request.MetaDataType)
                 {
                     case MetaDataTypes.Countries:
-                        return await _context.Customers.Select(x => x.Country).AsNoTracking().Distinct().OrderBy(x => x).ToListAsync();
+                        return await _context.Customers.Select(x => x.Country).Where(x => !string.IsNullOrEmpty(x)).AsNoTracking().Distinct().OrderBy(x => x).ToListAsync();
                     case MetaDataTypes.Cities:
-                        return await _context.Customers.Select(x => x.City).AsNoTracking().Distinct().OrderBy(x => x).ToListAsync();
+                        return await _context.Customers.Select(x => x.City).Where(x => !string.IsNullOrEmpty(x)).AsNoTracking().Distinct().OrderBy(x => x).ToListAsync();
                     default:
                         return Enumerable.Empty<string>();
                 }

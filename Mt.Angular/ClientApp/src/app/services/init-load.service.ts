@@ -7,20 +7,20 @@ import { APP_SETTINGS } from '../models/APP_SETTINGS';
 })
 export class InitLoadService {
 
-    constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    getSettings(): Promise<any> {
-        const promise = Promise.all([
-            this.http.get<string[]>('https://localhost:5002/MetaData/Cities').toPromise(),
-            this.http.get<string[]>('https://localhost:5002/MetaData/Countries').toPromise(),
-        ]).then(settings =>
-        {
-            APP_SETTINGS.cities = settings[0];
-            APP_SETTINGS.countries = settings[1];
-            console.log(settings);
-            return settings
-        });
+  getSettings(): Promise<any> {
+    const promise = Promise.all([
+      this.http.get<string[]>('https://localhost:5002/MetaData/Cities').toPromise(),
+      this.http.get<string[]>('https://localhost:5002/MetaData/Countries').toPromise(),
+    ]).then(settings => {
+      APP_SETTINGS.cities = settings[0];
+      APP_SETTINGS.countries = settings[1];
+      APP_SETTINGS.cities.unshift("");
+      APP_SETTINGS.countries.unshift("");
+      return settings
+    });
 
-        return promise;
-    }
+    return promise;
+  }
 }
