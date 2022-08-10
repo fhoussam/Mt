@@ -2,6 +2,12 @@
   <thead>
     <tr>
       <th scope="col" style="cursor:pointer">
+        <span>#</span>
+      </th>
+      <th scope="col" style="cursor:pointer">
+        <span>Contact Name</span>
+      </th>
+      <th scope="col" style="cursor:pointer">
         <span>Contact Name</span>
       </th>
       <th scope="col" style="cursor:pointer">
@@ -14,9 +20,11 @@
   </thead>
   <tbody>
     <tr *ngFor="let order of orders">
+      <td>{{order.id}}</td>
       <td>{{order.contactName}}</td>
       <td>{{order.orderDate}}</td>
       <td>{{order.productsCount}}</td>
+      <td><button (click)="delete(order.id)">X</button></td>
     </tr>
   </tbody>
 </table>

@@ -33,7 +33,8 @@ namespace Mt.Application.Operations.Queries
                     .Include(x => x.OrderDetails)
                     .Include(x => x.Customer)
                     .Select(x => new OrderListItem() 
-                    { 
+                    {
+                        Id = x.OrderId,
                         ContactName = x.Customer.ContactName,
                         OrderDate = x.OrderDate,
                         ProductsCount = x.OrderDetails.Count

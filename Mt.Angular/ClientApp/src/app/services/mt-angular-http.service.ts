@@ -66,4 +66,8 @@ export class MtAngularHttpService {
   getCustomerOrders(id: string): Observable<CustomerOrderListModel[]> {
     return this.http.get<CustomerOrderListModel[]>(this.fullUrl("orders/" + id));
   }
+
+  deleteCustomerOrder(customerId: string, orderId: number): Observable<void> {
+    return this.http.delete<void>(this.fullUrl("orders/" + customerId + "/" + orderId));
+  }
 }

@@ -1,0 +1,10 @@
+<div *ngIf="currentState.displayed">
+  <div class="backdrop" (click)="onClose()"></div>
+  <div class="alert-box">
+    <p>{{ currentState.message }}</p>
+    <div class="custom-btn-group" style="text-align-last: end;">
+      <button class="btn btn-success" (click)="onConfirm()">Confirm</button>
+      <button class="btn btn-secondary" (click)="onClose()">Close</button>
+    </div>
+  </div>
+</div>

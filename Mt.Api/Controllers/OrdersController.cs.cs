@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Mt.Application.Operations.Commands;
 using Mt.Application.Operations.Queries;
 using System.Threading.Tasks;
 
@@ -22,6 +23,14 @@ namespace Mt.Api.Controllers
         {
             var result = await _mediator.Send(new GetOrdersByCustomerIdQuery(customerId));
             return Ok(result);
+        }
+
+        [HttpDelete]
+        [Route("{customerId}/{orderId}")]
+        public async Task<IActionResult> Delete([FromRoute] string customerId, [FromRoute] int orderId) 
+        {
+            await _mediator.Send(new DeleteCustomerOrderCommand(customerId, orderId));
+            return Ok();
         }
     }
 }

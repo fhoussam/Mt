@@ -15,36 +15,38 @@ import { ModalComponent } from './components/shared/modal/modal.component';
 import { PagerComponent } from './components/shared/pager/pager.component';
 import { CustomerSearchComponent } from './components/customer/customer-search/customer-search.component';
 import { CustomerOrdersComponent } from './components/customer/customer-orders/customer-orders.component';
+import { ConfirmationComponent } from './components/shared/confirmation/confirmation.component';
 
 export function get_settings(initLoadService: InitLoadService) {
-    return () => initLoadService.getSettings();
+  return () => initLoadService.getSettings();
 }
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        NavMenuComponent,
-        HomeComponent,
-        CustomersListComponent,
-        CustomerEditComponent,
-        CustomerDisplayComponent,
-        ModalComponent,
-        PagerComponent,
-        CustomerSearchComponent,
-        CustomerOrdersComponent
-    ],
-    imports: [
-        BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-        HttpClientModule,
-        FormsModule,
-        RouterModule.forRoot([
-            { path: '', component: HomeComponent, pathMatch: 'full' },
-            { path: 'customers', component: CustomersListComponent },
-        ])
-    ],
-    providers: [
-        { provide: APP_INITIALIZER, useFactory: get_settings, deps: [InitLoadService], multi: true }
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    NavMenuComponent,
+    HomeComponent,
+    CustomersListComponent,
+    CustomerEditComponent,
+    CustomerDisplayComponent,
+    ModalComponent,
+    PagerComponent,
+    CustomerSearchComponent,
+    CustomerOrdersComponent,
+    ConfirmationComponent
+  ],
+  imports: [
+    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    HttpClientModule,
+    FormsModule,
+    RouterModule.forRoot([
+      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'customers', component: CustomersListComponent },
+    ])
+  ],
+  providers: [
+    { provide: APP_INITIALIZER, useFactory: get_settings, deps: [InitLoadService], multi: true }
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
