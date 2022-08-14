@@ -13,6 +13,5 @@
         CustomerId,
         ContactName,
         Country,
-        Unknown
     }
 }

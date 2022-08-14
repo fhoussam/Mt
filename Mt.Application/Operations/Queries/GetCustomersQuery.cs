@@ -35,8 +35,9 @@ namespace Mt.Application.Operations.Queries
 
             public async Task<PageList<CustomerListItem>> Handle(GetCustomersQuery request, CancellationToken cancellationToken)
             {
-                request.Desc = request.Desc ?? false;
-                Expression<Func<Customer, object>> sortExpression = getSortExpression(request.SortField);
+                var sortFieldKnown = Enum.TryParse<CustomersSortFields>(request.SortField, true, out var parsedSortField);
+                request.Desc = !sortFieldKnown ? true : request.Desc ?? false;
+                Expression<Func<Customer, object>> sortExpression = sortFieldKnown ? getSortExpression(parsedSortField) : x => x.CreationDate;
                 Expression<Func<Customer, bool>> whereExpression = x => true
                         && (x.City == request.City || string.IsNullOrEmpty(request.City))
                         && (x.Country == request.Country || string.IsNullOrEmpty(request.Country))
@@ -56,6 +57,7 @@ namespace Mt.Application.Operations.Queries
                         ContactName = x.ContactName,
                         Country = x.Country
                     })
+                    .AsNoTracking()
                     .ToArrayAsync();
 
                 var totalCount = await _northWindDbContext.Customers.Where(whereExpression).CountAsync();
@@ -66,14 +68,11 @@ namespace Mt.Application.Operations.Queries
                     TotalCount = totalCount
                 };
 
-                static Expression<Func<Customer, object>> getSortExpression(string sortField)
+                static Expression<Func<Customer, object>> getSortExpression(CustomersSortFields sortField)
                 {
-                    if (!Enum.TryParse<CustomersSortFields>(sortField, true, out var parsedSortField))
-                        parsedSortField = CustomersSortFields.Unknown;
-
                     Expression<Func<Customer, object>> expression = x => x.CreationDate;
 
-                    switch (parsedSortField)
+                    switch (sortField)
                     {
                         case CustomersSortFields.CompanyName:
                             expression = x => x.CompanyName;

@@ -7,10 +7,11 @@
                class="form-control"
                placeholder="Customer Id"
                name="customerId"
+               maxlength="5"
                required
                ngModel
                #customerIdValidator="ngModel"
-               [readonly]="id?.length != 0">
+               [readonly]="id !== undefined">
       </div>
       <ul *ngIf="!customerIdValidator.valid && f.touched" class="col-md-4">
         <li *ngIf="customerIdValidator.errors?.required">

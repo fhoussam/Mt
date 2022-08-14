@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Mt.Application.Exceptions;
 using Mt.Application.Operations.Commands.RequestDtos;
 using Mt.Application.Persistence;
 using Mt.Domain.Entities;
@@ -9,12 +10,12 @@ namespace Mt.Application.Operations.Commands
 {
     public class AddCustomerCommand : IRequest<Unit>
     {
+        public AddCustomerRequestDto CustomerValues { get; set; }
+
         public AddCustomerCommand(AddCustomerRequestDto customerValues)
         {
             CustomerValues = customerValues;
         }
-
-        public AddCustomerRequestDto CustomerValues { get; set; }
 
         public class AddCustomerCommandHandler : IRequestHandler<AddCustomerCommand, Unit>
         {

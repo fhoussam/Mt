@@ -1,6 +1,6 @@
 <div>
   <app-modal *ngIf="addModalActive" [title]="addModalTitle" (dismiss)="toggleAddModal(false)">
-    <app-customer-edit (Cancel)="toggleAddModal(false)" (Ok)="toggleAddModal(false)"></app-customer-edit>
+    <app-customer-edit (Cancel)="toggleAddModal(false)" (Ok)="toggleAddModal(false); reload()"></app-customer-edit>
   </app-modal>
 </div>
 
@@ -10,7 +10,7 @@
       <div class="row">
         <p class="col-md-6" style="font-size: 25px;"><b>Search</b></p>
         <div class="col-md-6" style="text-align:right">
-          <button type="button" (click)="toggleAddModal(true)" class="btn btn-primary">New</button>
+          <button type="button" (click)="toggleAddModal(true); $event.stopPropagation();" class="btn btn-primary">New</button>
         </div>
       </div>
     </div>
@@ -77,9 +77,9 @@
     <div>
       <div *ngIf="customerTabMenu.profile">
         <app-customer-display *ngIf="!editMode" [id]="selectedId" (onActivateEditMode)="setEditMode(true)"></app-customer-display>
-        <app-customer-edit *ngIf="editMode" [id]="selectedId" (Cancel)="setEditMode(false)"></app-customer-edit>
+        <app-customer-edit *ngIf="editMode" [id]="selectedId" (Cancel)="setEditMode(false)" (Ok)="reload()"></app-customer-edit>
       </div>
-      <div *ngIf="customerTabMenu.orders">
+      <div *ngIf="customerTabMenu.orders">reload
         <app-customer-orders [id]="selectedId"></app-customer-orders>
       </div>
     </div>

@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,7 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Mt.Api.Filters;
 using Mt.Api.Middlewares;
+using Mt.Application.Operations.Validators;
 using Mt.Application.Persistence;
 using Mt.Infra.Persistence;
 using System.Text.Json.Serialization;
@@ -32,11 +36,19 @@ namespace Mt.Api
 
             services.AddCors();
 
-            services.AddControllers().AddJsonOptions(opts =>
-            {
-                var enumConverter = new JsonStringEnumConverter();
-                opts.JsonSerializerOptions.Converters.Add(enumConverter);
-            });
+            services.AddFluentValidationAutoValidation();
+            services.AddValidatorsFromAssemblyContaining<EditCustomerValidator>();
+
+            services
+                .AddControllers(opts => 
+                {
+                    opts.Filters.Add(typeof(ValidateModelStateFilter));
+                })
+                .AddJsonOptions(opts =>
+                {
+                    var enumConverter = new JsonStringEnumConverter();
+                    opts.JsonSerializerOptions.Converters.Add(enumConverter);
+                });
 
             services.AddSwaggerGen(c =>
             {

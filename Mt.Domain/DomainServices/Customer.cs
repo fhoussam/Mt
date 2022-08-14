@@ -1,5 +1,6 @@
 ﻿using Mt.Domain.Abstractions;
 using System;
+using System.Collections.Generic;
 
 namespace Mt.Domain.Entities
 {

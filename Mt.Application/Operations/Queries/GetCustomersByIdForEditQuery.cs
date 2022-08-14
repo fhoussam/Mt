@@ -6,38 +6,35 @@ using System.Threading.Tasks;
 
 namespace Mt.Application.Operations.Queries
 {
-    public class GetCustomersByIdQuery : IRequest<CustomerDetail>
+    public class GetCustomersByIdForEditQuery : IRequest<CustomerForEditResponseDto>
     {
         public string Id { get; set; }
 
-        public GetCustomersByIdQuery(string id)
+        public GetCustomersByIdForEditQuery(string id)
         {
             Id = id;
         }
 
-        public class GetCustomersByIdQueryHandler : IRequestHandler<GetCustomersByIdQuery, CustomerDetail>
+        public class GetCustomersByIdForEditQueryHandler : IRequestHandler<GetCustomersByIdForEditQuery, CustomerForEditResponseDto>
         {
             private readonly INorthWindDbContext _context;
 
-            public GetCustomersByIdQueryHandler(INorthWindDbContext context)
+            public GetCustomersByIdForEditQueryHandler(INorthWindDbContext context)
             {
                 _context = context;
             }
 
-            public async Task<CustomerDetail> Handle(GetCustomersByIdQuery request, CancellationToken cancellationToken)
+            public async Task<CustomerForEditResponseDto> Handle(GetCustomersByIdForEditQuery request, CancellationToken cancellationToken)
             {
                 var rawCustomer = await _context.Customers.FindAsync(request.Id);
-                var result = new CustomerDetail() 
+                var result = new CustomerForEditResponseDto()
                 {
+                    CustomerId = rawCustomer.CustomerId,
                     CompanyName = rawCustomer.CompanyName,
-                    ContactName = rawCustomer.ContactName,
-                    ContactTitle = rawCustomer.ContactTitle,
-                    Address = rawCustomer.Address,
                     City = rawCustomer.City,
-                    PostalCode = rawCustomer.PostalCode,
                     Country = rawCustomer.Country,
-                    Phone = rawCustomer.Phone,
-                    Fax = rawCustomer.Fax,
+                    PostalCode = rawCustomer.PostalCode,
+                    ContactName = rawCustomer.ContactName,
                 };
 
                 return result;

@@ -13,7 +13,6 @@ powershell :
 
 Angular
 	when using a reference to a directive, delcaring it with # is what should done but passing it as param with # is not
-	refreshPageCount works when init but not in ctor
 
 ****************************************************
 
@@ -28,3 +27,28 @@ powershell :
 		Error message is clearer and we understood that we dont have some kind of access
 		turned out we needed to execute the following command to allow ps to execute on ther machine 
 		run ps with admin mode and run : set-executionpolicy remotesigned
+
+complicated issues :
+
+fluent validation 
+	issue decription : validators are not called, and therefore model state is always true
+	solution : the casual version we worked we've used : the IserviceCollection extension AddFluentValidation
+	this method has deprecated and needs to be replaced with : 
+		services.AddValidatorsFromAssemblyContaining<EditCustomerValidator>();
+		services.AddFluentValidationAutoValidation();
+
+angular
+	goal : setting form value at component load
+	issue description : trying to do that in a simple way : this.setFormExampleValues() in init (as well as in other events), error > Cannot read properties of undefined (reading 'form')
+	solution : in init event : setTimeout(() => this.setFormExampleValues(), 10);
+
+****************************************************
+
+*snippets to remember
+
+	- instead of trying to write the body prop, you should do this :
+		async Task WriteToResponse(string s)
+		{
+			var bytes = Encoding.UTF8.GetBytes(s);
+			await httpContext.Response.Body.WriteAsync(bytes, 0, bytes.Length);
+		}

@@ -41,6 +41,14 @@ namespace Mt.Api.Controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        [Route("exists/{id}")]
+        public async Task<IActionResult> CustomerExisting([FromRoute] string id)
+        {
+            var result = await _mediator.Send(new CustomerExistingQuery(id));
+            return Ok(result);
+        }
+
         [HttpPost]
         [Route("{id}")]
         public async Task<IActionResult> Post([FromRoute] string id, [FromBody] EditCustomerRequestDto customerValues)

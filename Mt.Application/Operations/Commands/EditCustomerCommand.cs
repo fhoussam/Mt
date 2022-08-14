@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Mt.Application.Exceptions;
 using Mt.Application.Operations.Commands.RequestDtos;
 using Mt.Application.Persistence;
 using System.Threading;
@@ -8,14 +9,14 @@ namespace Mt.Application.Operations.Commands
 {
     public class EditCustomerCommand :IRequest<Unit>
     {
-        public EditCustomerCommand(string id, EditCustomerRequestDto customerValues)
+        public EditCustomerCommand(string customerId, EditCustomerRequestDto customerValues)
         {
-            Id = id;
+            CustomerId = customerId;
             CustomerValues = customerValues;
         }
 
-        public string Id { get; set; }
         public EditCustomerRequestDto CustomerValues { get; set; }
+        public string CustomerId { get; set; }
 
         public class EditCustomerCommandHandler : IRequestHandler<EditCustomerCommand, Unit>
         {
@@ -28,7 +29,11 @@ namespace Mt.Application.Operations.Commands
 
             public async Task<Unit> Handle(EditCustomerCommand request, CancellationToken cancellationToken)
             {
-                var toEdit = _context.Customers.Find(request.Id);
+                var toEdit = _context.Customers.Find(request.CustomerId);
+
+                if (toEdit == null)
+                    throw new NotFoundException("customer not found");
+
                 toEdit.EditCustomer
                 (
                     request.CustomerValues.CompanyName,

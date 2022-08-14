@@ -1,40 +1,43 @@
 ﻿using MediatR;
-using Mt.Application.Operations.Commands.RequestDtos;
+using Mt.Application.Operations.Queries.ResponseDtos;
 using Mt.Application.Persistence;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Mt.Application.Operations.Queries
 {
-    public class GetCustomersByIdForEditQuery : IRequest<EditCustomerRequestDto>
+    public class GetCustomersByIdQuery : IRequest<CustomerDetail>
     {
         public string Id { get; set; }
 
-        public GetCustomersByIdForEditQuery(string id)
+        public GetCustomersByIdQuery(string id)
         {
             Id = id;
         }
 
-        public class GetCustomersByIdForEditQueryHandler : IRequestHandler<GetCustomersByIdForEditQuery, EditCustomerRequestDto>
+        public class GetCustomersByIdQueryHandler : IRequestHandler<GetCustomersByIdQuery, CustomerDetail>
         {
             private readonly INorthWindDbContext _context;
 
-            public GetCustomersByIdForEditQueryHandler(INorthWindDbContext context)
+            public GetCustomersByIdQueryHandler(INorthWindDbContext context)
             {
                 _context = context;
             }
 
-            public async Task<EditCustomerRequestDto> Handle(GetCustomersByIdForEditQuery request, CancellationToken cancellationToken)
+            public async Task<CustomerDetail> Handle(GetCustomersByIdQuery request, CancellationToken cancellationToken)
             {
                 var rawCustomer = await _context.Customers.FindAsync(request.Id);
-                var result = new EditCustomerRequestDto() 
+                var result = new CustomerDetail()
                 {
-                    CustomerId = rawCustomer.CustomerId,
                     CompanyName = rawCustomer.CompanyName,
-                    City = rawCustomer.City,
-                    Country = rawCustomer.Country,
-                    PostalCode = rawCustomer.PostalCode,
                     ContactName = rawCustomer.ContactName,
+                    ContactTitle = rawCustomer.ContactTitle,
+                    Address = rawCustomer.Address,
+                    City = rawCustomer.City,
+                    PostalCode = rawCustomer.PostalCode,
+                    Country = rawCustomer.Country,
+                    Phone = rawCustomer.Phone,
+                    Fax = rawCustomer.Fax,
                 };
 
                 return result;

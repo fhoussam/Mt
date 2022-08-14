@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { APP_SETTINGS } from '../../../models/APP_SETTINGS';
 import { CustomerEditModel } from '../../../models/customer-edit-model';
@@ -9,7 +9,7 @@ import { MtAngularHttpService } from '../../../services/mt-angular-http.service'
   templateUrl: './customer-edit.component.html',
   styleUrls: ['./customer-edit.component.css']
 })
-export class CustomerEditComponent implements OnChanges, OnInit, AfterViewInit {
+export class CustomerEditComponent implements OnChanges, OnInit {
 
   constructor(private customerService: MtAngularHttpService) { }
 
@@ -21,13 +21,27 @@ export class CustomerEditComponent implements OnChanges, OnInit, AfterViewInit {
   @Output() Ok = new EventEmitter<void>();
   @ViewChild('f', { static: false }) editForm: NgForm;
 
-  ngAfterViewInit(): void {
-    console.log(this.editForm.setValue(new CustomerEditModel()));
-  }
-
   ngOnInit(): void {
     this.cities = APP_SETTINGS.cities;
     this.countries = APP_SETTINGS.countries;
+    setTimeout(() => this.setFormExampleValues(), 10);
+  }
+
+  cancelEdit() {
+    this.Cancel.emit();
+  }
+
+  setFormExampleValues(): void {
+    if (this.id === undefined) {
+      var formValue = new CustomerEditModel();
+      formValue.city = "Lyon";
+      formValue.companyName = "My Company";
+      formValue.contactName = "My Contact Name";
+      formValue.country = "France";
+      formValue.customerId = "FDZEA";
+      formValue.postalCode = "DF-874";
+      this.editForm.form.setValue(formValue);
+    }
   }
 
   ngOnChanges() {
@@ -47,10 +61,5 @@ export class CustomerEditComponent implements OnChanges, OnInit, AfterViewInit {
       this.Ok.emit();
       console.log("customer data saved");
     });
-  }
-
-  cancelEdit() {
-    //this.Cancel.emit();
-    console.log(this.editForm);
   }
 }

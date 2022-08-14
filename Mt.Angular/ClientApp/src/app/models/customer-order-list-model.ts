@@ -1,5 +1,5 @@
 export class CustomerOrderListModel {
-  orderId: number;
+  id: number;
   contactName: string;
   orderDate: Date;
   productsCount: number;
