@@ -18,8 +18,8 @@ export class InitLoadService {
       APP_SETTINGS.countries = settings[1];
       APP_SETTINGS.cities.unshift("");
       APP_SETTINGS.countries.unshift("");
-      return settings
-    });
+      return settings;
+    }).catch(error => console.log(error));
 
     return promise;
   }
