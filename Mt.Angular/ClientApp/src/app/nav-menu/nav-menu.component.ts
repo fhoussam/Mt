@@ -23,4 +23,8 @@ export class NavMenuComponent {
   login() {
     this.authService.authenticateUser("");
   }
+
+  getUserInfo() {
+    this.authService.getUserInfo().subscribe(x => console.log(x));
+  }
 }

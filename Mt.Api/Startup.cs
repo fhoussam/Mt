@@ -1,5 +1,6 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using IdentityModel.OidcClient;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -61,6 +62,17 @@ namespace Mt.Api
                     options.Authority = "https://demo.duendesoftware.com/";
                     options.Audience = "api";
                 });
+
+            var options = new OidcClientOptions()
+            {
+                Authority = "https://demo.duendesoftware.com/",
+                ClientId = "interactive.confidential",
+                ClientSecret = "secret",
+                Scope = "openid profile api offline_access",
+                RedirectUri = "/",
+            };
+
+            services.AddTransient(opt => new OidcClient(options));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

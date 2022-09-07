@@ -39,7 +39,7 @@ namespace Mt.Angular
             .AddOpenIdConnect("oidc", options =>
             {
                 options.Authority = "https://demo.duendesoftware.com/";
-                options.ClientId = "interactive.confidential.short";
+                options.ClientId = "interactive.confidential";
                 options.ClientSecret = "secret";
 
                 options.ResponseType = "code";
