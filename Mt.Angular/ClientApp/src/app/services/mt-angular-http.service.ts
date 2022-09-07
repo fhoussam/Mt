@@ -14,7 +14,7 @@ import { PagedList } from '../models/PagedList';
 export class MtAngularHttpService {
 
   constructor(private http: HttpClient) { }
-  static baseUrl = "https://localhost:5002/";
+  static baseUrl = "api/";
   fullUrl(path: string) {
     return MtAngularHttpService.baseUrl + path;
   }

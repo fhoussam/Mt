@@ -11,9 +11,12 @@ export class InitLoadService {
 
   getSettings(): Promise<any> {
     const promise = Promise.all([
-      this.http.get<string[]>('https://localhost:5002/MetaData/Cities').toPromise(),
-      this.http.get<string[]>('https://localhost:5002/MetaData/Countries').toPromise(),
+      this.http.get<string[]>('api/MetaData/Cities').toPromise(),
+      this.http.get<string[]>('api/MetaData/Countries').toPromise(),
     ]).then(settings => {
+      console.log('init success');
+      console.log(settings[0]);
+      console.log(settings[1]);
       APP_SETTINGS.cities = settings[0];
       APP_SETTINGS.countries = settings[1];
       APP_SETTINGS.cities.unshift("");
