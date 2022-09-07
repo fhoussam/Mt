@@ -54,6 +54,13 @@ namespace Mt.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Mt.Api", Version = "v1" });
             });
+
+            services.AddAuthentication("jwt")
+                .AddJwtBearer("jwt", options =>
+                {
+                    options.Authority = "https://demo.duendesoftware.com/";
+                    options.Audience = "api";
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,6 +81,7 @@ namespace Mt.Api
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
