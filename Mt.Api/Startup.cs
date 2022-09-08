@@ -30,7 +30,7 @@ namespace Mt.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = Configuration.GetConnectionString("Default");
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<INorthWindDbContext, NorthWindDbContext>(o => o.UseSqlServer(connectionString));
 
             services.AddMediatR();
