@@ -52,3 +52,20 @@ angular
 			var bytes = Encoding.UTF8.GetBytes(s);
 			await httpContext.Response.Body.WriteAsync(bytes, 0, bytes.Length);
 		}
+
+	- init user profiles after seed
+
+		select * from AspNetRoleClaims
+		select * from AspNetRoles
+		select * from AspNetUserRoles
+		select * from AspNetUsers
+
+		--alice : 9a092ccf-99e9-4ca7-b251-0c1a85241659
+		--bob : ebcc1893-8159-4fd0-8260-18acc82e9b83
+
+		insert into AspNetRoles values (1, 'admin','admin','admin')
+		insert into AspNetRoles values (2, 'manager','manager','manager')
+		insert into AspNetRoles values (3, 'identified_visitor','identified_visitor','identified_visitor')
+
+		insert into AspNetUserRoles values ('9a092ccf-99e9-4ca7-b251-0c1a85241659', 1)
+		insert into AspNetUserRoles values ('ebcc1893-8159-4fd0-8260-18acc82e9b83', 2)

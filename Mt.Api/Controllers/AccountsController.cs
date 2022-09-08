@@ -1,7 +1,8 @@
-﻿using IdentityModel.OidcClient;
+﻿using IdentityModel;
+using IdentityModel.OidcClient;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Mt.Application.Operations.Queries.ResponseDtos;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -33,7 +34,15 @@ namespace Mt.Api.Controllers
                 x.Type,
                 x.Value
             });
-            return Ok(claimList);
+
+            var response = new UserResponseDto() 
+            {
+                Id = claimList.Single(x=> x.Type == JwtClaimTypes.Subject).Value,
+                Name = claimList.Single(x => x.Type == JwtClaimTypes.Name).Value,
+                Role = claimList.Single(x => x.Type == JwtClaimTypes.Role).Value,
+            };
+
+            return Ok(response);
         }
     }
 }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { UserModel } from '../models/UserModel';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
     window.location.href = `accounts?redirect=${redirect}`;
   }
 
-  public getUserInfo(): Observable<any> {
-    return this.http.get("api/accounts/user-info");
+  public getUserInfo(): Observable<UserModel> {
+    return this.http.get<UserModel>("api/accounts/user-info");
   }
 }
