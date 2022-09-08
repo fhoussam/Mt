@@ -60,7 +60,7 @@ namespace Mt.Api
                 .AddJwtBearer("jwt", options =>
                 {
                     options.Authority = "https://localhost:5001/";
-                    options.Audience = "api";
+                    options.Audience = "https://localhost:5001/resources";
                 });
 
             var options = new OidcClientOptions()
@@ -68,7 +68,7 @@ namespace Mt.Api
                 Authority = "https://localhost:5001/",
                 ClientId = "interactive",
                 ClientSecret = "secret",
-                Scope = "openid profile api offline_access",
+                Scope = "openid profile scope2 offline_access",
                 RedirectUri = "/",
             };
 

@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Mt.Api.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class AccountsController : ControllerBase
@@ -24,6 +23,10 @@ namespace Mt.Api.Controllers
         public async Task<IActionResult> Get()
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
+
+            if (string.IsNullOrEmpty(accessToken))
+                return NoContent();
+
             var result = await _oidcClient.GetUserInfoAsync(accessToken);
             var claimList = result.Claims.Select(x => new 
             { 
