@@ -1,6 +1,5 @@
 ﻿
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Mt.Api.Controllers
@@ -13,7 +12,7 @@ namespace Mt.Api.Controllers
         public IActionResult Index(string redirect)
         {
             if(User?.Identity?.IsAuthenticated != true)
-                return Challenge(new AuthenticationProperties() { RedirectUri = "/" }, "oidc");
+                return Challenge(new AuthenticationProperties() { RedirectUri = $"/Accounts?redirect={redirect}" }, "oidc");
 
             string path;
 

@@ -17,6 +17,8 @@ import { CustomerSearchComponent } from './components/customer/customer-search/c
 import { CustomerOrdersComponent } from './components/customer/customer-orders/customer-orders.component';
 import { ConfirmationComponent } from './components/shared/confirmation/confirmation.component';
 import { OrdersListComponent } from './components/orders/orders-list/orders-list.component';
+import { AuthGuardService } from './services/auth-guard.service';
+import { ForbiddenComponent } from './components/shared/forbidden/forbidden.component';
 
 export function get_settings(initLoadService: InitLoadService) {
   return () => initLoadService.getSettings();
@@ -35,7 +37,8 @@ export function get_settings(initLoadService: InitLoadService) {
     CustomerSearchComponent,
     CustomerOrdersComponent,
     ConfirmationComponent,
-    OrdersListComponent
+    OrdersListComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -43,8 +46,9 @@ export function get_settings(initLoadService: InitLoadService) {
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'customers', component: CustomersListComponent },
-      { path: 'orders', component: OrdersListComponent },
+      { path: 'customers', canActivate: [AuthGuardService], component: CustomersListComponent },
+      { path: 'orders', canActivate: [AuthGuardService], component: OrdersListComponent },
+      { path: 'forbidden', component: ForbiddenComponent },
     ])
   ],
   providers: [
