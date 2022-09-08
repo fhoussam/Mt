@@ -1,6 +1,6 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ConfirmationService } from '../../../../shared/services/confirmation.service';
 import { CustomerOrderListModel } from '../../../models/customer-order-list-model';
-import { ConfirmationService } from '../../../services/confirmation.service';
 import { MtAngularHttpService } from '../../../services/mt-angular-http.service';
 
 @Component({

@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { ConfirmationModel } from '../../../models/confirmation-model';
-import { ConfirmationService } from '../../../services/confirmation.service';
+import { Component, OnInit } from '@angular/core';
+import { of } from 'rxjs';
+import { ConfirmationService } from '../../services/confirmation.service';
+import { ConfirmationModel } from '../../models/confirmation-model';
 
 @Component({
   selector: 'app-confirmation',

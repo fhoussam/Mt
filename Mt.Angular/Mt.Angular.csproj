@@ -34,31 +34,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\models\confirmation-model.ts" />
-    <None Remove="ClientApp\src\app\models\customer-detail-model.ts" />
-    <None Remove="ClientApp\src\app\models\customer-edit-model.ts" />
-    <None Remove="ClientApp\src\app\models\customer-list-model.ts" />
-    <None Remove="ClientApp\src\app\models\customer-search-model.ts" />
-    <None Remove="ClientApp\src\app\models\customer-tab-menu.ts" />
-    <None Remove="ClientApp\src\app\models\PagedList.ts" />
+    <None Remove="ClientApp\src\app\main\models\confirmation-model.ts" />
+    <None Remove="ClientApp\src\app\main\models\customer-detail-model.ts" />
+    <None Remove="ClientApp\src\app\main\models\customer-edit-model.ts" />
+    <None Remove="ClientApp\src\app\main\models\customer-list-model.ts" />
+    <None Remove="ClientApp\src\app\main\models\customer-search-model.ts" />
+    <None Remove="ClientApp\src\app\main\models\customer-tab-menu.ts" />
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Remove="ClientApp\src\app\models\APP_SETTINGS.ts" />
-    <TypeScriptCompile Remove="ClientApp\src\app\models\customer-order-list-model.ts" />
-    <TypeScriptCompile Remove="ClientApp\src\app\models\PagerSetting.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\main\models\customer-order-list-model.ts" />
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\models\customer-edit-model.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="ClientApp\src\app\models\customer-list-model.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\models\customer-detail-model.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Update="ClientApp\src\app\models\customer-search-model.ts">
+    <TypeScriptCompile Update="ClientApp\src\app\main\models\customer-search-model.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
   </ItemGroup>

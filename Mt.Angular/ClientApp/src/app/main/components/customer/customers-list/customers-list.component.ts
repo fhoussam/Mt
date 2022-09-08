@@ -1,9 +1,9 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
+import { PagerSetting } from '../../../../shared/models/PagerSetting';
 import { CustomerListModel } from '../../../models/customer-list-model';
-import { PagerSetting } from '../../../models/PagerSetting';
 import { CustomerSearch } from '../../../models/customer-search-model';
-import { MtAngularHttpService } from '../../../services/mt-angular-http.service';
 import { CustomerTabMenu } from '../../../models/customer-tab-menu';
+import { MtAngularHttpService } from '../../../services/mt-angular-http.service';
 
 @Component({
   selector: 'app-customers-list',
