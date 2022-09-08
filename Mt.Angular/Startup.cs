@@ -38,8 +38,8 @@ namespace Mt.Angular
             })
             .AddOpenIdConnect("oidc", options =>
             {
-                options.Authority = "https://demo.duendesoftware.com/";
-                options.ClientId = "interactive.confidential";
+                options.Authority = "https://localhost:5001/";
+                options.ClientId = "interactive";
                 options.ClientSecret = "secret";
 
                 options.ResponseType = "code";
@@ -49,7 +49,7 @@ namespace Mt.Angular
                 options.Scope.Clear();
                 options.Scope.Add("openid");
                 options.Scope.Add("profile");
-                options.Scope.Add("api");
+                options.Scope.Add("scope2");
                 options.Scope.Add("offline_access");
 
                 options.TokenValidationParameters = new TokenValidationParameters

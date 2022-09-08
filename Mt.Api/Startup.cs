@@ -59,14 +59,14 @@ namespace Mt.Api
             services.AddAuthentication("jwt")
                 .AddJwtBearer("jwt", options =>
                 {
-                    options.Authority = "https://demo.duendesoftware.com/";
+                    options.Authority = "https://localhost:5001/";
                     options.Audience = "api";
                 });
 
             var options = new OidcClientOptions()
             {
-                Authority = "https://demo.duendesoftware.com/",
-                ClientId = "interactive.confidential",
+                Authority = "https://localhost:5001/",
+                ClientId = "interactive",
                 ClientSecret = "secret",
                 Scope = "openid profile api offline_access",
                 RedirectUri = "/",
