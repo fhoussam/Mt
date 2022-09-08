@@ -23,6 +23,10 @@ namespace Mt.Api.Controllers
                     path = "/customers";
                     break;
 
+                case "orders":
+                    path = "/orders";
+                    break;
+
                 default:
                     path = "/";
                     break;

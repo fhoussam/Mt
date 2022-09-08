@@ -6,6 +6,7 @@
     <ul class="nav navbar-nav">
       <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"><a [routerLink]="['/']">Home</a></li>
       <li *ngIf="user.role === 'admin' || user.role === 'manager'" [routerLinkActive]="['active']"><a [routerLink]="['/customers']">Customers</a></li>
+      <li *ngIf="user.role === 'admin'" [routerLinkActive]="['active']"><a [routerLink]="['/orders']">Orders</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li *ngIf="user.id.length !== 0"><a href="javascript:;">{{user.name}} ({{user.role}})</a></li>

@@ -16,6 +16,7 @@ import { PagerComponent } from './components/shared/pager/pager.component';
 import { CustomerSearchComponent } from './components/customer/customer-search/customer-search.component';
 import { CustomerOrdersComponent } from './components/customer/customer-orders/customer-orders.component';
 import { ConfirmationComponent } from './components/shared/confirmation/confirmation.component';
+import { OrdersListComponent } from './components/orders/orders-list/orders-list.component';
 
 export function get_settings(initLoadService: InitLoadService) {
   return () => initLoadService.getSettings();
@@ -33,7 +34,8 @@ export function get_settings(initLoadService: InitLoadService) {
     PagerComponent,
     CustomerSearchComponent,
     CustomerOrdersComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    OrdersListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -42,6 +44,7 @@ export function get_settings(initLoadService: InitLoadService) {
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'customers', component: CustomersListComponent },
+      { path: 'orders', component: OrdersListComponent },
     ])
   ],
   providers: [
