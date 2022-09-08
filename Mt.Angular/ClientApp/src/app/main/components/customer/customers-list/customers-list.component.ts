@@ -72,7 +72,7 @@ export class CustomersListComponent implements OnInit {
     this.editMode = activated;
   }
 
-  onChangePagerSettings(pagerSetting: PagerSetting) {
+  onChangePagerSettings(pagerSetting: any) {
 
     if (pagerSetting.pageSize === undefined)
       pagerSetting.pageSize = 5;
