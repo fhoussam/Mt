@@ -1,5 +1,9 @@
 ﻿
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Mt.Api.Controllers
@@ -31,6 +35,13 @@ namespace Mt.Api.Controllers
                     break;
             }
             return Redirect(path);
+        }
+
+        [Authorize]
+        public IActionResult Logout()
+        {
+            var redirectUri = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.Value}";
+            return SignOut(new AuthenticationProperties() { RedirectUri = redirectUri }, "cookies", "oidc");
         }
     }
 }

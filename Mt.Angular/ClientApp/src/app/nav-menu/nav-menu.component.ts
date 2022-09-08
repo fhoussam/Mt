@@ -32,7 +32,7 @@ export class NavMenuComponent implements OnInit {
   }
 
   logout() {
-
+    window.location.href = 'accounts/logout';
   }
 
   initUserInfo() {
