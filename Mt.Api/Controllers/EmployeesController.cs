@@ -17,6 +17,14 @@ namespace Mt.Api.Controllers
         }
 
         [HttpGet]
+        [Route("experienced-enough")]
+        public async Task<IActionResult> GetIsExperiencedEnough([FromQuery] GetEmployeeExperiencedQuery getEmployeeExperiencedQuery)
+        {
+            var result = await _mediator.Send(getEmployeeExperiencedQuery);
+            return Ok(result);
+        }
+
+        [HttpGet]
         [Route("options")]
         public async Task<IActionResult> GetOptions([FromQuery] string name)
         {

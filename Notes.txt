@@ -69,3 +69,21 @@ angular
 
 		insert into AspNetUserRoles values ('9a092ccf-99e9-4ca7-b251-0c1a85241659', 1)
 		insert into AspNetUserRoles values ('ebcc1893-8159-4fd0-8260-18acc82e9b83', 2)
+
+
+//check employee experience level
+select EmployeeID,count(*) from Orders
+group by EmployeeID
+having count(*) > 80
+order by 2 desc
+
+select CustomerID,count(*) from Orders
+group by CustomerID
+having count(*) > 20
+order by 2 desc
+
+//order select
+select OrderID, ContactName, Employees.FirstName, OrderDate, ShipCountry
+from Orders
+join Customers on Customers.CustomerID = Orders.CustomerID
+join Employees on Employees.EmployeeID = Orders.EmployeeID
