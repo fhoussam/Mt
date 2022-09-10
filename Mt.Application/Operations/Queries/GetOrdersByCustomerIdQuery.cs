@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Mt.Application.Operations.Queries
 {
-    public class GetOrdersByCustomerIdQuery : IRequest<IEnumerable<OrderListItem>>
+    public class GetOrdersByCustomerIdQuery : IRequest<IEnumerable<OrderListByCustomerIdItem>>
     {
         public string CustomerId { get; set; }
 
@@ -18,7 +18,7 @@ namespace Mt.Application.Operations.Queries
             CustomerId = customerId;
         }
 
-        public class GetOrdersByCustomerIdQueryHandler : IRequestHandler<GetOrdersByCustomerIdQuery, IEnumerable<OrderListItem>>
+        public class GetOrdersByCustomerIdQueryHandler : IRequestHandler<GetOrdersByCustomerIdQuery, IEnumerable<OrderListByCustomerIdItem>>
         {
             private readonly INorthWindDbContext _context;
 
@@ -27,12 +27,12 @@ namespace Mt.Application.Operations.Queries
                 _context = context;
             }
 
-            public async Task<IEnumerable<OrderListItem>> Handle(GetOrdersByCustomerIdQuery request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<OrderListByCustomerIdItem>> Handle(GetOrdersByCustomerIdQuery request, CancellationToken cancellationToken)
             {
                 var result = await _context.Orders.Where(x => x.CustomerId == request.CustomerId)
                     .Include(x => x.OrderDetails)
                     .Include(x => x.Customer)
-                    .Select(x => new OrderListItem() 
+                    .Select(x => new OrderListByCustomerIdItem() 
                     {
                         Id = x.OrderId,
                         ContactName = x.Customer.ContactName,

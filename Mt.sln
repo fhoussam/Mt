@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mt.Angular", "Mt.Angular\Mt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mt.Identity", "Mt.Identity\Mt.Identity.csproj", "{A2B6C6E0-889E-4583-98ED-F3BA0E1204AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mt.SeedWork", "Mt.SeedWork\Mt.SeedWork.csproj", "{2D525F18-AD49-4BD5-A6E6-A8B42BF7B1EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{A2B6C6E0-889E-4583-98ED-F3BA0E1204AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2B6C6E0-889E-4583-98ED-F3BA0E1204AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2B6C6E0-889E-4583-98ED-F3BA0E1204AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D525F18-AD49-4BD5-A6E6-A8B42BF7B1EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D525F18-AD49-4BD5-A6E6-A8B42BF7B1EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D525F18-AD49-4BD5-A6E6-A8B42BF7B1EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D525F18-AD49-4BD5-A6E6-A8B42BF7B1EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
