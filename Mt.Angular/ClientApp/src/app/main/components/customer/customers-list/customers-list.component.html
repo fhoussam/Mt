@@ -77,7 +77,7 @@
     <div>
       <div *ngIf="customerTabMenu.profile">
         <app-customer-display *ngIf="!editMode" [id]="selectedId" (onActivateEditMode)="setEditMode(true)"></app-customer-display>
-        <app-customer-edit *ngIf="editMode" [id]="selectedId" (Cancel)="setEditMode(false)" (Ok)="reload()"></app-customer-edit>
+        <app-customer-edit *ngIf="editMode" [id]="selectedId" (Cancel)="setEditMode(false)" (Ok)="reload()" #editComponent></app-customer-edit>
       </div>
       <div *ngIf="customerTabMenu.orders">reload
         <app-customer-orders [id]="selectedId"></app-customer-orders>

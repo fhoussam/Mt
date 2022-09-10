@@ -9,9 +9,10 @@ import { CustomerOrdersComponent } from './components/customer/customer-orders/c
 import { OrdersListComponent } from './components/orders/orders-list/orders-list.component';
 import { InitLoadService } from './services/init-load.service';
 import { RouterModule } from '@angular/router';
-import { AuthGuardService } from '../shared/services/auth-guard.service';
 import { ForbiddenComponent } from '../shared/components/forbidden/forbidden.component';
 import { SharedModule } from '../shared/shared.module';
+import { AuthGuardService } from '../shared/guards/auth-guard.service';
+import { CanDeactivateGuard } from '../shared/guards/can-deactivate';
 
 export function get_settings(initLoadService: InitLoadService) {
   return () => initLoadService.getSettings();
@@ -33,12 +34,13 @@ export function get_settings(initLoadService: InitLoadService) {
     SharedModule,
     CommonModule,
     RouterModule.forRoot([
-      { path: 'customers', canActivate: [AuthGuardService], component: CustomersListComponent },
+      { path: 'customers', canDeactivate: [CanDeactivateGuard], canActivate: [AuthGuardService], component: CustomersListComponent },
       { path: 'orders', canActivate: [AuthGuardService], component: OrdersListComponent },
       { path: 'forbidden', component: ForbiddenComponent },
     ])
   ],
   providers: [
+    CanDeactivateGuard,
     { provide: APP_INITIALIZER, useFactory: get_settings, deps: [InitLoadService], multi: true }
   ],
 })

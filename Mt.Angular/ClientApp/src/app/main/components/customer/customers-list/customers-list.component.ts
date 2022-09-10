@@ -1,18 +1,20 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
+import { CanCompoDeactivate } from '../../../../shared/guards/can-deactivate';
 import { PagerSetting } from '../../../../shared/models/PagerSetting';
 import { CustomerListModel } from '../../../models/customer-list-model';
 import { CustomerSearch } from '../../../models/customer-search-model';
 import { CustomerTabMenu } from '../../../models/customer-tab-menu';
 import { MtAngularHttpService } from '../../../services/mt-angular-http.service';
+import { CustomerEditComponent } from '../customer-edit/customer-edit.component';
 
 @Component({
   selector: 'app-customers-list',
   templateUrl: './customers-list.component.html',
   styleUrls: ['./customers-list.component.css']
 })
-export class CustomersListComponent implements OnInit {
-
-  constructor(private customerService: MtAngularHttpService, private renderer: Renderer2) { }
+export class CustomersListComponent implements OnInit, CanCompoDeactivate {
 
   customers: CustomerListModel[];
   selectedId: string = "";
@@ -26,10 +28,27 @@ export class CustomersListComponent implements OnInit {
   customerSearch = new CustomerSearch();
   collapsed: boolean = true;
   customerTabMenu = new CustomerTabMenu();
+  @ViewChild('editComponent') editComponent: CustomerEditComponent;
+  
+
+  constructor(private customerService: MtAngularHttpService, private renderer: Renderer2) { }
 
   ngOnInit() {
     this.pagerSetting = new PagerSetting();
     this.reload();
+  }
+
+  CanDeactivate(): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+    let jsonPreviousState = JSON.stringify(this.editComponent.previousState);
+    let jsonFormState = JSON.stringify(this.editComponent.editForm.value);
+    let isDirty = jsonPreviousState !== jsonFormState;
+
+    if (isDirty) {
+      let userConfirmation = confirm('Do you want to discard the changes ?');
+      return userConfirmation;
+    }
+
+    else return true;
   }
 
   setSortField(sortField: string) {

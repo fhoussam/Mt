@@ -40,6 +40,7 @@
     <None Remove="ClientApp\src\app\main\models\customer-list-model.ts" />
     <None Remove="ClientApp\src\app\main\models\customer-search-model.ts" />
     <None Remove="ClientApp\src\app\main\models\customer-tab-menu.ts" />
+    <None Remove="ClientApp\src\app\shared\guards\can-deactivate.ts" />
   </ItemGroup>
 
   <ItemGroup>

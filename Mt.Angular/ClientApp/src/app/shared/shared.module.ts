@@ -7,6 +7,7 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CanDeactivateGuard } from './guards/can-deactivate';
 
 @NgModule({
   exports: [
@@ -15,7 +16,7 @@ import { FormsModule } from '@angular/forms';
     PagerComponent,
     ConfirmationComponent,
     ForbiddenComponent,
-    FormsModule
+    FormsModule,
   ],
   declarations: [
     NavMenuComponent,
@@ -28,6 +29,7 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     RouterModule,
     FormsModule,
-  ]
+  ],
+  providers: [CanDeactivateGuard]
 })
 export class SharedModule { }
