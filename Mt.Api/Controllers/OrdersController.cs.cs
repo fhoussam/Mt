@@ -19,9 +19,17 @@ namespace Mt.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] DateTime? from, [FromQuery] DateTime? to, [FromQuery] string shipCountry)
+        [Route("{orderId}/edit")]
+        public async Task<IActionResult> Get([FromRoute] int orderId)
         {
-            var result = await _mediator.Send(new GetOrdersQuery(from, to, shipCountry));
+            var result = await _mediator.Send(new GetOrderByIdForEditQuery(orderId));
+            return Ok(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get([FromQuery] GetOrdersQuery getOrdersQuery)
+        {
+            var result = await _mediator.Send(getOrdersQuery);
             return Ok(result);
         }
 

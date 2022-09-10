@@ -10,6 +10,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Mt.SeedWork.LinqExrensions;
 
 namespace Mt.Application.Operations.Queries
 {
@@ -47,7 +48,7 @@ namespace Mt.Application.Operations.Queries
                 var content = await _northWindDbContext
                     .Customers
                     .Where(whereExpression)
-                    .OrderBy(sortExpression, request.Desc.Value)
+                    .OrderBy(sortExpression, request.Desc)
                     .Skip(request.PageIndex * request.PageSize).Take(request.PageSize)
                     .Select(x => new CustomerListItem()
                     {

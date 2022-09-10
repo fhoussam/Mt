@@ -14,4 +14,13 @@
         ContactName,
         Country,
     }
+
+    public enum OrdersSortFields
+    {
+        ContactName,
+        Employee,
+        OrderDate,
+        ShipCountry,
+        TotalOrderedUnits,
+    }
 }

@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Mt.Api.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class CustomersController : ControllerBase
@@ -24,6 +23,14 @@ namespace Mt.Api.Controllers
         public async Task<IActionResult> Get([FromQuery] GetCustomersQuery getCustomersQuery)
         {
             var result = await _mediator.Send(getCustomersQuery);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("options")]
+        public async Task<IActionResult> GetOptions([FromQuery] string name)
+        {
+            var result = await _mediator.Send(new GetCustomersByNameQuery(name));
             return Ok(result);
         }
 
