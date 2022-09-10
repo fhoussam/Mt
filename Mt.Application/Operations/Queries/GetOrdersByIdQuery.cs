@@ -42,7 +42,8 @@ namespace Mt.Application.Operations.Queries
                     CustomerId = rawCustomer.CustomerId,
                     EmployeeId = rawCustomer.EmployeeId,
                     OrderDate = rawCustomer.OrderDate,
-                    ShipCountry = rawCustomer.ShipCountry
+                    ShipCountry = rawCustomer.ShipCountry,
+                    ShipAddress = rawCustomer.ShipAddress
                 };
 
                 return result;

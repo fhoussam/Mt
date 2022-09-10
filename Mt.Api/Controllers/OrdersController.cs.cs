@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Mt.Application.Operations.Commands;
+using Mt.Application.Operations.Commands.RequestDtos;
 using Mt.Application.Operations.Queries;
 using System;
 using System.Threading.Tasks;
@@ -16,6 +17,14 @@ namespace Mt.Api.Controllers
         public OrdersController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpPost]
+        [Route("{id}")]
+        public async Task<IActionResult> Post([FromRoute] int id, [FromBody] EditOrderRequestDto customerValues)
+        {
+            var result = await _mediator.Send(new EditOrderCommand(id, customerValues));
+            return Ok(result);
         }
 
         [HttpGet]
