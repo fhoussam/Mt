@@ -19,6 +19,7 @@ namespace Mt.Application.Operations.Queries
         public DateTime? From { get; set; }
         public DateTime? To { get; set; }
         public string ShipCountry { get; set; }
+        public string CustomerId { get; set; }
         public int PageIndex { get; set; }
         public int PageSize { get; set; }
         public string SortField { get; set; }
@@ -45,6 +46,9 @@ namespace Mt.Application.Operations.Queries
 
                 if (request.To.HasValue)
                     whereExpression = whereExpression.And(x => x.OrderDate <= request.To.Value);
+
+                if (!string.IsNullOrEmpty(request.CustomerId))
+                    whereExpression = whereExpression.And(x => x.CustomerId == request.CustomerId);
 
                 var sortFieldKnown = Enum.TryParse<OrdersSortFields>(request.SortField, true, out var parsedSortField);
                 request.Desc = !sortFieldKnown ? true : request.Desc ?? false;

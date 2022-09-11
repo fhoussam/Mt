@@ -1,4 +1,5 @@
-export class CustomerOrderListModel {
+
+export class CustomerOrderListItem {
   id: number;
   contactName: string;
   orderDate: Date;

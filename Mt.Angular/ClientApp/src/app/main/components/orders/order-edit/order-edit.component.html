@@ -1,0 +1,55 @@
+<form>
+  <div class="form-group row">
+    <label class="col-md-4 col-form-label">Employee</label>
+    <div class="col-md-4">
+      <input type="text"
+             class="form-control"
+             placeholder="Employee"
+             ngModel
+             name="employeeId">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-4 col-form-label">Customer</label>
+    <div class="col-md-4">
+      <input type="text"
+             class="form-control"
+             placeholder="Customer"
+             ngModel
+             name="customerId">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-4 col-form-label">Order Date</label>
+    <div class="col-md-4">
+      <input type="text"
+             class="form-control"
+             placeholder="Order Date"
+             ngModel
+             name="orderDate">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-4 col-form-label">Country</label>
+    <div class="col-md-4">
+      <select class="form-control"
+              placeholder="Country"
+              name="shipCountry">
+        <option *ngFor="let country of countries" value="{{country}}">{{country}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-4 col-form-label">Ship address</label>
+    <div class="col-md-4">
+      <input type="text"
+             class="form-control"
+             placeholder="Ship address"
+             name="shipAddress">
+    </div>
+  </div>
+  <div class="custom-form-group">
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" (click)="cancelEdit()" class="btn btn-secondary">Cancel</button>
+  </div>
+</form>

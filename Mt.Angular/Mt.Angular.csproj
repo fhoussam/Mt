@@ -35,20 +35,27 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\main\models\confirmation-model.ts" />
-    <None Remove="ClientApp\src\app\main\models\customer-detail-model.ts" />
-    <None Remove="ClientApp\src\app\main\models\customer-edit-model.ts" />
-    <None Remove="ClientApp\src\app\main\models\customer-list-model.ts" />
-    <None Remove="ClientApp\src\app\main\models\customer-search-model.ts" />
+    <None Remove="ClientApp\src\app\main\models\customer-detail.ts" />
+    <None Remove="ClientApp\src\app\main\models\customer-edit.ts" />
+    <None Remove="ClientApp\src\app\main\models\customer-list-item.ts" />
+    <None Remove="ClientApp\src\app\main\models\customer-search.ts" />
     <None Remove="ClientApp\src\app\main\models\customer-tab-menu.ts" />
+    <None Remove="ClientApp\src\app\main\models\order-edit.ts" />
+    <None Remove="ClientApp\src\app\main\models\order-list-item.ts" />
+    <None Remove="ClientApp\src\app\main\models\order-search.ts" />
+    <None Remove="ClientApp\src\app\main\models\order-tab-menu.ts" />
     <None Remove="ClientApp\src\app\shared\guards\can-deactivate.ts" />
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Remove="ClientApp\src\app\main\models\customer-order-list-model.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\main\models\customer-order-list-item.ts" />
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Update="ClientApp\src\app\main\models\customer-search-model.ts">
+    <TypeScriptCompile Update="ClientApp\src\app\main\models\customer-search.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Update="ClientApp\src\app\main\models\order-search.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
   </ItemGroup>

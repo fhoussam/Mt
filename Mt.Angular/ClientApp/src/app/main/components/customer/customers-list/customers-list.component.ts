@@ -3,10 +3,10 @@ import { UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CanCompoDeactivate } from '../../../../shared/guards/can-deactivate';
 import { PagerSetting } from '../../../../shared/models/PagerSetting';
-import { CustomerListModel } from '../../../models/customer-list-model';
-import { CustomerSearch } from '../../../models/customer-search-model';
+import { CustomerListItem } from '../../../models/customer-list-item';
+import { CustomerSearch } from '../../../models/customer-search';
 import { CustomerTabMenu } from '../../../models/customer-tab-menu';
-import { MtAngularHttpService } from '../../../services/mt-angular-http.service';
+import { MtService } from '../../../services/mt-angular-http.service';
 import { CustomerEditComponent } from '../customer-edit/customer-edit.component';
 
 @Component({
@@ -16,7 +16,7 @@ import { CustomerEditComponent } from '../customer-edit/customer-edit.component'
 })
 export class CustomersListComponent implements OnInit, CanCompoDeactivate {
 
-  customers: CustomerListModel[];
+  customers: CustomerListItem[];
   selectedId: string = "";
   editMode: boolean = true;
   addModalTitle = "New Customer";
@@ -31,7 +31,7 @@ export class CustomersListComponent implements OnInit, CanCompoDeactivate {
   @ViewChild('editComponent') editComponent: CustomerEditComponent;
   
 
-  constructor(private customerService: MtAngularHttpService, private renderer: Renderer2) { }
+  constructor(private mtAngularHttpService: MtService, private renderer: Renderer2) { }
 
   ngOnInit() {
     this.pagerSetting = new PagerSetting();
@@ -64,7 +64,7 @@ export class CustomersListComponent implements OnInit, CanCompoDeactivate {
   }
 
   reload() {
-    this.customerService.getCustomers(this.pagerSetting.pageIndex, this.pagerSetting.pageSize, this.customerSearch, this.sortField, this.desc).subscribe(x => {
+    this.mtAngularHttpService.getCustomers(this.pagerSetting.pageIndex, this.pagerSetting.pageSize, this.customerSearch, this.sortField, this.desc).subscribe(x => {
       this.customers = x.content;
       this.totalCount = x.totalCount;
       this.selectedId = this.customers[0].customerId;

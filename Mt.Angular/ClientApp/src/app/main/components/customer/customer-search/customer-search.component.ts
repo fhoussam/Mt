@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { APP_SETTINGS } from '../../../models/APP_SETTINGS';
-import { CustomerSearch } from '../../../models/customer-search-model';
+import { CustomerSearch } from '../../../models/customer-search';
 
 @Component({
     selector: 'app-customer-search',

@@ -1,4 +1,4 @@
-﻿export class CustomerDetailModel
+export class CustomerDetail
 {
     customerId: string;
     companyName: string;

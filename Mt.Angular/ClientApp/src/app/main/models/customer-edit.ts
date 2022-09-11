@@ -1,4 +1,4 @@
-export class CustomerEditModel
+export class CustomerEdit
 {
     customerId: string;
     companyName: string;

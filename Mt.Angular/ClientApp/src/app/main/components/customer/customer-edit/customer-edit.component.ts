@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { APP_SETTINGS } from '../../../models/APP_SETTINGS';
-import { CustomerEditModel } from '../../../models/customer-edit-model';
-import { MtAngularHttpService } from '../../../services/mt-angular-http.service';
+import { CustomerEdit } from '../../../models/customer-edit';
+import { MtService } from '../../../services/mt-angular-http.service';
 
 @Component({
   selector: 'app-customer-edit',
@@ -11,9 +11,9 @@ import { MtAngularHttpService } from '../../../services/mt-angular-http.service'
 })
 export class CustomerEditComponent implements OnChanges, OnInit {
 
-  constructor(private customerService: MtAngularHttpService) { }
+  constructor(private customerService: MtService) { }
 
-  previousState: CustomerEditModel;
+  previousState: CustomerEdit;
   cities: string[];
   countries: string[];
   @Input() id: string;
@@ -33,7 +33,7 @@ export class CustomerEditComponent implements OnChanges, OnInit {
 
   setFormExampleValues(): void {
     if (this.id === undefined) {
-      var formValue = new CustomerEditModel();
+      var formValue = new CustomerEdit();
       formValue.city = "Lyon";
       formValue.companyName = "My Company";
       formValue.contactName = "My Contact Name";
@@ -55,7 +55,7 @@ export class CustomerEditComponent implements OnChanges, OnInit {
   }
 
   editCustomer() {
-    let customer = new CustomerEditModel();
+    let customer = new CustomerEdit();
     Object.assign(customer, this.editForm.value);
     this.customerService.editCustomer(this.id, customer).subscribe((x: any) => {
       this.Ok.emit();

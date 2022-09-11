@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ConfirmationService } from '../../../../shared/services/confirmation.service';
-import { CustomerOrderListModel } from '../../../models/customer-order-list-model';
-import { MtAngularHttpService } from '../../../services/mt-angular-http.service';
+import { CustomerOrderListItem } from '../../../models/customer-order-list-item';
+import { MtService } from '../../../services/mt-angular-http.service';
 
 @Component({
   selector: 'app-customer-orders',
@@ -11,9 +11,9 @@ import { MtAngularHttpService } from '../../../services/mt-angular-http.service'
 export class CustomerOrdersComponent implements OnChanges {
 
   @Input() id: string;
-  orders: CustomerOrderListModel[] = [];
+  orders: CustomerOrderListItem[] = [];
 
-  constructor(private http: MtAngularHttpService, private confirmationService: ConfirmationService) { }
+  constructor(private http: MtService, private confirmationService: ConfirmationService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.load();
