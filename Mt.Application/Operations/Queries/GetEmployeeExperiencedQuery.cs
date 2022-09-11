@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Mt.Application.Exceptions;
 using Mt.Application.Persistence;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,6 +23,16 @@ namespace Mt.Application.Operations.Queries
 
             public async Task<bool> Handle(GetEmployeeExperiencedQuery request, CancellationToken cancellationToken)
             {
+                var employee = await _context.Employees.FindAsync(request.EmployeeId);
+
+                if (employee == null)
+                    throw new InvalidInputException("invaild employee");
+
+                var customer = await _context.Customers.FindAsync(request.CustomerId);
+
+                if (customer == null)
+                    throw new InvalidInputException("invaild customer");
+
                 var employeeOrderCount = await _context
                     .Orders
                     .CountAsync(x => x.EmployeeId == request.EmployeeId);

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Mt.Application.Exceptions;
 using Mt.Application.Operations.Commands.RequestDtos;
+using Mt.Application.Operations.Queries;
 using Mt.Application.Persistence;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,9 +23,12 @@ namespace Mt.Application.Operations.Commands
         {
             private readonly INorthWindDbContext _context;
 
-            public EditOrderCommandHandler(INorthWindDbContext context)
+            private readonly IMediator _mediator;
+
+            public EditOrderCommandHandler(INorthWindDbContext context, IMediator mediator)
             {
                 _context = context;
+                _mediator = mediator;
             }
 
             public async Task<Unit> Handle(EditOrderCommand request, CancellationToken cancellationToken)
@@ -33,6 +37,17 @@ namespace Mt.Application.Operations.Commands
 
                 if (toEdit == null)
                     throw new NotFoundException();
+
+                var experiencedQuery = new GetEmployeeExperiencedQuery() 
+                { 
+                    CustomerId = request.OrderValues.CustomerId,
+                    EmployeeId = request.OrderValues.EmployeeId
+                };
+
+                var experienced = await _mediator.Send(experiencedQuery);
+
+                if (!experienced)
+                    throw new InvalidInputException("employee not experienced enough to perform this order");
 
                 toEdit.EditOrder
                 (
