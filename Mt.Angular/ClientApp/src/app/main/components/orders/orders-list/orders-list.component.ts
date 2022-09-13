@@ -24,7 +24,7 @@ export class OrdersListComponent implements OnInit {
   desc: boolean = false;
   pagerSetting: PagerSetting;
   orderSearch = new OrderSearch();
-  collapsed: boolean = true;
+  collapsed: boolean = false;
   orderTabMenu = new OrderTabMenu();
   @ViewChild('editComponent') editComponent: OrderEditComponent;
 
