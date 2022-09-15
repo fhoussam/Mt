@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { APP_SETTINGS } from '../../../models/APP_SETTINGS';
-import { OrderSearch } from '../../../models/order-search';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { decrement, increment, reset } from '../../../reducers/orders-actions';
+import { APP_SETTINGS } from '../../../models/APP_SETTINGS';
+import { OrderSearch } from '../../../models/order-search';
+import { loadOrdersBegin } from '../../../reducers/orders-actions';
 
 @Component({
   selector: 'app-order-search',
@@ -13,19 +13,12 @@ import { decrement, increment, reset } from '../../../reducers/orders-actions';
 export class OrderSearchComponent implements OnInit {
 
   countries: string[];
-  customerSearch = new OrderSearch();
+  orderSearch = new OrderSearch();
   count$: Observable<number>;
 
-  increment() {
-    this.store.dispatch(increment());
-  }
-
-  decrement() {
-    this.store.dispatch(decrement());
-  }
-
-  reset() {
-    this.store.dispatch(reset());
+  triggerSearch() {
+    this.orderSearch.shipCountry = "France";
+    this.store.dispatch(loadOrdersBegin({ orderSearch: this.orderSearch }));
   }
 
   constructor(private store: Store<{ count: number }>) {
@@ -36,13 +29,8 @@ export class OrderSearchComponent implements OnInit {
     this.countries = APP_SETTINGS.countries;
   }
 
-  triggerSearch() {
-    //this.search.emit(this.customerSearch);
-    this.increment();
-  }
-
   triggerReset() {
-    this.customerSearch = new OrderSearch();
+    this.orderSearch = new OrderSearch();
     //this.reset.emit();
   }
 }
