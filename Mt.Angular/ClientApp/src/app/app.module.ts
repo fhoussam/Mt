@@ -10,6 +10,8 @@ import { SharedModule } from './shared/shared.module';
 
 import { StoreModule } from '@ngrx/store';
 import { counterReducer } from './main/reducers/orders-reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { OrdersEffects } from './main/reducers/orders-effects';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { counterReducer } from './main/reducers/orders-reducer';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
     ]),
-    StoreModule.forRoot({ count: counterReducer })
+    StoreModule.forRoot({ count: counterReducer }),
+    EffectsModule.forRoot([OrdersEffects]),
   ],
   bootstrap: [AppComponent]
 })

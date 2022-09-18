@@ -1,5 +1,6 @@
 import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { UrlTree } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { PagerSetting } from '../../../../shared/models/PagerSetting';
 import { OrderListItem } from '../../../models/order-list-item';
@@ -27,12 +28,19 @@ export class OrdersListComponent implements OnInit {
   collapsed: boolean = false;
   orderTabMenu = new OrderTabMenu();
   @ViewChild('editComponent') editComponent: OrderEditComponent;
+  count$: Observable<number>;
 
-  constructor(private mtAngularHttpService: MtService, private renderer: Renderer2) { }
+  constructor(
+    private mtAngularHttpService: MtService,
+    private renderer: Renderer2
+    ,private store: Store<{ count: number }>
+  ) { }
 
   ngOnInit() {
     this.pagerSetting = new PagerSetting();
     this.reload();
+    this.count$ = this.store.select('count');
+    this.count$.subscribe((x) => { console.log('subbed', x); })
   }
 
   CanDeactivate(): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
