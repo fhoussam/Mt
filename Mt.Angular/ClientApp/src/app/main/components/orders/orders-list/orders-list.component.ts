@@ -1,10 +1,13 @@
 import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { UrlTree } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { PagerSetting } from '../../../../shared/models/PagerSetting';
 import { OrderListItem } from '../../../models/order-list-item';
 import { OrderSearch } from '../../../models/order-search';
 import { OrderTabMenu } from '../../../models/order-tab-menu';
+import { IAppState } from '../../../reducers/app-state';
+import { selectCounter } from '../../../reducers/orders/orders-selectors';
 import { MtService } from '../../../services/mt-angular-http.service';
 import { OrderEditComponent } from '../order-edit/order-edit.component';
 
@@ -24,15 +27,22 @@ export class OrdersListComponent implements OnInit {
   desc: boolean = false;
   pagerSetting: PagerSetting;
   orderSearch = new OrderSearch();
-  collapsed: boolean = true;
+  collapsed: boolean = false;
   orderTabMenu = new OrderTabMenu();
   @ViewChild('editComponent') editComponent: OrderEditComponent;
+  count$: Observable<number>;
 
-  constructor(private mtAngularHttpService: MtService, private renderer: Renderer2) { }
+  constructor(
+    private mtAngularHttpService: MtService,
+    private renderer: Renderer2
+    ,private store: Store<IAppState>
+  ) { }
 
   ngOnInit() {
     this.pagerSetting = new PagerSetting();
     this.reload();
+    this.count$ = this.store.select(selectCounter);
+    this.count$.subscribe((x) => { console.log('subbed', x); })
   }
 
   CanDeactivate(): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {

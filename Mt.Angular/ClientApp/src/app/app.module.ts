@@ -8,6 +8,11 @@ import { HomeComponent } from './main/components/home/home.component';
 import { MainModule } from './main/main.module';
 import { SharedModule } from './shared/shared.module';
 
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { OrdersEffects } from './main/reducers/orders/orders-effects';
+import { appReducer } from './main/reducers/app-state';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +24,9 @@ import { SharedModule } from './shared/shared.module';
     SharedModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-    ])
+    ]),
+    StoreModule.forRoot(appReducer),
+    EffectsModule.forRoot([OrdersEffects]),
   ],
   bootstrap: [AppComponent]
 })
