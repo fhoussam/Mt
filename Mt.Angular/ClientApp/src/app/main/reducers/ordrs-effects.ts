@@ -1,21 +1,20 @@
 import { Injectable } from "@angular/core";
-import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { EMPTY } from "rxjs";
-import { catchError, map, mergeMap, tap } from "rxjs/operators";
-import { OrderSearch } from "../models/order-search";
+import { Actions, ofType, createEffect } from "@ngrx/effects";
+import { EMPTY, EmptyError } from "rxjs";
+import { catchError, exhaustMap, map, tap, mergeMap } from "rxjs/operators";
+import { OrderSearch } from "../models/order-search"; 
 import { MtService } from "../services/mt-angular-http.service";
-import { loadOrderSuccess, loadOrdersBegin } from "./orders-actions";
+import { decrement, increment } from "./orders-actions";
 
 @Injectable()
 export class OrdersEffects {
 
   loadOrders$ = createEffect(() => this.actions$.pipe(
-    ofType(loadOrdersBegin),
-    tap(x => console.log('effect triggered', x)),
-    mergeMap((x) => this.mtService.getOrders(0, 10, x.orderSearch)
+    tap(x => console.log('effect triggered')),
+    ofType(increment),
+    mergeMap(() => this.mtService.getOrders(0, 10, new OrderSearch())
       .pipe(
-        map(orders => loadOrderSuccess({ orderSearchResult: orders })),
-        tap(x => console.log('effect executed', x)),
+        map(movies => decrement()),
         catchError(() => EMPTY)
       ))
   ));

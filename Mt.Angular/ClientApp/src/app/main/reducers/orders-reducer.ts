@@ -1,10 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
-import { loadOrdersBegin, loadOrderSuccess } from './orders-actions';
+import { increment, decrement, reset } from './orders-actions';
 
 export const initialState = 0;
 
-export const orderReducer = createReducer(
+export const counterReducer = createReducer(
   initialState,
-  on(loadOrdersBegin, (state) => { console.log('loadOrdersBegin'); return state; }),
-  on(loadOrderSuccess, (state) => { console.log('loadOrderSuccess'); return state; }),
+  on(increment, (state) => { console.log('increment'); return state + 1; }),
+  on(decrement, (state) => { console.log('decrement'); return state + 1; }),
+  on(reset, (state) => { console.log('reset'); return state + 1; })
 )
