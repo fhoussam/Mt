@@ -44,6 +44,9 @@
     <None Remove="ClientApp\src\app\main\models\order-list-item.ts" />
     <None Remove="ClientApp\src\app\main\models\order-search.ts" />
     <None Remove="ClientApp\src\app\main\models\order-tab-menu.ts" />
+    <None Remove="ClientApp\src\app\main\reducers\orders-actions.ts" />
+    <None Remove="ClientApp\src\app\main\reducers\orders-effects.ts" />
+    <None Remove="ClientApp\src\app\main\reducers\orders-reducer.ts" />
     <None Remove="ClientApp\src\app\shared\guards\can-deactivate.ts" />
   </ItemGroup>
 
