@@ -53,6 +53,7 @@
 
   <ItemGroup>
     <TypeScriptCompile Remove="ClientApp\src\app\main\models\customer-order-list-item.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\main\reducers\orders\orders-selectors.ts" />
   </ItemGroup>
 
   <ItemGroup>
