@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { EMPTY } from "rxjs";
 import { catchError, map, mergeMap, tap } from "rxjs/operators";
-import { OrderSearch } from "../models/order-search";
-import { MtService } from "../services/mt-angular-http.service";
+import { OrderSearch } from "../../models/order-search";
+import { MtService } from "../../services/mt-angular-http.service";
 import { increment, multiply } from "./orders-actions";
 
 @Injectable()

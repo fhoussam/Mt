@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { APP_SETTINGS } from '../../../models/APP_SETTINGS';
 import { OrderSearch } from '../../../models/order-search';
-import { increment } from '../../../reducers/orders-actions';
+import { increment } from '../../../reducers/orders/orders-actions';
 
 @Component({
   selector: 'app-order-search',

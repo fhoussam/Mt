@@ -6,6 +6,7 @@ import { PagerSetting } from '../../../../shared/models/PagerSetting';
 import { OrderListItem } from '../../../models/order-list-item';
 import { OrderSearch } from '../../../models/order-search';
 import { OrderTabMenu } from '../../../models/order-tab-menu';
+import { IAppState } from '../../../reducers/app-state';
 import { MtService } from '../../../services/mt-angular-http.service';
 import { OrderEditComponent } from '../order-edit/order-edit.component';
 
@@ -33,13 +34,13 @@ export class OrdersListComponent implements OnInit {
   constructor(
     private mtAngularHttpService: MtService,
     private renderer: Renderer2
-    ,private store: Store<{ count: number }>
+    ,private store: Store<IAppState>
   ) { }
 
   ngOnInit() {
     this.pagerSetting = new PagerSetting();
     this.reload();
-    this.count$ = this.store.select('count');
+    this.count$ = this.store.select('counter');
     this.count$.subscribe((x) => { console.log('subbed', x); })
   }
 
