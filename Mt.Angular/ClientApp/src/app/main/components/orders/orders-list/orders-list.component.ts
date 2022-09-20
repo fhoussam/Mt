@@ -24,7 +24,7 @@ export class OrdersListComponent implements OnInit {
   desc: boolean = false;
   pagerSetting: PagerSetting;
   orderSearch = new OrderSearch();
-  collapsed: boolean = true;
+  collapsed: boolean = false;
   orderTabMenu = new OrderTabMenu();
   @ViewChild('editComponent') editComponent: OrderEditComponent;
 
@@ -62,11 +62,11 @@ export class OrdersListComponent implements OnInit {
   }
 
   reload() {
-    this.mtAngularHttpService.getOrders(this.pagerSetting.pageIndex, this.pagerSetting.pageSize, this.orderSearch, this.sortField, this.desc).subscribe(x => {
-      this.orders = x.content;
-      this.totalCount = x.totalCount;
-      this.selectedId = this.orders[0].id;
-    });
+    //this.mtAngularHttpService.getOrders(this.pagerSetting.pageIndex, this.pagerSetting.pageSize, this.orderSearch, this.sortField, this.desc).subscribe(x => {
+    //  this.orders = x.content;
+    //  this.totalCount = x.totalCount;
+    //  this.selectedId = this.orders[0].id;
+    //});
   }
 
   setRowBgColor(el: any) {

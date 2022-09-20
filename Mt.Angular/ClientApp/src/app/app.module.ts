@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './main/components/home/home.component';
 import { MainModule } from './main/main.module';
 import { SharedModule } from './shared/shared.module';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { SharedModule } from './shared/shared.module';
     SharedModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-    ])
+    ]),
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([])
   ],
   bootstrap: [AppComponent]
 })

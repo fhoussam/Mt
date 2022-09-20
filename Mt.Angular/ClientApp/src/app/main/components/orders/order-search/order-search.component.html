@@ -34,7 +34,8 @@
     <div class="col-md-8">
       <select class="form-control"
               placeholder="Country"
-              name="country">
+              name="country"
+              [(ngModel)]="customerSearch.shipCountry">
         <option *ngFor="let country of countries" value="{{country}}">{{country}}</option>
       </select>
     </div>

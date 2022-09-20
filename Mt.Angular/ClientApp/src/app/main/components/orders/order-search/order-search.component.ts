@@ -19,6 +19,7 @@ export class OrderSearchComponent implements OnInit {
   }
 
   triggerSearch() {
+    console.log("selected ship country", this.customerSearch.shipCountry);
     //this.search.emit(this.customerSearch);
   }
 
