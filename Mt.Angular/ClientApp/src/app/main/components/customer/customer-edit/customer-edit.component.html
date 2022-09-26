@@ -14,7 +14,7 @@
                [readonly]="id !== undefined">
       </div>
       <ul *ngIf="!customerIdValidator.valid && f.touched" class="col-md-4">
-        <li *ngIf="customerIdValidator.errors?.required">
+        <li *ngIf="customerIdValidator.hasError('required')">
           <span class="validation-error">Customer Id is required</span>
         </li>
       </ul>
@@ -33,12 +33,12 @@
                name="companyName">
       </div>
       <ul *ngIf="!companyNameValidator.valid && f.touched" class="col-md-4">
-        <li *ngIf="companyNameValidator.errors?.required">
+        <li *ngIf="companyNameValidator.hasError('required')">
           <span class="validation-error">Company Name is required</span>
         </li>
-        <li *ngIf="companyNameValidator.errors?.minlength">
+        <li *ngIf="companyNameValidator.hasError('minlength')">
           <span class="validation-error">
-            Should be minimum of {{companyNameValidator.errors?.minlength.requiredLength}} catacters !
+            Should be minimum of {{companyNameValidator.errors?.['minlength']}} catacters !
           </span>
         </li>
       </ul>
@@ -68,7 +68,7 @@
         </select>
       </div>
       <ul *ngIf="!countryvalidator.valid && f.touched" class="col-md-4">
-        <li *ngIf="countryvalidator.errors?.required">
+        <li *ngIf="countryvalidator.hasError('required')">
           <span class="validation-error">Country is required</span>
         </li>
       </ul>
@@ -85,7 +85,7 @@
                name="postalCode">
       </div>
       <ul *ngIf="!postalCodevalidator.valid && f.touched" class="col-md-4">
-        <li *ngIf="postalCodevalidator.errors?.pattern">
+        <li *ngIf="postalCodevalidator.hasError('pattern')">
           <span class="validation-error">Only big letters or numbers</span>
         </li>
       </ul>
@@ -104,9 +104,9 @@
                name="contactName">
       </div>
       <ul *ngIf="!contactNameValidator.valid && f.touched" class="col-md-4">
-        <li *ngIf="contactNameValidator.errors?.minlength">
+        <li *ngIf="contactNameValidator.hasError('minlength')">
           <span class="validation-error">
-            Should be minimum of {{contactNameValidator.errors?.minlength.requiredLength}} catacters !
+            Should be minimum of {{contactNameValidator.errors?.['minlength']}} catacters !
           </span>
         </li>
       </ul>
