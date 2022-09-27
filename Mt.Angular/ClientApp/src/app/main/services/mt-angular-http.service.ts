@@ -8,7 +8,7 @@ import { CustomerOrderListItem } from '../models/customer-order-list-item';
 import { CustomerSearch } from '../models/customer-search';
 import { OrderEdit } from '../models/order-edit';
 import { OrderListItem } from '../models/order-list-item';
-import { OrderSearch } from '../models/order-search';
+import { OrderSearchQuery } from '../models/order-search';
 import { PagedList } from '../models/PagedList';
 
 @Injectable({
@@ -52,7 +52,7 @@ export class MtService {
     return this.http.get<PagedList<CustomerListItem>>(this.fullUrl(url));
   }
 
-  getOrders(pageIndex: number, pageSize: number, orderSearch: OrderSearch, sortField?: string, desc?: boolean): Observable<PagedList<OrderListItem>> {
+  getOrders(pageIndex: number, pageSize: number, orderSearch: OrderSearchQuery, sortField?: string, desc?: boolean): Observable<PagedList<OrderListItem>> {
     let url = "orders?PageIndex=" + pageIndex + "&PageSize=" + pageSize + "&SortField=" + sortField;
 
     if (desc != null)

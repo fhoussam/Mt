@@ -48,6 +48,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Remove="ClientApp\src\app\main\components\orders\order-reducer\order-actions.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\main\components\orders\order-reducer\order-reducer.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\main\components\orders\order-reducer\order-selectors.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\main\models\customer-order-list-item.ts" />
   </ItemGroup>
 

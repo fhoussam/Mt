@@ -16,6 +16,8 @@ import { CanDeactivateGuard } from '../shared/guards/can-deactivate';
 import { OrderEditComponent } from './components/orders/order-edit/order-edit.component';
 import { OrderDetailsComponent } from './components/orders/order-details/order-details.component';
 import { OrderSearchComponent } from './components/orders/order-search/order-search.component';
+import { StoreModule } from '@ngrx/store';
+import * as OrderReducers from './components/orders/order-reducer/order-reducer';
 
 export function get_settings(initLoadService: InitLoadService) {
   return () => initLoadService.getSettings();
@@ -43,7 +45,8 @@ export function get_settings(initLoadService: InitLoadService) {
       { path: 'customers', canDeactivate: [CanDeactivateGuard], canActivate: [AuthGuardService], component: CustomersListComponent },
       { path: 'orders', canActivate: [AuthGuardService], component: OrdersListComponent },
       { path: 'forbidden', component: ForbiddenComponent },
-    ])
+    ]),
+    StoreModule.forFeature('orders', OrderReducers.reducers)
   ],
   providers: [
     CanDeactivateGuard,

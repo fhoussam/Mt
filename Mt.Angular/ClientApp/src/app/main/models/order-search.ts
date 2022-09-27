@@ -1,4 +1,4 @@
-export class OrderSearch {
+export class OrderSearchQuery {
   from: Date | null;
   to: Date | null;
   shipCountry: string;

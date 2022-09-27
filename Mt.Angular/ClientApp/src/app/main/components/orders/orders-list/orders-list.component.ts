@@ -3,7 +3,7 @@ import { UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { PagerSetting } from '../../../../shared/models/PagerSetting';
 import { OrderListItem } from '../../../models/order-list-item';
-import { OrderSearch } from '../../../models/order-search';
+import { OrderSearchQuery } from '../../../models/order-search';
 import { OrderTabMenu } from '../../../models/order-tab-menu';
 import { MtService } from '../../../services/mt-angular-http.service';
 import { OrderEditComponent } from '../order-edit/order-edit.component';
@@ -23,7 +23,7 @@ export class OrdersListComponent implements OnInit {
   sortField: string;
   desc: boolean = false;
   pagerSetting: PagerSetting;
-  orderSearch = new OrderSearch();
+  orderSearch = new OrderSearchQuery();
   collapsed: boolean = false;
   orderTabMenu = new OrderTabMenu();
   @ViewChild('editComponent') editComponent: OrderEditComponent;
@@ -99,7 +99,7 @@ export class OrdersListComponent implements OnInit {
     this.reload();
   }
 
-  search(orderSearch: OrderSearch) {
+  search(orderSearch: OrderSearchQuery) {
     this.orderSearch = orderSearch;
     this.reload();
   }
