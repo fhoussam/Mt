@@ -4,10 +4,10 @@ export class OrderSearchQuery {
   shipCountry: string;
   customerId: string;
 
-  constructor() {
+  constructor(shipCountry: string = null) {
     this.from = null;
     this.to = null;
-    this.shipCountry = "";
+    this.shipCountry = shipCountry;
     this.customerId = "";
   }
 }

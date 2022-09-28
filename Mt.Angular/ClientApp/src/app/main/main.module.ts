@@ -18,6 +18,8 @@ import { OrderDetailsComponent } from './components/orders/order-details/order-d
 import { OrderSearchComponent } from './components/orders/order-search/order-search.component';
 import { StoreModule } from '@ngrx/store';
 import * as OrderReducers from './components/orders/order-reducer/order-reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { OrderEffects } from './components/orders/order-reducer/order-effects';
 
 export function get_settings(initLoadService: InitLoadService) {
   return () => initLoadService.getSettings();
@@ -46,7 +48,8 @@ export function get_settings(initLoadService: InitLoadService) {
       { path: 'orders', canActivate: [AuthGuardService], component: OrdersListComponent },
       { path: 'forbidden', component: ForbiddenComponent },
     ]),
-    StoreModule.forFeature('orders', OrderReducers.reducers)
+    StoreModule.forFeature('orders', OrderReducers.reducers),
+    EffectsModule.forFeature([OrderEffects])
   ],
   providers: [
     CanDeactivateGuard,

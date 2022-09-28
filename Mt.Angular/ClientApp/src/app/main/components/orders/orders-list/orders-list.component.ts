@@ -1,5 +1,6 @@
 import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { UrlTree } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { PagerSetting } from '../../../../shared/models/PagerSetting';
 import { OrderListItem } from '../../../models/order-list-item';
@@ -7,6 +8,8 @@ import { OrderSearchQuery } from '../../../models/order-search';
 import { OrderTabMenu } from '../../../models/order-tab-menu';
 import { MtService } from '../../../services/mt-angular-http.service';
 import { OrderEditComponent } from '../order-edit/order-edit.component';
+import { IOrderState } from '../order-reducer/order-reducer';
+import * as OrderSelectors from '../order-reducer/order-selectors';
 
 @Component({
   selector: 'app-orders-list',
@@ -15,7 +18,7 @@ import { OrderEditComponent } from '../order-edit/order-edit.component';
 })
 export class OrdersListComponent implements OnInit {
 
-  orders: OrderListItem[];
+  orders: OrderListItem[] = [];
   selectedId: number;
   editMode: boolean = true;
   addModalActive = false;
@@ -28,11 +31,26 @@ export class OrdersListComponent implements OnInit {
   orderTabMenu = new OrderTabMenu();
   @ViewChild('editComponent') editComponent: OrderEditComponent;
 
-  constructor(private mtAngularHttpService: MtService, private renderer: Renderer2) { }
+  constructor(
+    private renderer: Renderer2,
+    private store: Store
+  ) { }
 
   ngOnInit() {
+
+    this.store.select(OrderSelectors.selectOrders)
+      .subscribe(x => {
+        console.log('from receiving component')
+        console.log(x);
+        let tmp: any = x;
+        this.orders = tmp.orders.orders;
+      });
+
     this.pagerSetting = new PagerSetting();
-    this.reload();
+    //this.reload();
+  }
+
+  reset() {
   }
 
   CanDeactivate(): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
@@ -58,15 +76,7 @@ export class OrdersListComponent implements OnInit {
       this.sortField = sortField;
     }
 
-    this.reload();
-  }
-
-  reload() {
-    //this.mtAngularHttpService.getOrders(this.pagerSetting.pageIndex, this.pagerSetting.pageSize, this.orderSearch, this.sortField, this.desc).subscribe(x => {
-    //  this.orders = x.content;
-    //  this.totalCount = x.totalCount;
-    //  this.selectedId = this.orders[0].id;
-    //});
+    //this.reload();
   }
 
   setRowBgColor(el: any) {
@@ -96,16 +106,12 @@ export class OrdersListComponent implements OnInit {
 
     this.pagerSetting = pagerSetting;
 
-    this.reload();
+    //this.reload();
   }
 
   search(orderSearch: OrderSearchQuery) {
     this.orderSearch = orderSearch;
-    this.reload();
-  }
-
-  reset() {
-
+    //this.reload();
   }
 
   toggleSearchAreaOpen() {
