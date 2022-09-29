@@ -14,7 +14,7 @@ export class OrderEffects {
       return this.mtService.getOrders(0, 5, new OrderSearchQuery(actionData.shipCountry))
         .pipe(
           map(orders => {
-            return OrderActions.getOrdersSuccess({ orders: orders.content })
+            return OrderActions.getOrdersSuccess({ prop1: orders.content })
           }),
           catchError(() => EMPTY)
         )})

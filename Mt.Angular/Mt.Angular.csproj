@@ -56,6 +56,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\proxy.conf.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <TypeScriptCompile Update="ClientApp\src\app\main\models\customer-search.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

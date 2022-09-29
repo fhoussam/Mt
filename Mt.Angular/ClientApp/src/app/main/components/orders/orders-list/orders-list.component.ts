@@ -43,7 +43,7 @@ export class OrdersListComponent implements OnInit {
         console.log('from receiving component')
         console.log(x);
         let tmp: any = x;
-        this.orders = tmp.orders.orders;
+        //this.orders = tmp.prop1.orders;
       });
 
     this.pagerSetting = new PagerSetting();
