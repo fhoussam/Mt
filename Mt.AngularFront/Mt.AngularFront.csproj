@@ -9,7 +9,34 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\main\components\orders\order-reducer\order-effects.ts" />
+    <None Remove="ClientApp\src\app\main\models\customer-detail.ts" />
+    <None Remove="ClientApp\src\app\main\models\customer-edit.ts" />
+    <None Remove="ClientApp\src\app\main\models\customer-list-item.ts" />
+    <None Remove="ClientApp\src\app\main\models\customer-search.ts" />
+    <None Remove="ClientApp\src\app\main\models\customer-tab-menu.ts" />
+    <None Remove="ClientApp\src\app\main\models\order-edit.ts" />
+    <None Remove="ClientApp\src\app\main\models\order-list-item.ts" />
+    <None Remove="ClientApp\src\app\main\models\order-search.ts" />
+    <None Remove="ClientApp\src\app\main\models\order-tab-menu.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <TypeScriptCompile Include="ClientApp\proxy.conf.json" />
+    <TypeScriptCompile Include="ClientApp\src\app\main\components\orders\order-reducer\order-effects.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\main\models\customer-detail.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\main\models\customer-edit.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\main\models\customer-list-item.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\main\models\customer-search.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\main\models\customer-tab-menu.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\main\models\order-edit.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\main\models\order-list-item.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\main\models\order-search.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\main\models\order-tab-menu.ts" />
   </ItemGroup>
 
 </Project>
