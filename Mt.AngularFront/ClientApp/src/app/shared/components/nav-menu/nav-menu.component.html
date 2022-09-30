@@ -1,0 +1,17 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">MT.Angular</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"><a [routerLink]="['/']">Home</a></li>
+      <li *ngIf="user.role === 'admin' || user.role === 'manager'" [routerLinkActive]="['active']"><a [routerLink]="['/customers']">Customers</a></li>
+      <li *ngIf="user.role === 'admin'" [routerLinkActive]="['active']"><a [routerLink]="['/orders']">Orders</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li *ngIf="user.id.length !== 0"><a href="javascript:;">{{user.name}} ({{user.role}})</a></li>
+      <li *ngIf="user.id.length === 0"><a (click)="login()" href="javascript:;">Login</a></li>
+      <li *ngIf="user.id.length !== 0"><a (click)="logout()" href="javascript:;">Logout</a></li>
+    </ul>
+  </div>
+</nav>

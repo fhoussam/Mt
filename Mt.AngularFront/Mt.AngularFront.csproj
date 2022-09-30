@@ -19,6 +19,7 @@
     <None Remove="ClientApp\src\app\main\models\order-list-item.ts" />
     <None Remove="ClientApp\src\app\main\models\order-search.ts" />
     <None Remove="ClientApp\src\app\main\models\order-tab-menu.ts" />
+    <None Remove="ClientApp\src\app\shared\guards\can-deactivate.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,6 +38,7 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\main\models\order-tab-menu.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\guards\can-deactivate.ts" />
   </ItemGroup>
 
 </Project>
