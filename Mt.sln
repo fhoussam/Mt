@@ -17,17 +17,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mt.Api", "Mt.Api\Mt.Api.csproj", "{69852732-74C0-4138-A1DE-7F2481A042D0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mt.Angular", "Mt.Angular\Mt.Angular.csproj", "{5F80B9C8-B1F1-444C-A12F-0D6E6B4E4A8F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mt.Identity", "Mt.Identity\Mt.Identity.csproj", "{A2B6C6E0-889E-4583-98ED-F3BA0E1204AD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mt.SeedWork", "Mt.SeedWork\Mt.SeedWork.csproj", "{2D525F18-AD49-4BD5-A6E6-A8B42BF7B1EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mt.BFF", "Mt.BFF\Mt.BFF.csproj", "{BCAB2990-6004-4638-9C08-7C4BBB2F8745}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mt.BFF", "Mt.BFF\Mt.BFF.csproj", "{BCAB2990-6004-4638-9C08-7C4BBB2F8745}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E16495E5-CD1F-431F-8179-E424B043043C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mt.AngularFront", "Mt.AngularFront\Mt.AngularFront.csproj", "{25C09878-8783-451D-9AA7-D1A5FBB54419}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mt.AngularFront", "Mt.AngularFront\Mt.AngularFront.csproj", "{25C09878-8783-451D-9AA7-D1A5FBB54419}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,10 +49,6 @@ Global
 		{69852732-74C0-4138-A1DE-7F2481A042D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69852732-74C0-4138-A1DE-7F2481A042D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69852732-74C0-4138-A1DE-7F2481A042D0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5F80B9C8-B1F1-444C-A12F-0D6E6B4E4A8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5F80B9C8-B1F1-444C-A12F-0D6E6B4E4A8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5F80B9C8-B1F1-444C-A12F-0D6E6B4E4A8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5F80B9C8-B1F1-444C-A12F-0D6E6B4E4A8F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A2B6C6E0-889E-4583-98ED-F3BA0E1204AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A2B6C6E0-889E-4583-98ED-F3BA0E1204AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2B6C6E0-889E-4583-98ED-F3BA0E1204AD}.Release|Any CPU.ActiveCfg = Release|Any CPU

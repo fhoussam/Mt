@@ -19,17 +19,17 @@ import * as OrderSelectors from '../order-reducer/order-selectors';
 export class OrdersListComponent implements OnInit {
 
   orders: OrderListItem[] = [];
-  selectedId: number;
+  selectedId = 0;
   editMode: boolean = true;
   addModalActive = false;
-  totalCount: number;
-  sortField: string;
+  totalCount = 0;
+  sortField = "";
   desc: boolean = false;
-  pagerSetting: PagerSetting;
+  pagerSetting = new PagerSetting();
   orderSearch = new OrderSearchQuery();
   collapsed: boolean = false;
   orderTabMenu = new OrderTabMenu();
-  @ViewChild('editComponent') editComponent: OrderEditComponent;
+  @ViewChild('editComponent') editComponent!: OrderEditComponent;
 
   constructor(
     private renderer: Renderer2,
@@ -38,13 +38,13 @@ export class OrdersListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.store.select(OrderSelectors.selectOrders)
-      .subscribe(x => {
-        console.log('from receiving component')
-        console.log(x);
-        let tmp: any = x;
-        //this.orders = tmp.prop1.orders;
-      });
+    //this.store.select(OrderSelectors.selectOrders)
+    //  .subscribe(x => {
+    //    console.log('from receiving component')
+    //    console.log(x);
+    //    let tmp: any = x;
+    //    //this.orders = tmp.prop1.orders;
+    //  });
 
     this.pagerSetting = new PagerSetting();
     //this.reload();

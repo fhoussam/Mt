@@ -12,8 +12,8 @@ export class OrderEditComponent implements OnInit {
 
   constructor(private mtService: MtService) { }
 
-  previousState: OrderEdit;
-  countries: string[];
+  previousState = new OrderEdit();
+  countries: string[] = [];
   id: number = 10248;
 
   ngOnInit(): void {

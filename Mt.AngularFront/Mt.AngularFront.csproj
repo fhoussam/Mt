@@ -1,42 +1,78 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<OutputType>Library</OutputType>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Content Remove="ClientApp\proxy.conf.json" />
-  </ItemGroup>
+	<ItemGroup>
+		<Content Remove="ClientApp\proxy.conf.json" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Remove="ClientApp\src\app\main\components\orders\order-reducer\order-effects.ts" />
-    <None Remove="ClientApp\src\app\main\models\customer-detail.ts" />
-    <None Remove="ClientApp\src\app\main\models\customer-edit.ts" />
-    <None Remove="ClientApp\src\app\main\models\customer-list-item.ts" />
-    <None Remove="ClientApp\src\app\main\models\customer-search.ts" />
-    <None Remove="ClientApp\src\app\main\models\customer-tab-menu.ts" />
-    <None Remove="ClientApp\src\app\main\models\order-edit.ts" />
-    <None Remove="ClientApp\src\app\main\models\order-list-item.ts" />
-    <None Remove="ClientApp\src\app\main\models\order-search.ts" />
-    <None Remove="ClientApp\src\app\main\models\order-tab-menu.ts" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="ClientApp\src\app\main\components\orders\order-reducer\order-effects.ts" />
+		<None Remove="ClientApp\src\app\main\models\customer-detail.ts" />
+		<None Remove="ClientApp\src\app\main\models\customer-edit.ts" />
+		<None Remove="ClientApp\src\app\main\models\customer-list-item.ts" />
+		<None Remove="ClientApp\src\app\main\models\customer-search.ts" />
+		<None Remove="ClientApp\src\app\main\models\customer-tab-menu.ts" />
+		<None Remove="ClientApp\src\app\main\models\order-edit.ts" />
+		<None Remove="ClientApp\src\app\main\models\order-list-item.ts" />
+		<None Remove="ClientApp\src\app\main\models\order-search.ts" />
+		<None Remove="ClientApp\src\app\main\models\order-tab-menu.ts" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\proxy.conf.json" />
-    <TypeScriptCompile Include="ClientApp\src\app\main\components\orders\order-reducer\order-effects.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\main\models\customer-detail.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\main\models\customer-edit.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\main\models\customer-list-item.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\main\models\customer-search.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="ClientApp\src\app\main\models\customer-tab-menu.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\main\models\order-edit.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\main\models\order-list-item.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\main\models\order-search.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="ClientApp\src\app\main\models\order-tab-menu.ts" />
-  </ItemGroup>
+	<ItemGroup>
+	  <TypeScriptCompile Remove="ClientApp\src\app\shared\components\confirmation\confirmation.component.ts" />
+	  <TypeScriptCompile Remove="ClientApp\src\app\shared\components\forbidden\forbidden.component.ts" />
+	  <TypeScriptCompile Remove="ClientApp\src\app\shared\components\modal\modal.component.ts" />
+	  <TypeScriptCompile Remove="ClientApp\src\app\shared\components\nav-menu\nav-menu.component.ts" />
+	  <TypeScriptCompile Remove="ClientApp\src\app\shared\components\pager\pager.component.ts" />
+	  <TypeScriptCompile Remove="ClientApp\src\app\shared\guards\auth-guard.service.ts" />
+	  <TypeScriptCompile Remove="ClientApp\src\app\shared\models\confirmation-model.ts" />
+	  <TypeScriptCompile Remove="ClientApp\src\app\shared\models\PagerSetting.ts" />
+	  <TypeScriptCompile Remove="ClientApp\src\app\shared\models\UserModel.ts" />
+	  <TypeScriptCompile Remove="ClientApp\src\app\shared\services\auth.service.ts" />
+	  <TypeScriptCompile Remove="ClientApp\src\app\shared\services\confirmation.service.ts" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="ClientApp\src\app\shared\components\confirmation\confirmation.component.ts" />
+	  <None Include="ClientApp\src\app\shared\components\forbidden\forbidden.component.ts" />
+	  <None Include="ClientApp\src\app\shared\components\modal\modal.component.ts" />
+	  <None Include="ClientApp\src\app\shared\components\nav-menu\nav-menu.component.ts" />
+	  <None Include="ClientApp\src\app\shared\components\pager\pager.component.ts" />
+	  <None Include="ClientApp\src\app\shared\guards\auth-guard.service.ts" />
+	  <None Include="ClientApp\src\app\shared\models\confirmation-model.ts" />
+	  <None Include="ClientApp\src\app\shared\models\PagerSetting.ts" />
+	  <None Include="ClientApp\src\app\shared\models\UserModel.ts" />
+	  <None Include="ClientApp\src\app\shared\services\auth.service.ts" />
+	  <None Include="ClientApp\src\app\shared\services\confirmation.service.ts" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.8.4">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<TypeScriptCompile Include="ClientApp\proxy.conf.json" />
+		<TypeScriptCompile Include="ClientApp\src\app\main\components\orders\order-reducer\order-effects.ts" />
+		<TypeScriptCompile Include="ClientApp\src\app\main\models\customer-detail.ts" />
+		<TypeScriptCompile Include="ClientApp\src\app\main\models\customer-edit.ts" />
+		<TypeScriptCompile Include="ClientApp\src\app\main\models\customer-list-item.ts" />
+		<TypeScriptCompile Include="ClientApp\src\app\main\models\customer-search.ts">
+			<SubType>Code</SubType>
+		</TypeScriptCompile>
+		<TypeScriptCompile Include="ClientApp\src\app\main\models\customer-tab-menu.ts" />
+		<TypeScriptCompile Include="ClientApp\src\app\main\models\order-edit.ts" />
+		<TypeScriptCompile Include="ClientApp\src\app\main\models\order-list-item.ts" />
+		<TypeScriptCompile Include="ClientApp\src\app\main\models\order-search.ts">
+			<SubType>Code</SubType>
+		</TypeScriptCompile>
+		<TypeScriptCompile Include="ClientApp\src\app\main\models\order-tab-menu.ts" />
+	</ItemGroup>
 
 </Project>

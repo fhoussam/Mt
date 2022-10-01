@@ -11,7 +11,7 @@ import * as OrderActions from '../order-reducer/order-actions';
 })
 export class OrderSearchComponent implements OnInit {
 
-  countries: string[];
+  countries: string[] = [];
   customerSearch = new OrderSearchQuery();
 
   constructor(private store:Store) { }

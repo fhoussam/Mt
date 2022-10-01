@@ -24,7 +24,7 @@ export class CustomersListComponent implements OnInit, CanCompoDeactivate {
   totalCount = 0;
   sortField = "";
   desc: boolean = false;
-  pagerSetting: PagerSetting;
+  pagerSetting = new PagerSetting();
   customerSearch = new CustomerSearch();
   collapsed: boolean = true;
   customerTabMenu = new CustomerTabMenu();

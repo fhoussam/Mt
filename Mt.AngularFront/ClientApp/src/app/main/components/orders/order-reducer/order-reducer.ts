@@ -24,9 +24,9 @@ export const reducers = createReducer(
     var result = { ...state, shipCountry: action.shipCountry };
     return result;
   }),
-  on(OrderActions.getOrdersSuccess, (state, action) => {
-    var result = { ...state, orders: action.orders };
-    return result;
-  })
+  //on(OrderActions.getOrdersSuccess, (state, action) => {
+  //  var result = { ...state, orders: action.orders };
+  //  return result;
+  //})
 );
 
