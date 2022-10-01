@@ -48,7 +48,7 @@ export function get_settings(initLoadService: InitLoadService) {
       { path: 'orders', canActivate: [AuthGuardService], component: OrdersListComponent },
       { path: 'forbidden', component: ForbiddenComponent },
     ]),
-    StoreModule.forFeature('orders', OrderReducers.reducers),
+    StoreModule.forFeature('prop2', OrderReducers.reducers),
     EffectsModule.forFeature([OrderEffects])
   ],
   providers: [

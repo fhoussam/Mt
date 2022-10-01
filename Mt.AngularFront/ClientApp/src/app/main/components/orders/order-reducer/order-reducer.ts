@@ -7,7 +7,7 @@ export interface IOrderState {
   to: Date | null;
   shipCountry: string;
   customerId: string;
-  orders: OrderListItem[];
+  prop3: OrderListItem[];
 }
 
 export const orderInitialState: IOrderState = {
@@ -15,18 +15,20 @@ export const orderInitialState: IOrderState = {
   to: null,
   shipCountry: "",
   customerId: "",
-  orders: []
+  prop3: []
 }
 
 export const reducers = createReducer(
   orderInitialState,
   on(OrderActions.getOrdersBegin, (state, action) => {
+    console.log("recevied getOrdersBegin action", action);
     var result = { ...state, shipCountry: action.shipCountry };
     return result;
   }),
-  //on(OrderActions.getOrdersSuccess, (state, action) => {
-  //  var result = { ...state, orders: action.orders };
-  //  return result;
-  //})
+  on(OrderActions.getOrdersSuccess, (state, action) => {
+    console.log("recevied getOrdersSuccess action", action);
+    var result = { ...state, prop3: action.prop1 };
+    return result;
+  })
 );
 

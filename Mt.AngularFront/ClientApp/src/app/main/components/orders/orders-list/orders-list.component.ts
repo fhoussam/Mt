@@ -33,18 +33,18 @@ export class OrdersListComponent implements OnInit {
 
   constructor(
     private renderer: Renderer2,
-    private store: Store
+    private store: Store<IOrderState>
   ) { }
 
   ngOnInit() {
 
-    //this.store.select(OrderSelectors.selectOrders)
-    //  .subscribe(x => {
-    //    console.log('from receiving component')
-    //    console.log(x);
-    //    let tmp: any = x;
-    //    //this.orders = tmp.prop1.orders;
-    //  });
+    this.store.select(OrderSelectors.selectOrders)
+      .subscribe(x => {
+        console.log('from receiving component')
+        console.log(x);
+        let tmp: any = x;
+        this.orders = tmp.prop2.prop3;
+      });
 
     this.pagerSetting = new PagerSetting();
     //this.reload();
