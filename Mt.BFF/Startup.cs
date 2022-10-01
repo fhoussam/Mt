@@ -88,6 +88,7 @@ namespace Mt.BFF
                 }
             });
 
+            app.UseAuthentication();
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
