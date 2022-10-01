@@ -13,7 +13,7 @@ export class OrderEffects {
       return this.mtService.getOrders(0, 5, actionData)
         .pipe(
           map(orders => {
-            return OrderActions.getOrdersSuccess({ actionProp: orders.content })
+            return OrderActions.getOrdersSuccess(orders)
           }),
           catchError(() => EMPTY)
         )})

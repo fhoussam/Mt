@@ -27,11 +27,9 @@ export class OrderSearchComponent implements OnInit {
       from: null,
       to: null
     }));
-    //this.search.emit(this.customerSearch);
   }
 
   triggerReset() {
     this.customerSearch = new OrderSearchQuery();
-    //this.reset.emit();
   }
 }

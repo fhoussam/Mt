@@ -1,16 +1,17 @@
 import { createReducer, on } from "@ngrx/store";
 import { OrderListItem } from "../../../models/order-list-item";
 import { OrderSearchQuery } from "../../../models/order-search";
+import { PagedList } from "../../../models/PagedList";
 import * as OrderActions from './order-actions';
 
 export interface IOrderState {
   searchQuery: OrderSearchQuery;
-  listProp: OrderListItem[];
+  searchResult: PagedList<OrderListItem>;
 }
 
 export const orderInitialState: IOrderState = {
   searchQuery: new OrderSearchQuery(),
-  listProp: []
+  searchResult: new PagedList<OrderListItem>()
 }
 
 export const reducers = createReducer(
@@ -24,7 +25,7 @@ export const reducers = createReducer(
   }),
   on(OrderActions.getOrdersSuccess, (state, action) => {
     console.log("recevied getOrdersSuccess action", action);
-    var result = { ...state, listProp: action.actionProp };
+    var result = { ...state, searchResult: action };
     return result;
   })
 );

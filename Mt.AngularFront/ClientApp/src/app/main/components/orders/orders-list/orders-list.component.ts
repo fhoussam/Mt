@@ -6,7 +6,6 @@ import { PagerSetting } from '../../../../shared/models/PagerSetting';
 import { OrderListItem } from '../../../models/order-list-item';
 import { OrderSearchQuery } from '../../../models/order-search';
 import { OrderTabMenu } from '../../../models/order-tab-menu';
-import { MtService } from '../../../services/mt-angular-http.service';
 import { OrderEditComponent } from '../order-edit/order-edit.component';
 import { IOrderState } from '../order-reducer/order-reducer';
 import * as OrderSelectors from '../order-reducer/order-selectors';
@@ -43,7 +42,7 @@ export class OrdersListComponent implements OnInit {
         console.log('from receiving component')
         console.log(x);
         let tmp: any = x;
-        this.orders = tmp.rootProp.listProp;
+        this.orders = tmp.rootProp.searchResult.content;
       });
 
     this.pagerSetting = new PagerSetting();
