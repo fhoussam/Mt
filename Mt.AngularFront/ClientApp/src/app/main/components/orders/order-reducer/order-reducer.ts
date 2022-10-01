@@ -7,7 +7,7 @@ export interface IOrderState {
   to: Date | null;
   shipCountry: string;
   customerId: string;
-  prop3: OrderListItem[];
+  listProp: OrderListItem[];
 }
 
 export const orderInitialState: IOrderState = {
@@ -15,7 +15,7 @@ export const orderInitialState: IOrderState = {
   to: null,
   shipCountry: "",
   customerId: "",
-  prop3: []
+  listProp: []
 }
 
 export const reducers = createReducer(
@@ -27,7 +27,7 @@ export const reducers = createReducer(
   }),
   on(OrderActions.getOrdersSuccess, (state, action) => {
     console.log("recevied getOrdersSuccess action", action);
-    var result = { ...state, prop3: action.prop1 };
+    var result = { ...state, listProp: action.actionProp };
     return result;
   })
 );
