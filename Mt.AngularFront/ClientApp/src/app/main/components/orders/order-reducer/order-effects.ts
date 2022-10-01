@@ -11,7 +11,7 @@ export class OrderEffects {
   loadMovies$ = createEffect(() => this.actions$.pipe(
     ofType(OrderActions.getOrdersBegin),
     mergeMap((actionData) => {
-      return this.mtService.getOrders(0, 5, new OrderSearchQuery(actionData.shipCountry))
+      return this.mtService.getOrders(0, 5, actionData.searchQuery)
         .pipe(
           map(orders => {
             return OrderActions.getOrdersSuccess({ actionProp: orders.content })
