@@ -18,7 +18,7 @@ export const reducers = createReducer(
   on(OrderActions.getOrdersBegin, (state, action) => {
     console.log("recevied getOrdersBegin action", action);
     let result: IOrderState = {
-      ...state, searchQuery: action.searchQuery
+      ...state, searchQuery: action
     };
     return result;
   }),

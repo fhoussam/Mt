@@ -22,12 +22,10 @@ export class OrderSearchComponent implements OnInit {
 
   triggerSearch() {
     this.store.dispatch(OrderActions.getOrdersBegin({
-      searchQuery: {
-        shipCountry: this.customerSearch.shipCountry,
-        customerId: "",
-        from: null,
-        to: null
-      }
+      shipCountry: this.customerSearch.shipCountry,
+      customerId: "",
+      from: null,
+      to: null
     }));
     //this.search.emit(this.customerSearch);
   }
