@@ -4,6 +4,10 @@ import { OrderSearchQuery } from "../../../models/order-search";
 import { PagedList } from "../../../models/PagedList";
 import * as OrderActions from './order-actions';
 
+export interface IAppStateInterface {
+  orders: IOrderState
+}
+
 export interface IOrderState {
   searchQuery: OrderSearchQuery;
   searchResult: PagedList<OrderListItem>;
@@ -18,14 +22,12 @@ export const reducers = createReducer(
   orderInitialState,
   on(OrderActions.getOrdersBegin, (state, action) => {
     console.log("recevied getOrdersBegin action", action);
-    let result: IOrderState = {
-      ...state, searchQuery: action
-    };
+    let result: IOrderState = { ...state, searchQuery: action.searchQuery };
     return result;
   }),
   on(OrderActions.getOrdersSuccess, (state, action) => {
     console.log("recevied getOrdersSuccess action", action);
-    var result = { ...state, searchResult: action };
+    var result = { ...state, searchResult: action.queryResult };
     return result;
   })
 );

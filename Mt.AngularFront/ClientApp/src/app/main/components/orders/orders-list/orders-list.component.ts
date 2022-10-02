@@ -1,13 +1,13 @@
 import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { UrlTree } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { PagerSetting } from '../../../../shared/models/PagerSetting';
 import { OrderListItem } from '../../../models/order-list-item';
 import { OrderSearchQuery } from '../../../models/order-search';
 import { OrderTabMenu } from '../../../models/order-tab-menu';
 import { OrderEditComponent } from '../order-edit/order-edit.component';
-import { IOrderState } from '../order-reducer/order-reducer';
+import { IAppStateInterface, IOrderState } from '../order-reducer/order-reducer';
 import * as OrderSelectors from '../order-reducer/order-selectors';
 
 @Component({
@@ -32,21 +32,14 @@ export class OrdersListComponent implements OnInit {
 
   constructor(
     private renderer: Renderer2,
-    private store: Store<IOrderState>
+    private store: Store<IAppStateInterface>
   ) { }
 
   ngOnInit() {
-
-    this.store.select(OrderSelectors.selectOrders)
-      .subscribe(x => {
-        console.log('from receiving component')
-        console.log(x);
-        let tmp: any = x;
-        this.orders = tmp.rootProp.searchResult.content;
-      });
-
-    this.pagerSetting = new PagerSetting();
-    //this.reload();
+    this.store.pipe(select(OrderSelectors.selectOrderQueryResult)).subscribe(x => {
+      this.orders = x.content;
+      console.log("order list component received data", x.content);
+    });
   }
 
   reset() {
@@ -63,7 +56,7 @@ export class OrdersListComponent implements OnInit {
     //}
 
     //else
-      return true;
+    return true;
   }
 
   setSortField(sortField: string) {

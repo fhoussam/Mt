@@ -10,11 +10,11 @@ export class OrderEffects {
   loadOrders$ = createEffect(() => this.actions$.pipe(
     ofType(OrderActions.getOrdersBegin),
     mergeMap((actionData) => {
-      return this.mtService.getOrders(0, 5, actionData)
+      return this.mtService.getOrders(0, 5, actionData.searchQuery)
         .pipe(
           map(orders => {
-            return OrderActions.getOrdersSuccess(orders)
-          }),
+            return OrderActions.getOrdersSuccess({ queryResult: orders });
+          }),                                           
           catchError(() => EMPTY)
         )})
     ))
