@@ -23,10 +23,7 @@ export class OrderEditComponent implements OnInit {
 
   initForm()
   {
-    this.mtService.getOrderByIdForEdit(10248).subscribe(x => {
-      this.previousState = x;
-      console.log(x);
-    });
+    this.mtService.getOrderByIdForEdit(10248).subscribe(x => this.previousState = x);
   }
 
   cancelEdit() {

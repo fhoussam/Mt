@@ -1,13 +1,13 @@
-export class OrderSearchQuery {
-  from: Date | null;
-  to: Date | null;
-  shipCountry: string = "";
-  customerId: string = "";
+import { ISearch } from "../../shared/models/ISearch";
+import { IPagerSetting } from "../../shared/models/PagerSetting";
 
-  constructor(shipCountry: string = "") {
-    this.from = null;
-    this.to = null;
-    this.shipCountry = shipCountry;
-    this.customerId = "";
-  }
+export class OrderSearchQuery implements IPagerSetting, ISearch {
+  from: Date | null = null;
+  to: Date | null = null;
+  shipCountry = "";
+  customerId = "";
+  pageIndex = 0;
+  pageSize = 0;
+  sortField = "";
+  desc = false;
 }

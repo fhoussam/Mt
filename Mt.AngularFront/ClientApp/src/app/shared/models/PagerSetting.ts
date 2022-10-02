@@ -1,10 +1,5 @@
-﻿export class PagerSetting
+export interface IPagerSetting
 {
     pageIndex: number;
     pageSize: number;
-
-    constructor() {
-        this.pageIndex = 0;
-        this.pageSize = 5;
-    }
 }

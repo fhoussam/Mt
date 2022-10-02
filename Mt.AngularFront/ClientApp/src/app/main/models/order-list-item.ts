@@ -4,5 +4,6 @@ export class OrderListItem {
   employee: string = "";
   orderDate!: Date;
   shipCountry: string = "";
+  customerId: string = "";
   totalOrderedUnits: number = 0;
 }

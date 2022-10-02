@@ -20,8 +20,8 @@ namespace Mt.Application.Operations.Queries
         public DateTime? To { get; set; }
         public string ShipCountry { get; set; }
         public string CustomerId { get; set; }
-        public int PageIndex { get; set; }
-        public int PageSize { get; set; }
+        public int? PageIndex { get; set; }
+        public int? PageSize { get; set; }
         public string SortField { get; set; }
         public bool? Desc { get; set; }
 
@@ -57,7 +57,7 @@ namespace Mt.Application.Operations.Queries
                 var content = await _context.Orders
                     .Where(whereExpression)
                     .OrderBy(sortExpression, request.Desc.Value)
-                    .Skip(request.PageIndex * request.PageSize).Take(request.PageSize)
+                    .Skip(request.PageIndex ?? 0 * request.PageSize ?? 5).Take(request.PageSize ?? 5)
                     .Include(x => x.OrderDetails)
                     .Include(x => x.Customer)
                     .Select(x => new OrderListItem()
@@ -67,7 +67,8 @@ namespace Mt.Application.Operations.Queries
                         OrderDate = x.OrderDate,
                         TotalOrderedUnits = x.OrderDetails.Count,
                         Employee = $"{x.Employee.FirstName} {x.Employee.LastName}",
-                        ShipCountry = x.ShipCountry
+                        ShipCountry = x.ShipCountry,
+                        CustomerId = x.CustomerId
                     })
                     .AsNoTracking()
                     .ToListAsync();

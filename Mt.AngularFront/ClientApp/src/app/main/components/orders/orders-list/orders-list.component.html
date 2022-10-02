@@ -37,6 +37,11 @@
                 <span *ngIf="desc && sortField === 'totalOrderedUnits'">⮝</span>
                 <span *ngIf="!desc && sortField === 'totalOrderedUnits'">⮟</span>
               </th>
+              <th scope="col" (click)="setSortField('customerId')" style="cursor:pointer">
+                <span>Customer Id</span>
+                <span *ngIf="desc && sortField === 'customerId'">⮝</span>
+                <span *ngIf="!desc && sortField === 'customerId'">⮟</span>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -53,6 +58,7 @@
               <td>{{order.orderDate}}</td>
               <td>{{order.shipCountry}}</td>
               <td>{{order.totalOrderedUnits}}</td>
+              <td>{{order.customerId}}</td>
             </tr>
           </tbody>
         </table>

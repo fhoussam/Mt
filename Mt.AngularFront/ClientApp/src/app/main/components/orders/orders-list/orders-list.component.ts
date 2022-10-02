@@ -2,7 +2,7 @@ import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { UrlTree } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { PagerSetting } from '../../../../shared/models/PagerSetting';
+import { IPagerSetting } from '../../../../shared/models/PagerSetting';
 import { OrderListItem } from '../../../models/order-list-item';
 import { OrderSearchQuery } from '../../../models/order-search';
 import { OrderTabMenu } from '../../../models/order-tab-menu';
@@ -24,8 +24,7 @@ export class OrdersListComponent implements OnInit {
   totalCount = 0;
   sortField = "";
   desc: boolean = false;
-  pagerSetting = new PagerSetting();
-  orderSearch = new OrderSearchQuery();
+  searchQuery = new OrderSearchQuery();
   collapsed: boolean = false;
   orderTabMenu = new OrderTabMenu();
   @ViewChild('editComponent') editComponent!: OrderEditComponent;
@@ -91,18 +90,19 @@ export class OrdersListComponent implements OnInit {
     this.editMode = activated;
   }
 
-  onChangePagerSettings(pagerSetting: any) {
+  onChangePagerSettings(pagerSetting: IPagerSetting) {
 
     if (pagerSetting.pageSize === undefined)
       pagerSetting.pageSize = 5;
 
-    this.pagerSetting = pagerSetting;
+    this.searchQuery.pageIndex = pagerSetting.pageIndex;
+    this.searchQuery.pageSize = pagerSetting.pageSize;
 
     //this.reload();
   }
 
   search(orderSearch: OrderSearchQuery) {
-    this.orderSearch = orderSearch;
+    this.searchQuery = orderSearch;
     //this.reload();
   }
 

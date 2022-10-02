@@ -16,8 +16,8 @@ namespace Mt.Application.Operations.Queries
 {
     public class GetCustomersQuery : IRequest<PageList<CustomerListItem>>, ISearch
     {
-        public int PageIndex { get; set; }
-        public int PageSize { get; set; }
+        public int? PageIndex { get; set; }
+        public int? PageSize { get; set; }
         public string SortField { get; set; }
         public bool? Desc { get; set; }
         public string City { get; set; }
@@ -49,7 +49,7 @@ namespace Mt.Application.Operations.Queries
                     .Customers
                     .Where(whereExpression)
                     .OrderBy(sortExpression, request.Desc)
-                    .Skip(request.PageIndex * request.PageSize).Take(request.PageSize)
+                    .Skip(request.PageIndex ?? 0 * request.PageSize ?? 5).Take(request.PageSize ?? 5)
                     .Select(x => new CustomerListItem()
                     {
                         CompanyName = x.CompanyName,

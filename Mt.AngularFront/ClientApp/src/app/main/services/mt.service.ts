@@ -52,33 +52,17 @@ export class MtService {
     return this.http.get<PagedList<CustomerListItem>>(this.fullUrl(url));
   }
 
-  getOrders(pageIndex: number, pageSize: number, orderSearch: OrderSearchQuery, sortField?: string, desc?: boolean): Observable<PagedList<OrderListItem>> {
-    let url = "orders?PageIndex=" + pageIndex + "&PageSize=" + pageSize + "&SortField=" + sortField;
+  getOrders(orderSearch: OrderSearchQuery): Observable<PagedList<OrderListItem>> {
 
-    if (desc != null)
-      url += "&Desc=" + desc;
-
-    const isEmptyString = (data: any): boolean => data == '' || data == null;
-
-    if (orderSearch != null) {
-
-      if (!isEmptyString(orderSearch.from)) {
-        url += "&from=" + orderSearch.from;
-      }
-
-      if (!isEmptyString(orderSearch.to)) {
-        url += "&to=" + orderSearch.to;
-      }
-
-      if (!isEmptyString(orderSearch.customerId)) {
-        url += "&customerId=" + orderSearch.customerId;
-      }
-
-      if (!isEmptyString(orderSearch.shipCountry)) {
-        url += "&shipCountry=" + orderSearch.shipCountry;
-      }
+    const serialize = (obj: any) => {
+      return Object.entries(obj)
+        .filter(([, value]) => value)
+        .map(([key, value]) => `${key}=${encodeURIComponent(value + "")}`)
+        .join('&');
     }
 
+    let url = "orders?" + serialize(orderSearch);
+    console.log(url);
     return this.http.get<PagedList<OrderListItem>>(this.fullUrl(url));
   }
 

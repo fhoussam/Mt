@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { PagerSetting } from '../../models/PagerSetting';
+import { IPagerSetting } from '../../models/PagerSetting';
 
 @Component({
   selector: 'app-pager',
@@ -10,8 +10,11 @@ export class PagerComponent implements OnInit, OnChanges {
 
   @Input() totalCount = 0;
   @Input() selectedPageSize = 0;
-  @Output() ChangePagerSettings = new EventEmitter<PagerSetting>();
-  pageSetting = new PagerSetting();
+  @Output() ChangePagerSettings = new EventEmitter<IPagerSetting>();
+  pageSetting: IPagerSetting = {
+    pageIndex: 0,
+    pageSize: 5
+  };
   pageCount = 0;
 
   goToFirst() {

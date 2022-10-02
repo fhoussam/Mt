@@ -2,7 +2,7 @@ import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CanCompoDeactivate } from '../../../../shared/guards/can-deactivate';
-import { PagerSetting } from '../../../../shared/models/PagerSetting';
+import { IPagerSetting } from '../../../../shared/models/PagerSetting';
 import { CustomerListItem } from '../../../models/customer-list-item';
 import { CustomerSearch } from '../../../models/customer-search';
 import { CustomerTabMenu } from '../../../models/customer-tab-menu';
@@ -24,7 +24,7 @@ export class CustomersListComponent implements OnInit, CanCompoDeactivate {
   totalCount = 0;
   sortField = "";
   desc: boolean = false;
-  pagerSetting = new PagerSetting();
+  pagerSetting!: IPagerSetting;
   customerSearch = new CustomerSearch();
   collapsed: boolean = true;
   customerTabMenu = new CustomerTabMenu();
@@ -34,7 +34,6 @@ export class CustomersListComponent implements OnInit, CanCompoDeactivate {
   constructor(private mtAngularHttpService: MtService, private renderer: Renderer2) { }
 
   ngOnInit() {
-    this.pagerSetting = new PagerSetting();
     this.reload();
   }
 

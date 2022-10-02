@@ -12,7 +12,7 @@ import * as OrderActions from '../order-reducer/order-actions';
 export class OrderSearchComponent implements OnInit {
 
   countries: string[] = [];
-  customerSearch = new OrderSearchQuery();
+  orderSearch = new OrderSearchQuery();
 
   constructor(private store:Store) { }
 
@@ -23,15 +23,19 @@ export class OrderSearchComponent implements OnInit {
   triggerSearch() {
     this.store.dispatch(OrderActions.getOrdersBegin({
       searchQuery: {
-        shipCountry: this.customerSearch.shipCountry,
-        customerId: "",
-        from: null,
-        to: null
+        shipCountry: this.orderSearch.shipCountry,
+        customerId: this.orderSearch.customerId,
+        from: this.orderSearch.from,
+        to: this.orderSearch.to,
+        pageIndex: this.orderSearch.pageIndex,
+        pageSize: this.orderSearch.pageSize,
+        desc: this.orderSearch.desc,
+        sortField: this.orderSearch.sortField
       }
     }));
   }
 
   triggerReset() {
-    this.customerSearch = new OrderSearchQuery();
+    this.orderSearch = new OrderSearchQuery();
   }
 }

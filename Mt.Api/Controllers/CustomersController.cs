@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Mt.Application.Operations.Commands;
 using Mt.Application.Operations.Commands.RequestDtos;

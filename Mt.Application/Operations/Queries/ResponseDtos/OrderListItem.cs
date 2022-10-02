@@ -9,6 +9,7 @@ namespace Mt.Application.Operations.Queries.ResponseDtos
         public string Employee { get; set; }
         public DateTime? OrderDate { get; set; }
         public string ShipCountry { get; set; }
+        public string CustomerId { get; set; }
         public int TotalOrderedUnits { get; set; }
     }
 }
