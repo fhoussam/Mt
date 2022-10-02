@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { APP_SETTINGS } from '../../../models/APP_SETTINGS';
 import { OrderEdit } from '../../../models/order-edit';
-import { MtService } from '../../../services/mt-angular-http.service';
+import { MtService } from '../../../services/mt.service';
 
 @Component({
   selector: 'app-order-edit',

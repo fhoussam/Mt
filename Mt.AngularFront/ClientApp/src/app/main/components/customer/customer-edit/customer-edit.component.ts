@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } 
 import { NgForm } from '@angular/forms';
 import { APP_SETTINGS } from '../../../models/APP_SETTINGS';
 import { CustomerEdit } from '../../../models/customer-edit';
-import { MtService } from '../../../services/mt-angular-http.service';
+import { MtService } from '../../../services/mt.service';
 
 @Component({
   selector: 'app-customer-edit',

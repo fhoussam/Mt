@@ -7,7 +7,7 @@ import { OrderListItem } from '../../../models/order-list-item';
 import { OrderSearchQuery } from '../../../models/order-search';
 import { OrderTabMenu } from '../../../models/order-tab-menu';
 import { OrderEditComponent } from '../order-edit/order-edit.component';
-import { IAppStateInterface, IOrderState } from '../order-reducer/order-reducer';
+import { IAppStateInterface } from '../order-reducer/order-reducer';
 import * as OrderSelectors from '../order-reducer/order-selectors';
 
 @Component({
@@ -35,7 +35,7 @@ export class OrdersListComponent implements OnInit {
     private store: Store<IAppStateInterface>
   ) { }
 
-  ngOnInit() {
+  ngOnInit() { 
     this.store.pipe(select(OrderSelectors.selectOrderQueryResult)).subscribe(x => {
       this.orders = x.content;
       console.log("order list component received data", x.content);

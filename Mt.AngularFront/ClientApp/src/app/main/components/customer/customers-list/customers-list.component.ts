@@ -6,7 +6,7 @@ import { PagerSetting } from '../../../../shared/models/PagerSetting';
 import { CustomerListItem } from '../../../models/customer-list-item';
 import { CustomerSearch } from '../../../models/customer-search';
 import { CustomerTabMenu } from '../../../models/customer-tab-menu';
-import { MtService } from '../../../services/mt-angular-http.service';
+import { MtService } from '../../../services/mt.service';
 import { CustomerEditComponent } from '../customer-edit/customer-edit.component';
 
 @Component({

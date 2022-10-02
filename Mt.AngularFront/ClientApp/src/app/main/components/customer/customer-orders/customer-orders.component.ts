@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ConfirmationService } from '../../../../shared/services/confirmation.service';
 import { CustomerOrderListItem } from '../../../models/customer-order-list-item';
-import { MtService } from '../../../services/mt-angular-http.service';
+import { MtService } from '../../../services/mt.service';
 
 @Component({
   selector: 'app-customer-orders',

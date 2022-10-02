@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { CustomerDetail } from '../../../models/customer-detail';
-import { MtService } from '../../../services/mt-angular-http.service';
+import { MtService } from '../../../services/mt.service';
 
 @Component({
   selector: 'app-customer-display',
