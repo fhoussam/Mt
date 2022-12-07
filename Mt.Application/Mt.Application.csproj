@@ -1,25 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Operations\Queries\RequestDtos\**" />
-    <EmbeddedResource Remove="Operations\Queries\RequestDtos\**" />
-    <None Remove="Operations\Queries\RequestDtos\**" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="Operations\Queries\RequestDtos\**" />
+		<EmbeddedResource Remove="Operations\Queries\RequestDtos\**" />
+		<None Remove="Operations\Queries\RequestDtos\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="11.2.0" />
-    <PackageReference Include="MediatR" Version="6.0.0" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="FluentValidation" Version="11.2.0" />
+		<PackageReference Include="MediatR" Version="6.0.0" />
+		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Mt.Domain\Mt.Domain.csproj" />
-    <ProjectReference Include="..\Mt.SeedWork\Mt.SeedWork.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Mt.Domain\Mt.Domain.csproj" />
+		<ProjectReference Include="..\Mt.SeedWork\Mt.SeedWork.csproj" />
+	</ItemGroup>
 
 </Project>
