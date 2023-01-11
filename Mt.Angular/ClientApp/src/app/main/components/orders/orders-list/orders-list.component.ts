@@ -6,6 +6,7 @@ import { PagerSetting } from '../../../../shared/models/PagerSetting';
 import { OrderListItem } from '../../../models/order-list-item';
 import { OrderSearch } from '../../../models/order-search';
 import { OrderTabMenu } from '../../../models/order-tab-menu';
+import { OrderState } from '../../../reducers/orders/orders-reducer';
 import { MtService } from '../../../services/mt-angular-http.service';
 import { OrderEditComponent } from '../order-edit/order-edit.component';
 
@@ -28,19 +29,21 @@ export class OrdersListComponent implements OnInit {
   collapsed: boolean = false;
   orderTabMenu = new OrderTabMenu();
   @ViewChild('editComponent') editComponent: OrderEditComponent;
-  count$: Observable<number>;
 
   constructor(
     private mtAngularHttpService: MtService,
-    private renderer: Renderer2
-    ,private store: Store<{ count: number }>
+    private renderer: Renderer2,
+    private store: Store<{ orders: OrderState }>
   ) { }
 
   ngOnInit() {
     this.pagerSetting = new PagerSetting();
     this.reload();
-    this.count$ = this.store.select('count');
-    this.count$.subscribe((x) => { console.log('subbed', x); })
+    var aa = this.store.select('orders');
+    aa.subscribe((x: OrderState) => {
+      this.orders = x?.orderSearchResult?.content;
+      console.log('subbed', x?.orderSearchResult?.content);
+    })
   }
 
   CanDeactivate(): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
@@ -54,7 +57,7 @@ export class OrdersListComponent implements OnInit {
     //}
 
     //else
-      return true;
+    return true;
   }
 
   setSortField(sortField: string) {
