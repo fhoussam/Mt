@@ -11,8 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mt.Domain", "Mt.Domain\Mt.D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A82D09FF-7313-4FF0-8D60-0DB703D78DD8}"
 	ProjectSection(SolutionItems) = preProject
-		Notes.txt = Notes.txt
-		StartAngular.ps1 = StartAngular.ps1
+		SolutionItems\NORTHWND.MDF = SolutionItems\NORTHWND.MDF
+		SolutionItems\NORTHWND_log.ldf = SolutionItems\NORTHWND_log.ldf
+		SolutionItems\Notes.txt = SolutionItems\Notes.txt
+		SolutionItems\StartAngular.ps1 = SolutionItems\StartAngular.ps1
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mt.Api", "Mt.Api\Mt.Api.csproj", "{69852732-74C0-4138-A1DE-7F2481A042D0}"
@@ -21,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mt.Angular", "Mt.Angular\Mt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mt.Identity", "Mt.Identity\Mt.Identity.csproj", "{A2B6C6E0-889E-4583-98ED-F3BA0E1204AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mt.SeedWork", "Mt.SeedWork\Mt.SeedWork.csproj", "{2D525F18-AD49-4BD5-A6E6-A8B42BF7B1EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mt.SeedWork", "Mt.SeedWork\Mt.SeedWork.csproj", "{2D525F18-AD49-4BD5-A6E6-A8B42BF7B1EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { PagerSetting } from '../../shared/models/PagerSetting';
 import { CustomerDetail } from '../models/customer-detail';
 import { CustomerEdit } from '../models/customer-edit';
 import { CustomerListItem } from '../models/customer-list-item';
@@ -10,6 +11,7 @@ import { OrderEdit } from '../models/order-edit';
 import { OrderListItem } from '../models/order-list-item';
 import { OrderSearch } from '../models/order-search';
 import { PagedList } from '../models/PagedList';
+import { SortSetting } from '../models/SortSetting';
 
 @Injectable({
   providedIn: 'root'
@@ -22,62 +24,32 @@ export class MtService {
     return MtService.baseUrl + path;
   }
 
+  objectToParams(obj: any): string {
+    let params = "";
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key) && obj[key]) {
+        params += key + "=" + obj[key] + "&";
+      }
+    }
+    return params.slice(0, -1);
+  }
+
   getCustomers(pageIndex: number, pageSize: number, customerSearch: CustomerSearch, sortField?: string, desc?: boolean): Observable<PagedList<CustomerListItem>> {
     let url = "customers?PageIndex=" + pageIndex + "&PageSize=" + pageSize + "&SortField=" + sortField;
 
     if (desc != null)
       url += "&Desc=" + desc;
 
-    const isEmptyString = (data: any): boolean => data == '';
-
-    if (customerSearch != null) {
-
-      if (!isEmptyString(customerSearch.city)) {
-        url += "&city=" + customerSearch.city;
-      }
-
-      if (!isEmptyString(customerSearch.companyName)) {
-        url += "&companyName=" + customerSearch.companyName;
-      }
-
-      if (!isEmptyString(customerSearch.country)) {
-        url += "&country=" + customerSearch.country;
-      }
-
-      if (!isEmptyString(customerSearch.customerId)) {
-        url += "&customerId=" + customerSearch.customerId;
-      }
-    }
-
+    var getParam = this.objectToParams(customerSearch);
+    url += "&" + getParam;
     return this.http.get<PagedList<CustomerListItem>>(this.fullUrl(url));
   }
 
-  getOrders(pageIndex: number, pageSize: number, orderSearch: OrderSearch, sortField?: string, desc?: boolean): Observable<PagedList<OrderListItem>> {
-    let url = "orders?PageIndex=" + pageIndex + "&PageSize=" + pageSize + "&SortField=" + sortField;
-
-    if (desc != null)
-      url += "&Desc=" + desc;
-
-    const isEmptyString = (data: any): boolean => data == '' || data == null;
-
-    if (orderSearch != null) {
-
-      if (!isEmptyString(orderSearch.from)) {
-        url += "&from=" + orderSearch.from;
-      }
-
-      if (!isEmptyString(orderSearch.to)) {
-        url += "&to=" + orderSearch.to;
-      }
-
-      if (!isEmptyString(orderSearch.customerId)) {
-        url += "&customerId=" + orderSearch.customerId;
-      }
-
-      if (!isEmptyString(orderSearch.shipCountry)) {
-        url += "&shipCountry=" + orderSearch.shipCountry;
-      }
-    }
+  getOrders(orderSearch: OrderSearch, sortSetting: SortSetting, pagerSetting: PagerSetting): Observable<PagedList<OrderListItem>> {
+    var url = "orders?"
+      + this.objectToParams(orderSearch) + "&"
+      + this.objectToParams(pagerSetting) + "&"
+      + this.objectToParams(sortSetting);
 
     return this.http.get<PagedList<OrderListItem>>(this.fullUrl(url));
   }

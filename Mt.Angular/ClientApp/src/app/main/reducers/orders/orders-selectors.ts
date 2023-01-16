@@ -1,3 +1,9 @@
-import { IAppState } from "../app-state";
+import { createSelector } from "@ngrx/store";
+import { AppState } from "../AppState";
 
-export const selectCounter = (state: IAppState) => state.counter;
+export const selectAppState = (state: AppState) => state;
+
+export const orderSearchResultSelector = createSelector(
+  selectAppState,
+  (state: AppState) => state.orders.orderSearchResult
+);

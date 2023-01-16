@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Mt.Application.Operations.Commands;
 using Mt.Application.Operations.Commands.RequestDtos;
@@ -36,7 +35,7 @@ namespace Mt.Api.Controllers
 
         [HttpGet]
         [Route("{id}/edit")]
-        
+
         public async Task<IActionResult> Edit([FromRoute] string id)
         {
             var result = await _mediator.Send(new GetCustomersByIdForEditQuery(id));

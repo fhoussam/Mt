@@ -1,14 +1,16 @@
-import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { UrlTree } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { PagerSetting } from '../../../../shared/models/PagerSetting';
 import { OrderListItem } from '../../../models/order-list-item';
 import { OrderSearch } from '../../../models/order-search';
 import { OrderTabMenu } from '../../../models/order-tab-menu';
-import { IAppState } from '../../../reducers/app-state';
-import { selectCounter } from '../../../reducers/orders/orders-selectors';
-import { MtService } from '../../../services/mt-angular-http.service';
+import { PagedList } from '../../../models/PagedList';
+import { SortSetting } from '../../../models/SortSetting';
+import { AppState } from '../../../reducers/AppState';
+import { pageOrdersBeginAction, sortOrdersBeginAction } from '../../../reducers/orders/orders-actions';
+import { orderSearchResultSelector } from '../../../reducers/orders/orders-selectors';
 import { OrderEditComponent } from '../order-edit/order-edit.component';
 
 @Component({
@@ -16,13 +18,16 @@ import { OrderEditComponent } from '../order-edit/order-edit.component';
   templateUrl: './orders-list.component.html',
   styleUrls: ['./orders-list.component.css']
 })
-export class OrdersListComponent implements OnInit {
+export class OrdersListComponent implements OnInit, OnDestroy {
 
+  totalCount: number;
   orders: OrderListItem[];
+  searchResult$: Observable<PagedList<OrderListItem>>;
+
   selectedId: number;
+  searchResultSubscription: Subscription;
   editMode: boolean = true;
   addModalActive = false;
-  totalCount: number;
   sortField: string;
   desc: boolean = false;
   pagerSetting: PagerSetting;
@@ -30,33 +35,22 @@ export class OrdersListComponent implements OnInit {
   collapsed: boolean = false;
   orderTabMenu = new OrderTabMenu();
   @ViewChild('editComponent') editComponent: OrderEditComponent;
-  count$: Observable<number>;
 
   constructor(
-    private mtAngularHttpService: MtService,
-    private renderer: Renderer2
-    ,private store: Store<IAppState>
+    private renderer: Renderer2,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {
-    this.pagerSetting = new PagerSetting();
-    this.reload();
-    this.count$ = this.store.select(selectCounter);
-    this.count$.subscribe((x) => { console.log('subbed', x); })
+    this.searchResult$ = this.store.select(orderSearchResultSelector);
+    this.searchResultSubscription = this.searchResult$.subscribe(x => {
+      this.orders = x?.content;
+      this.totalCount = x?.totalCount
+    });
   }
 
-  CanDeactivate(): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    //let jsonPreviousState = JSON.stringify(this.editComponent.previousState);
-    //let jsonFormState = JSON.stringify(this.editComponent.editForm.value);
-    //let isDirty = jsonPreviousState !== jsonFormState;
-
-    //if (isDirty) {
-    //  let userConfirmation = confirm('Do you want to discard the changes ?');
-    //  return userConfirmation;
-    //}
-
-    //else
-      return true;
+  ngOnDestroy(): void {
+    this.searchResultSubscription.unsubscribe();
   }
 
   setSortField(sortField: string) {
@@ -68,15 +62,20 @@ export class OrdersListComponent implements OnInit {
       this.sortField = sortField;
     }
 
-    this.reload();
+    let sortSetting = new SortSetting();
+    sortSetting.desc = this.desc;
+    sortSetting.sortField = this.sortField;
+    this.store.dispatch(sortOrdersBeginAction(sortSetting));
   }
 
-  reload() {
-    this.mtAngularHttpService.getOrders(this.pagerSetting.pageIndex, this.pagerSetting.pageSize, this.orderSearch, this.sortField, this.desc).subscribe(x => {
-      this.orders = x.content;
-      this.totalCount = x.totalCount;
-      this.selectedId = this.orders[0].id;
-    });
+  onChangePagerSettings(pagerSetting: any) {
+
+    if (pagerSetting.pageSize === undefined)
+      pagerSetting.pageSize = 5;
+
+    this.pagerSetting = pagerSetting;
+
+    this.store.dispatch(pageOrdersBeginAction(this.pagerSetting));
   }
 
   setRowBgColor(el: any) {
@@ -97,25 +96,6 @@ export class OrdersListComponent implements OnInit {
 
   setEditMode(activated: boolean) {
     this.editMode = activated;
-  }
-
-  onChangePagerSettings(pagerSetting: any) {
-
-    if (pagerSetting.pageSize === undefined)
-      pagerSetting.pageSize = 5;
-
-    this.pagerSetting = pagerSetting;
-
-    this.reload();
-  }
-
-  search(orderSearch: OrderSearch) {
-    this.orderSearch = orderSearch;
-    this.reload();
-  }
-
-  reset() {
-
   }
 
   toggleSearchAreaOpen() {
