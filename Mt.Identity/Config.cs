@@ -41,6 +41,18 @@ namespace Mt.Identity
                     AllowOfflineAccess = true,
                     AllowedScopes = { "openid", "profile", "scope2" }
                 },
+                new Client
+                {
+                    ClientId = "postman",
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    AllowOfflineAccess = true,
+                    AllowAccessTokensViaBrowser = true,
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
+                    AllowedScopes = { "openid", "profile", "scope2" }
+                }
             };
     }
 }
