@@ -14,14 +14,24 @@ export class PagerComponent implements OnInit, OnChanges {
   pageSetting = new PagerSetting();
   pageCount = 0;
 
+  emit() {
+    //emiting the object like the following :
+    //this.ChangePagerSettings.emit(this.pageSetting);
+    //makes redux stire point to the reference of this.pageSetting
+    //thus making not possible to modify when emiting the next value
+    //real use case example : selecting first page > works, then select second page > does work and gives error message : cannot set read only propoerty pageIndex
+    //that's why this, we made it work like this :
+    this.ChangePagerSettings.emit({ ...this.pageSetting });
+  }
+
   goToFirst() {
     this.pageSetting.pageIndex = 0;
-    this.ChangePagerSettings.emit(this.pageSetting);
+    this.emit();
   }
 
   goToLast() {
     this.pageSetting.pageIndex = this.pageCount - 1;
-    this.ChangePagerSettings.emit(this.pageSetting);
+    this.emit();
   }
 
   goToPrevious() {
@@ -30,7 +40,7 @@ export class PagerComponent implements OnInit, OnChanges {
       return;
 
     this.pageSetting.pageIndex--;
-    this.ChangePagerSettings.emit(this.pageSetting);
+    this.emit();
   }
 
   goToNext() {
@@ -39,7 +49,7 @@ export class PagerComponent implements OnInit, OnChanges {
       return;
 
     this.pageSetting.pageIndex++;
-    this.ChangePagerSettings.emit(this.pageSetting);
+    this.emit();
   }
 
   emitPageSize(event: any) {
@@ -47,7 +57,7 @@ export class PagerComponent implements OnInit, OnChanges {
     this.pageSetting.pageSize = +pageSize;
     this.pageSetting.pageIndex = 0;
     this.refreshPageCount();
-    this.ChangePagerSettings.emit(this.pageSetting);
+    this.emit();
   }
 
   refreshPageCount() {

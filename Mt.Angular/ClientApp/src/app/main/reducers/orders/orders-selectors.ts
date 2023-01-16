@@ -1,3 +1,9 @@
-//import { OrderState } from "./orders-reducer";
+import { createSelector } from "@ngrx/store";
+import { AppState } from "../AppState";
 
-//const selectOrders = (state: OrderState) => state.orderSearchResult;
+export const selectAppState = (state: AppState) => state;
+
+export const orderSearchResultSelector = createSelector(
+  selectAppState,
+  (state: AppState) => state.orders.orderSearchResult
+);

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { State, Store } from '@ngrx/store';
 import { APP_SETTINGS } from '../../../models/APP_SETTINGS';
 import { OrderSearch } from '../../../models/order-search';
+import { AppState } from '../../../reducers/AppState';
 import { searchOrdersBeginAction } from '../../../reducers/orders/orders-actions';
-import { OrderState } from '../../../reducers/orders/orders-reducer';
 
 @Component({
   selector: 'app-order-search',
@@ -15,21 +15,21 @@ export class OrderSearchComponent implements OnInit {
 
   countries: string[];
   customerSearch = new OrderSearch();
+  @ViewChild('f', { static: false }) editForm: NgForm;
 
-  constructor(private store: Store<{ orders: OrderState }>) {}
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
     this.countries = APP_SETTINGS.countries;
   }
 
   triggerSearch() {
-    var defaultSearch = new OrderSearch();
-    defaultSearch.shipCountry = "France";
-    this.store.dispatch(searchOrdersBeginAction(defaultSearch));
+    this.customerSearch = this.editForm.value;
+    this.store.dispatch(searchOrdersBeginAction(this.customerSearch));
   }
 
   triggerReset() {
     this.customerSearch = new OrderSearch();
-
+    this.store.dispatch(searchOrdersBeginAction(this.customerSearch));
   }
 }
