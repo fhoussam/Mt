@@ -8,26 +8,27 @@ import { HomeComponent } from './main/components/home/home.component';
 import { MainModule } from './main/main.module';
 import { SharedModule } from './shared/shared.module';
 
-import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { ordersReducer } from './main/reducers/orders/orders-reducer';
+import { StoreModule } from '@ngrx/store';
 import { OrdersEffects } from './main/reducers/orders/orders-effects';
+import { ordersReducer } from './main/reducers/orders/orders-reducer';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
-    MainModule,
+	MainModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     SharedModule,
-    RouterModule.forRoot([
+	RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
     ]),
     StoreModule.forRoot({ orders: ordersReducer }),
     EffectsModule.forRoot([OrdersEffects]),
   ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
