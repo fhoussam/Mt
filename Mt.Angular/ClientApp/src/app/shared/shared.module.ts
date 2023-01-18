@@ -8,6 +8,8 @@ import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CanDeactivateGuard } from './guards/can-deactivate';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   exports: [
@@ -17,6 +19,8 @@ import { CanDeactivateGuard } from './guards/can-deactivate';
     ConfirmationComponent,
     ForbiddenComponent,
     FormsModule,
+    BsDatepickerModule,
+    BrowserAnimationsModule
   ],
   declarations: [
     NavMenuComponent,
@@ -29,6 +33,8 @@ import { CanDeactivateGuard } from './guards/can-deactivate';
     CommonModule,
     RouterModule,
     FormsModule,
+    BsDatepickerModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [CanDeactivateGuard]
 })

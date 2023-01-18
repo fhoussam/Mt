@@ -18,11 +18,11 @@ import { ordersReducer } from './main/reducers/orders/orders-reducer';
     AppComponent
   ],
   imports: [
-	MainModule,
+    MainModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     SharedModule,
-	RouterModule.forRoot([
+    RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
     ]),
     StoreModule.forRoot({ orders: ordersReducer }),
