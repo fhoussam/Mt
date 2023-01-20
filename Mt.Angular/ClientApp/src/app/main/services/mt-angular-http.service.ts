@@ -24,11 +24,36 @@ export class MtService {
     return MtService.baseUrl + path;
   }
 
+  isValidUnixTimestamp(unixTimestamp: any): boolean {
+    if (typeof unixTimestamp !== 'string' && typeof unixTimestamp !== 'number') {
+      return false;
+    }
+
+    const timestamp = parseInt(unixTimestamp as string, 10);
+    if (isNaN(timestamp)) {
+      return false;
+    }
+
+    const date = new Date(timestamp);
+    if (isNaN(date.getTime())) {
+      return false;
+    }
+
+    return true;
+  }
+
   objectToParams(obj: any): string {
     let params = "";
     for (const key in obj) {
       if (obj.hasOwnProperty(key) && obj[key]) {
-        params += key + "=" + obj[key] + "&";
+        let value = obj[key];
+        if (value instanceof Date) {
+          value = value.getTime();
+          if (!this.isValidUnixTimestamp(value)) {
+            continue;
+          }
+        }
+        params += key + "=" + value + "&";
       }
     }
     return params.slice(0, -1);

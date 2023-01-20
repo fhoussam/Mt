@@ -14,7 +14,7 @@ import { searchOrdersBeginAction } from '../../../reducers/orders/orders-actions
 export class OrderSearchComponent implements OnInit {
 
   countries: string[];
-  customerSearch = new OrderSearch();
+  customerSearch: OrderSearch;
   @ViewChild('f', { static: false }) editForm: NgForm;
 
   constructor(private store: Store<AppState>) {}
@@ -24,7 +24,11 @@ export class OrderSearchComponent implements OnInit {
   }
 
   triggerSearch() {
-    this.customerSearch = this.editForm.value;
+    this.customerSearch = new OrderSearch();
+    this.customerSearch.customerId = this.editForm.value["customerId"];
+    this.customerSearch.shipCountry = this.editForm.value["shipCountry"];
+    this.customerSearch.from = new Date(this.editForm.value["from"]);
+    this.customerSearch.to = new Date(this.editForm.value["to"]);
     this.store.dispatch(searchOrdersBeginAction(this.customerSearch));
   }
 

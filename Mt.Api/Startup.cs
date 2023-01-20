@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Mt.Api.CustomerBinders;
 using Mt.Api.Filters;
 using Mt.Api.Middlewares;
 using Mt.Application.Operations.Validators;
@@ -41,9 +42,10 @@ namespace Mt.Api
             services.AddValidatorsFromAssemblyContaining<EditCustomerValidator>();
 
             services
-                .AddControllers(opts => 
+                .AddControllers(opts =>
                 {
                     opts.Filters.Add(typeof(ValidateModelStateFilter));
+                    opts.ModelBinderProviders.Insert(0, new BinderProvider(new DateTimeModelBinder()));
                 })
                 .AddJsonOptions(opts =>
                 {

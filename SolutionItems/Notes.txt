@@ -1,5 +1,11 @@
 *shorts
 
+general
+	need : intercept datetime data in unix format when receiving an http request, then convert it to datetime and bind it to the model
+	we have 2 options : input formatter or a binder
+	going with first choice prevent you from managing the GET request case, but the other can manage both
+	overall, better stick with the binder option, unless you have a built in one, like the Enum formatter
+
 ef/sql
 	scaffolding db context : dotnet ef dbcontext scaffold "Data Source=localhost\SQLEXPRESS;Initial Catalog=NORTHWND;Integrated Security=True" Microsoft.EntityFrameworkCore.SqlServer --context-dir Persistence --output-dir Models --context NorthWindDbContext
 	services.AddMediatR(); ambigious and required going from both packages (mediatr and dependency injection) version 10 down to 6
