@@ -29,7 +29,6 @@ export class CustomersListComponent implements OnInit, CanCompoDeactivate {
   collapsed: boolean = true;
   customerTabMenu = new CustomerTabMenu();
   @ViewChild('editComponent') editComponent: CustomerEditComponent;
-  
 
   constructor(private mtAngularHttpService: MtService, private renderer: Renderer2) { }
 

@@ -5,7 +5,7 @@ import { EMPTY } from "rxjs";
 import { catchError, map, mergeMap, tap, withLatestFrom } from "rxjs/operators";
 import { MtService } from "../../services/mt-angular-http.service";
 import { AppState } from "../AppState";
-import { pageOrdersBeginAction, searchOrdersBeginAction, searchOrdersEndAction, sortOrdersBeginAction } from "./orders-actions";
+import { pageOrdersBeginAction, searchOrdersBeginAction, searchOrdersEndAction, selectOrderForEditBeginAction, selectOrderForEditEndAction, sortOrdersBeginAction, updateOrderBeginAction } from "./orders-actions";
 
 @Injectable()
 export class OrdersEffects {
@@ -51,6 +51,32 @@ export class OrdersEffects {
         map(orders => {
           console.log('got data using effect pageOrders', orders);
           return searchOrdersEndAction(orders);
+        }),
+        catchError(() => EMPTY)
+      ))
+  ));
+
+  selectOrderForEdit$ = createEffect(() => this.actions$.pipe(
+    ofType(selectOrderForEditBeginAction),
+    tap(x => console.log('effect selectOrderForEdit triggered', x)),
+    mergeMap(action => this.mtService.getOrderByIdForEdit(action.id)
+      .pipe(
+        map(order => {
+          console.log('got data using effect selectOrderForEdit', order);
+          return selectOrderForEditEndAction(order);
+        }),
+        catchError(() => EMPTY)
+      ))
+  ));
+
+  updateOrder$ = createEffect(() => this.actions$.pipe(
+    ofType(updateOrderBeginAction),
+    tap(x => console.log('effect updateOrder triggered', x)),
+    mergeMap(action => this.mtService.editOrder(action.order)
+      .pipe(
+        map(order => {
+          console.log('got data using effect selectOrderForEdit', order);
+          return selectOrderForEditEndAction(order);
         }),
         catchError(() => EMPTY)
       ))

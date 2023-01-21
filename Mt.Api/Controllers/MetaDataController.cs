@@ -26,6 +26,14 @@ namespace Mt.Api.Controllers
         }
 
         [HttpGet]
+        [Route("countries/{countryName}/in-eu")]
+        public async Task<IActionResult> GetCountries([FromRoute] string countryName)
+        {
+            var result = await _mediator.Send(new GetCountryIsInEuQuery(countryName));
+            return Ok(result);
+        }
+
+        [HttpGet]
         [Route("cities")]
         public async Task<IActionResult> GetCities()
         {

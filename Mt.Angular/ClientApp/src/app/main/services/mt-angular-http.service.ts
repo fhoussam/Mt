@@ -87,6 +87,10 @@ export class MtService {
     return this.http.get<CustomerEdit>(this.fullUrl("customers/" + id + "/edit"));
   }
 
+  getCountryInEu(countryName: string): Observable<boolean> {
+    return this.http.get<boolean>(this.fullUrl("metadata/countries/" + countryName + "/in-eu"));
+  }
+
   getOrderByIdForEdit(id: number): Observable<OrderEdit> {
     return this.http.get<OrderEdit>(this.fullUrl("orders/" + id + "/edit"));
   }

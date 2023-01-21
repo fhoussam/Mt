@@ -21,6 +21,7 @@ export class OrderSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.countries = APP_SETTINGS.countries;
+    this.triggerReset();
   }
 
   triggerSearch() {

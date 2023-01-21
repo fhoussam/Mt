@@ -32,8 +32,8 @@ namespace Mt.Application.Operations.Queries
                 var result = await _context
                     .Employees
                     .Where(
-                        x => x.FirstName.Contains(request.Name) 
-                        || x.LastName.Contains(request.Name) 
+                        x => x.FirstName.Contains(request.Name)
+                        || x.LastName.Contains(request.Name)
                         || string.IsNullOrEmpty(request.Name)
                     )
                     .Select(x => new OptionResponseDto<int>()

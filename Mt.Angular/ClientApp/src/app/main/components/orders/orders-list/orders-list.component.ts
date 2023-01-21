@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { UrlTree } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { PagerSetting } from '../../../../shared/models/PagerSetting';
 import { OrderListItem } from '../../../models/order-list-item';
@@ -9,7 +8,7 @@ import { OrderTabMenu } from '../../../models/order-tab-menu';
 import { PagedList } from '../../../models/PagedList';
 import { SortSetting } from '../../../models/SortSetting';
 import { AppState } from '../../../reducers/AppState';
-import { pageOrdersBeginAction, sortOrdersBeginAction } from '../../../reducers/orders/orders-actions';
+import { pageOrdersBeginAction, selectOrderForEditBeginAction, sortOrdersBeginAction } from '../../../reducers/orders/orders-actions';
 import { orderSearchResultSelector } from '../../../reducers/orders/orders-selectors';
 import { OrderEditComponent } from '../order-edit/order-edit.component';
 
@@ -45,7 +44,9 @@ export class OrdersListComponent implements OnInit, OnDestroy {
     this.searchResult$ = this.store.select(orderSearchResultSelector);
     this.searchResultSubscription = this.searchResult$.subscribe(x => {
       this.orders = x?.content;
-      this.totalCount = x?.totalCount
+      this.totalCount = x?.totalCount;
+      this.selectedId = x?.content[0].id;
+      this.selectOrder(this.selectedId);
     });
   }
 
@@ -92,6 +93,7 @@ export class OrdersListComponent implements OnInit, OnDestroy {
 
   selectOrder(selectedId: number) {
     this.selectedId = selectedId;
+    this.store.dispatch(selectOrderForEditBeginAction(selectedId));
   }
 
   setEditMode(activated: boolean) {

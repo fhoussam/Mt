@@ -7,3 +7,8 @@ export const orderSearchResultSelector = createSelector(
   selectAppState,
   (state: AppState) => state.orders.orderSearchResult
 );
+
+export const orderForEditSelector = createSelector(
+  selectAppState,
+  (state: AppState) => state.orders.orderForEdit
+);

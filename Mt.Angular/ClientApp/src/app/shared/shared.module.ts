@@ -6,7 +6,7 @@ import { PagerComponent } from './components/pager/pager.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CanDeactivateGuard } from './guards/can-deactivate';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ConfirmationComponent,
     ForbiddenComponent,
     FormsModule,
+    ReactiveFormsModule,
     BsDatepickerModule,
     BrowserAnimationsModule
   ],
@@ -33,6 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CommonModule,
     RouterModule,
     FormsModule,
+    ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
     BrowserAnimationsModule
   ],
