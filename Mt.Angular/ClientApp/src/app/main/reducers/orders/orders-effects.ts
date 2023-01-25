@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
-import { EMPTY } from "rxjs";
+import { EMPTY, of } from "rxjs";
 import { catchError, map, mergeMap, tap, withLatestFrom } from "rxjs/operators";
 import { MtService } from "../../services/mt-angular-http.service";
 import { AppState } from "../AppState";
@@ -63,20 +63,25 @@ export class OrdersEffects {
       .pipe(
         map(order => {
           console.log('got data using effect selectOrderForEdit', order);
+          order.orderId = action.id;
           return selectOrderForEditEndAction(order);
         }),
         catchError(() => EMPTY)
       ))
   ));
 
-  updateOrder$ = createEffect(() => this.actions$.pipe(
+  updateOrder = createEffect(() => this.actions$.pipe(
     ofType(updateOrderBeginAction),
     tap(x => console.log('effect updateOrder triggered', x)),
-    mergeMap(action => this.mtService.editOrder(action.order)
+    withLatestFrom(this.store),
+    mergeMap(([action, state]) => this.mtService.editOrder(action.id, action.order)
       .pipe(
         map(order => {
-          console.log('got data using effect selectOrderForEdit', order);
-          return selectOrderForEditEndAction(order);
+          console.log('got data using effect updateOrder', order);
+          //no need to update the edit panel as the user have already modified
+          //the data and only thing left to update is the list
+          //return selectOrderForEditBeginAction(action.id);
+          return searchOrdersBeginAction(state.orders.orderSearch);
         }),
         catchError(() => EMPTY)
       ))

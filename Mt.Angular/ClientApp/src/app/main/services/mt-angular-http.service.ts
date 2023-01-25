@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Data } from '@angular/router';
 import { Observable } from 'rxjs';
 import { PagerSetting } from '../../shared/models/PagerSetting';
 import { CustomerDetail } from '../models/customer-detail';
@@ -8,6 +9,7 @@ import { CustomerListItem } from '../models/customer-list-item';
 import { CustomerOrderListItem } from '../models/customer-order-list-item';
 import { CustomerSearch } from '../models/customer-search';
 import { OrderEdit } from '../models/order-edit';
+import { OrderEditUpdate } from '../models/order-edit-update';
 import { OrderListItem } from '../models/order-list-item';
 import { OrderSearch } from '../models/order-search';
 import { PagedList } from '../models/PagedList';
@@ -24,22 +26,20 @@ export class MtService {
     return MtService.baseUrl + path;
   }
 
-  isValidUnixTimestamp(unixTimestamp: any): boolean {
-    if (typeof unixTimestamp !== 'string' && typeof unixTimestamp !== 'number') {
-      return false;
-    }
+  formatDate(date: Date | null) {
+    if (date === null) return "";
+    else date = date as Date;
+    var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
 
-    const timestamp = parseInt(unixTimestamp as string, 10);
-    if (isNaN(timestamp)) {
-      return false;
-    }
+    if (month.length < 2)
+      month = '0' + month;
+    if (day.length < 2)
+      day = '0' + day;
 
-    const date = new Date(timestamp);
-    if (isNaN(date.getTime())) {
-      return false;
-    }
-
-    return true;
+    return [day, month, year].join('/');
   }
 
   objectToParams(obj: any): string {
@@ -48,8 +48,12 @@ export class MtService {
       if (obj.hasOwnProperty(key) && obj[key]) {
         let value = obj[key];
         if (value instanceof Date) {
-          value = value.getTime();
-          if (!this.isValidUnixTimestamp(value)) {
+          let strigified = JSON.stringify(value).replace(/"/g, '');
+          if (strigified != "null") {
+            value = strigified;
+          }
+          else {
+            console.log('continue');
             continue;
           }
         }
@@ -101,10 +105,9 @@ export class MtService {
     return this.http.post(this.fullUrl(path), editValues);
   }
 
-  editOrder(id: number, editValues: OrderEdit): any {
-    let path = "orders";
-    if (id) path += "/" + id;
-    return this.http.post(this.fullUrl(path), editValues);
+  editOrder(id: number, editValues: OrderEditUpdate): Observable<any> {
+    let url = this.fullUrl("orders/" + id);
+    return this.http.post(url, editValues);
   }
 
   getCustomerOrders(id: string): Observable<CustomerOrderListItem[]> {

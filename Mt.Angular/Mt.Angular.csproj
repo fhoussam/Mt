@@ -40,6 +40,7 @@
     <None Remove="ClientApp\src\app\main\models\customer-list-item.ts" />
     <None Remove="ClientApp\src\app\main\models\customer-search.ts" />
     <None Remove="ClientApp\src\app\main\models\customer-tab-menu.ts" />
+    <None Remove="ClientApp\src\app\main\models\order-edit-update.ts" />
     <None Remove="ClientApp\src\app\main\models\order-edit.ts" />
     <None Remove="ClientApp\src\app\main\models\order-list-item.ts" />
     <None Remove="ClientApp\src\app\main\models\order-search.ts" />

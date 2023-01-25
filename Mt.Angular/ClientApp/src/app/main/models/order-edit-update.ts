@@ -1,5 +1,4 @@
-export class OrderEdit {
-  orderId: number;
+export class OrderEditUpdate {
   employeeId: number;
   customerId: string;
   orderDate: Date | null;

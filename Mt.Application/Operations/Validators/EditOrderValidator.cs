@@ -3,6 +3,7 @@ using MediatR;
 using Mt.Application.Commons;
 using Mt.Application.Operations.Commands.RequestDtos;
 using Mt.Application.Operations.Queries;
+using Mt.SeedWork;
 using System;
 using System.Linq;
 
@@ -14,7 +15,7 @@ namespace Mt.Application.Operations.Validators
         {
             RuleFor(x => x.CustomerId).NotEmpty();
 
-            RuleFor(x => x.OrderDate).GreaterThan(DateTime.Now.AddDays(-1));
+            //RuleFor(x => x.OrderDate.ToDateTime()).GreaterThan(DateTime.Now.AddDays(-1));
 
             RuleFor(x => x.ShipCountry).NotEmpty().Must(propValue =>
             {

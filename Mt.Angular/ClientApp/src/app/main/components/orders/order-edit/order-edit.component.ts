@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { map, Observable, of, Subscription, switchMap, delay } from 'rxjs';
+import { delay, map, Observable, of, Subscription, switchMap } from 'rxjs';
 import { APP_SETTINGS } from '../../../models/APP_SETTINGS';
 import { OrderEdit } from '../../../models/order-edit';
+import { OrderEditUpdate } from '../../../models/order-edit-update';
 import { AppState } from '../../../reducers/AppState';
 import { updateOrderBeginAction } from '../../../reducers/orders/orders-actions';
 import { orderForEditSelector } from '../../../reducers/orders/orders-selectors';
@@ -33,30 +34,32 @@ export class OrderEditComponent implements OnInit, OnDestroy {
 
   saveChanges() {
     let formValue: OrderEdit = this.getDeserializedFormGroupValue();
-    this.store.dispatch(updateOrderBeginAction(this.id, formValue));
+    let updateValue = new OrderEditUpdate();
+    updateValue.customerId = formValue.customerId;
+    updateValue.employeeId = formValue.employeeId;
+    updateValue.orderDate = formValue.orderDate;
+    updateValue.shipAddress = formValue.shipAddress;
+    updateValue.shipCountry = formValue.shipCountry;
+    this.store.dispatch(updateOrderBeginAction(formValue.orderId, updateValue));
   }
 
   getDeserializedFormGroupValue(): OrderEdit {
     let formValue = new OrderEdit();
-
-    let parsedOrderDate = new Date(this?.editForm?.get('orderDate')?.value);
-    console.log(parsedOrderDate);
-
-    formValue.contactName = this?.editForm?.get('contactName')?.value;
+    formValue.orderId = this?.editForm?.get('orderId')?.value;
     formValue.customerId = this?.editForm?.get('customerId')?.value;
     formValue.employeeId = this?.editForm?.get('employeeId')?.value;
     formValue.orderDate = this?.editForm?.get('orderDate')?.value;
     formValue.shipAddress = this?.editForm?.get('shipAddress')?.value;
     formValue.shipCountry = this?.editForm?.get('shipCountry')?.value;
-
     return formValue;
   }
 
   initForm(x: OrderEdit) {
     this.editForm = new FormGroup({
+      orderId: new FormControl(x.orderId),
       employeeId: new FormControl(x.employeeId, [Validators.required]),
       customerId: new FormControl(x.customerId),
-      orderDate: new FormControl(x.orderDate),
+      orderDate: new FormControl(new Date()),
       shipCountry: new FormControl(x.shipCountry, [Validators.required], [this.isCountryInEu()]),
       shipAddress: new FormControl(x.shipAddress, [Validators.required, this.isLengthEvenNumber]),
     });

@@ -38,7 +38,7 @@ namespace Mt.Application.Operations.Queries
 
                 var result = new OrderForEditResponseDto()
                 {
-                    ContactName = rawCustomer.Customer.ContactName,
+                    OrderId = rawCustomer.OrderId,
                     CustomerId = rawCustomer.CustomerId,
                     EmployeeId = rawCustomer.EmployeeId,
                     OrderDate = rawCustomer.OrderDate,
