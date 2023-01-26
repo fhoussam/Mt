@@ -87,6 +87,12 @@
         </div>
       </div>
 
+      <div *ngIf="editForm.errors">
+        <div *ngIf="editForm.errors?.['invalidGroup'] && editForm?.get('shipAddress')?.touched && editForm?.get('orderDate')?.touched" class="alert alert-danger" role="alert">
+          Date must be greater than current and ship address should be more than 20 characters!
+        </div>
+      </div>
+
     </div>
   </div>
 </form>

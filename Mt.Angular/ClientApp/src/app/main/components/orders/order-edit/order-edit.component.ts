@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { delay, map, Observable, of, Subscription, switchMap } from 'rxjs';
 import { APP_SETTINGS } from '../../../models/APP_SETTINGS';
@@ -62,7 +62,7 @@ export class OrderEditComponent implements OnInit, OnDestroy {
       orderDate: new FormControl(new Date()),
       shipCountry: new FormControl(x.shipCountry, [Validators.required], [this.isCountryInEu()]),
       shipAddress: new FormControl(x.shipAddress, [Validators.required, this.isLengthEvenNumber]),
-    });
+    }, { validators: myFormGroupValidator() });
   }
 
   isCountryInEu(): AsyncValidatorFn {
@@ -98,4 +98,15 @@ export class OrderEditComponent implements OnInit, OnDestroy {
   cancelEdit() {
 
   }
+}
+
+function myFormGroupValidator(): ValidatorFn | ValidatorFn[] | null | undefined {
+  return (formGroup: AbstractControl) => {
+    const shipAddress = formGroup.get("shipAddress")?.value;
+    const orderDate = formGroup.get("orderDate")?.value;
+    let result = orderDate > new Date() && shipAddress.length >= 20;
+    return result ? null : {
+      invalidGroup: true
+    };
+  };
 }
