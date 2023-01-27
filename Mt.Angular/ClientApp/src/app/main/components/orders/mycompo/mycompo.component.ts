@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { timer, switchMap, map } from 'rxjs';
 import { ddlOption } from '../../../models/ddlOption';
 import { MtService } from '../../../services/mt-angular-http.service';
 
@@ -15,9 +16,12 @@ export class MycompoComponent {
   constructor(private mtService: MtService) { }
 
   filterItems() {
-    this.mtService.getEmployeeOptionsByName(this.inputValue.toLowerCase()).subscribe(x => {
-      this.filteredItems = x;
-    });
+    timer(500).pipe(
+      switchMap(() => this.mtService.getEmployeeOptionsByName(this.inputValue.toLowerCase())),
+      map(x => {
+        this.filteredItems = x;
+      })
+    ).subscribe();
   }
 
   selectItem(item: ddlOption<number>) {
