@@ -24,12 +24,18 @@ export class OrderEditComponent implements OnInit, OnDestroy {
   id: number = 10248;
   editForm: FormGroup;
   orderForEditSubscription$: Subscription;
+  initialEmployeeName: string;
 
   ngOnInit(): void {
     this.countries = APP_SETTINGS.countries;
     this.orderForEditSubscription$ = this.store.select(orderForEditSelector).subscribe(x => {
       this.initForm(x);
+      this.initialEmployeeName = x.employeeName;
     });
+  }
+
+  selectSuggestion(event: string) {
+    this.editForm.get('employeeId')?.setValue(event);
   }
 
   saveChanges() {

@@ -1,3 +1,9 @@
+.parent-container {
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+}
+
 .suggestions-panel {
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -5,6 +11,7 @@
   max-height: 200px;
   overflow-y: auto;
   position: fixed;
+  background-color: aliceblue;
 }
 
 .suggestion {

@@ -31,6 +31,7 @@ namespace Mt.Application.Operations.Queries
                 var rawCustomer = await _context
                     .Orders
                     .Include(x => x.Customer)
+                    .Include(x => x.Employee)
                     .FirstOrDefaultAsync(x => x.OrderId == request.Id);
 
                 if (rawCustomer == null)
@@ -41,6 +42,7 @@ namespace Mt.Application.Operations.Queries
                     OrderId = rawCustomer.OrderId,
                     CustomerId = rawCustomer.CustomerId,
                     EmployeeId = rawCustomer.EmployeeId,
+                    EmployeeName = $"{rawCustomer.Employee.FirstName} {rawCustomer.Employee.LastName}",
                     OrderDate = rawCustomer.OrderDate,
                     ShipCountry = rawCustomer.ShipCountry,
                     ShipAddress = rawCustomer.ShipAddress

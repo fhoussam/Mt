@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { timer, switchMap, map } from 'rxjs';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { map, switchMap, timer } from 'rxjs';
 import { ddlOption } from '../../../models/ddlOption';
 import { MtService } from '../../../services/mt-angular-http.service';
 
@@ -12,6 +12,8 @@ export class MycompoComponent {
   inputValue = '';
   filteredItems: ddlOption<number>[];
   isFocused: boolean;
+  @Output() onSelectSuggestion = new EventEmitter<string>();
+  @Input() initialDisplay = '';
 
   constructor(private mtService: MtService) { }
 
@@ -27,5 +29,6 @@ export class MycompoComponent {
   selectItem(item: ddlOption<number>) {
     this.inputValue = item.display;
     this.filteredItems = [];
+    this.onSelectSuggestion.emit(item.value.toString());
   }
 }
