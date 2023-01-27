@@ -1,0 +1,6 @@
+<input type="text" class="form-control" [(ngModel)]="inputValue" (input)="filterItems()" (focus)="isFocused=true" (blur)="isFocused=false" placeholder="Type a country name">
+<div class="suggestions-panel" *ngIf="!!filteredItems && filteredItems.length > 0">
+  <div class="suggestion" *ngFor="let item of filteredItems" (click)="selectItem(item)">
+    {{ item.display }}
+  </div>
+</div>

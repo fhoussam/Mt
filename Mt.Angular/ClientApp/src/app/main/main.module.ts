@@ -16,6 +16,7 @@ import { CanDeactivateGuard } from '../shared/guards/can-deactivate';
 import { OrderEditComponent } from './components/orders/order-edit/order-edit.component';
 import { OrderDetailsComponent } from './components/orders/order-details/order-details.component';
 import { OrderSearchComponent } from './components/orders/order-search/order-search.component';
+import { MycompoComponent } from './components/orders/mycompo/mycompo.component';
 
 export function get_settings(initLoadService: InitLoadService) {
   return () => initLoadService.getSettings();
@@ -35,6 +36,7 @@ export function get_settings(initLoadService: InitLoadService) {
     OrderEditComponent,
     OrderDetailsComponent,
     OrderSearchComponent,
+    MycompoComponent,
   ],
   imports: [
     SharedModule,

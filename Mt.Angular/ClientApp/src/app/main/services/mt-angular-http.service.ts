@@ -8,6 +8,7 @@ import { CustomerEdit } from '../models/customer-edit';
 import { CustomerListItem } from '../models/customer-list-item';
 import { CustomerOrderListItem } from '../models/customer-order-list-item';
 import { CustomerSearch } from '../models/customer-search';
+import { ddlOption } from '../models/ddlOption';
 import { OrderEdit } from '../models/order-edit';
 import { OrderEditUpdate } from '../models/order-edit-update';
 import { OrderListItem } from '../models/order-list-item';
@@ -72,6 +73,10 @@ export class MtService {
     var getParam = this.objectToParams(customerSearch);
     url += "&" + getParam;
     return this.http.get<PagedList<CustomerListItem>>(this.fullUrl(url));
+  }
+
+  getEmployeeOptionsByName(name: string): Observable<ddlOption<number>[]> {
+    return this.http.get<ddlOption<number>[]>(this.fullUrl("employees/options?name=" + name));
   }
 
   getOrders(orderSearch: OrderSearch, sortSetting: SortSetting, pagerSetting: PagerSetting): Observable<PagedList<OrderListItem>> {
