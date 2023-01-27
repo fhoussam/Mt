@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Mt.Application.Operations.Queries
 {
-    public class GetEmployeesByNameQuery : IRequest<IEnumerable<OptionResponseDto<int>>>
+    public class GetEmployeesByNameQuery : IRequest<IEnumerable<OptionResponseDto<string>>>
     {
         public string Name { get; set; }
 
@@ -18,7 +18,7 @@ namespace Mt.Application.Operations.Queries
             Name = contactName;
         }
 
-        public class GetEmployeesByNameQueryHandler : IRequestHandler<GetEmployeesByNameQuery, IEnumerable<OptionResponseDto<int>>>
+        public class GetEmployeesByNameQueryHandler : IRequestHandler<GetEmployeesByNameQuery, IEnumerable<OptionResponseDto<string>>>
         {
             private readonly INorthWindDbContext _context;
 
@@ -27,7 +27,7 @@ namespace Mt.Application.Operations.Queries
                 _context = context;
             }
 
-            public async Task<IEnumerable<OptionResponseDto<int>>> Handle(GetEmployeesByNameQuery request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<OptionResponseDto<string>>> Handle(GetEmployeesByNameQuery request, CancellationToken cancellationToken)
             {
                 var result = await _context
                     .Employees
@@ -36,10 +36,10 @@ namespace Mt.Application.Operations.Queries
                         || x.LastName.Contains(request.Name)
                         || string.IsNullOrEmpty(request.Name)
                     )
-                    .Select(x => new OptionResponseDto<int>()
+                    .Select(x => new OptionResponseDto<string>()
                     {
                         Display = $"{x.FirstName} {x.LastName}",
-                        Value = x.EmployeeId
+                        Value = x.EmployeeId.ToString()
                     })
                     .ToListAsync();
 
