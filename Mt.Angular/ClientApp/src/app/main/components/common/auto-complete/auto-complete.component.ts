@@ -4,11 +4,11 @@ import { ddlOption } from '../../../models/ddlOption';
 import { MtService } from '../../../services/mt-angular-http.service';
 
 @Component({
-  selector: 'app-mycompo',
-  templateUrl: './mycompo.component.html',
-  styleUrls: ['./mycompo.component.css']
+  selector: 'app-auto-complete',
+  templateUrl: './auto-complete.component.html',
+  styleUrls: ['./auto-complete.component.css']
 })
-export class MycompoComponent {
+export class AutoCompleteComponent {
   inputValue = '';
   filteredItems: ddlOption<string>[];
   isFocused: boolean;
