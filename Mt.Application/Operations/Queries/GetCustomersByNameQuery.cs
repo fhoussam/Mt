@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Mt.Application.Operations.Queries
 {
-    public class GetCustomersByNameQuery : IRequest<IEnumerable<OptionResponseDto<string>>>
+    public class GetCustomersByNameQuery : IRequest<IEnumerable<OptionResponseDto>>
     {
         public string Name { get; set; }
 
@@ -18,7 +18,7 @@ namespace Mt.Application.Operations.Queries
             Name = contactName;
         }
 
-        public class GetCustomersByNameQueryHandler : IRequestHandler<GetCustomersByNameQuery, IEnumerable<OptionResponseDto<string>>>
+        public class GetCustomersByNameQueryHandler : IRequestHandler<GetCustomersByNameQuery, IEnumerable<OptionResponseDto>>
         {
             private readonly INorthWindDbContext _context;
 
@@ -27,12 +27,12 @@ namespace Mt.Application.Operations.Queries
                 _context = context;
             }
 
-            public async Task<IEnumerable<OptionResponseDto<string>>> Handle(GetCustomersByNameQuery request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<OptionResponseDto>> Handle(GetCustomersByNameQuery request, CancellationToken cancellationToken)
             {
                 var result = await _context
                     .Customers
                     .Where(x => x.ContactName.Contains(request.Name) || string.IsNullOrEmpty(request.Name))
-                    .Select(x => new OptionResponseDto<string>()
+                    .Select(x => new OptionResponseDto()
                     {
                         Display = x.ContactName,
                         Value = x.CustomerId

@@ -41,6 +41,7 @@ namespace Mt.Application.Operations.Queries
                 {
                     OrderId = rawCustomer.OrderId,
                     CustomerId = rawCustomer.CustomerId,
+                    CustomerName = $"{rawCustomer.Customer.ContactName}",
                     EmployeeId = rawCustomer.EmployeeId,
                     EmployeeName = $"{rawCustomer.Employee.FirstName} {rawCustomer.Employee.LastName}",
                     OrderDate = rawCustomer.OrderDate,

@@ -1,4 +1,4 @@
-export class ddlOption<T> {
-  value: T;
+export class ddlOption {
+  value: string;
   display: string;
 }

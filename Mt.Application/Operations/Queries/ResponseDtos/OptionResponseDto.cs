@@ -1,8 +1,8 @@
 ﻿namespace Mt.Application.Operations.Queries.ResponseDtos
 {
-    public class OptionResponseDto<Identifier>
+    public class OptionResponseDto
     {
-        public Identifier Value { get; set; }
+        public string Value { get; set; }
         public string Display { get; set; }
     }
 }

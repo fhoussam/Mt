@@ -10,12 +10,12 @@ import { MtService } from '../../../services/mt-angular-http.service';
 })
 export class AutoCompleteComponent {
   inputValue = '';
-  filteredItems: ddlOption<string>[];
+  filteredItems: ddlOption[];
   isFocused: boolean;
   @Output() onSelectSuggestion = new EventEmitter<string>();
   @Input() initialDisplay = '';
   @Input() action: string;
-  observableAction: Observable<ddlOption<string>[]>;
+  observableAction: Observable<ddlOption[]>;
 
   /* typically a service that will be dedicated to load drop down lists from api */
   constructor(private mtService: MtService) {}
@@ -25,6 +25,11 @@ export class AutoCompleteComponent {
     if (this.action == "load_emplyees") {
       this.observableAction = this.mtService.getEmployeeOptionsByName(this.inputValue.toLowerCase());
     }
+
+    if (this.action == "load_customers") {
+      this.observableAction = this.mtService.getCustomersOptionsByName(this.inputValue.toLowerCase());
+    }
+
     else
       throw new DOMException("data load action is required");
 
@@ -36,7 +41,7 @@ export class AutoCompleteComponent {
     ).subscribe();
   }
 
-  selectItem(item: ddlOption<string>) {
+  selectItem(item: ddlOption) {
     this.inputValue = item.display;
     this.filteredItems = [];
     this.onSelectSuggestion.emit(item.value.toString());

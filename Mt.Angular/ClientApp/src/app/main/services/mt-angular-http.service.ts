@@ -75,8 +75,12 @@ export class MtService {
     return this.http.get<PagedList<CustomerListItem>>(this.fullUrl(url));
   }
 
-  getEmployeeOptionsByName(name: string): Observable<ddlOption<string>[]> {
-    return this.http.get<ddlOption<string>[]>(this.fullUrl("employees/options?name=" + name));
+  getEmployeeOptionsByName(name: string): Observable<ddlOption[]> {
+    return this.http.get<ddlOption[]>(this.fullUrl("employees/options?name=" + name));
+  }
+
+  getCustomersOptionsByName(name: string): Observable<ddlOption[]> {
+    return this.http.get<ddlOption[]>(this.fullUrl("customers/options?name=" + name));
   }
 
   getOrders(orderSearch: OrderSearch, sortSetting: SortSetting, pagerSetting: PagerSetting): Observable<PagedList<OrderListItem>> {
