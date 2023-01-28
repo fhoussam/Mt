@@ -9,9 +9,7 @@ import { MainModule } from './main/main.module';
 import { SharedModule } from './shared/shared.module';
 
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
 import { OrdersEffects } from './main/reducers/orders/orders-effects';
-import { ordersReducer } from './main/reducers/orders/orders-reducer';
 
 @NgModule({
   declarations: [
@@ -25,7 +23,6 @@ import { ordersReducer } from './main/reducers/orders/orders-reducer';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
     ]),
-    StoreModule.forRoot({ orders: ordersReducer }),
     EffectsModule.forRoot([OrdersEffects]),
   ],
   providers: [],

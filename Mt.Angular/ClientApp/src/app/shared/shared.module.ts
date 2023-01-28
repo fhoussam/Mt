@@ -10,6 +10,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CanDeactivateGuard } from './guards/can-deactivate';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
+import { apiQueryReducer } from './reducers/api-query/api-query-reducer';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ApiQueryInterceptor } from './api-query-interceptor';
 
 @NgModule({
   exports: [
@@ -36,8 +40,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
+    StoreModule.forRoot({ apiQuery: apiQueryReducer }),
     BrowserAnimationsModule
   ],
-  providers: [CanDeactivateGuard]
+  providers: [
+    CanDeactivateGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: ApiQueryInterceptor, multi: true },
+  ]
 })
 export class SharedModule { }

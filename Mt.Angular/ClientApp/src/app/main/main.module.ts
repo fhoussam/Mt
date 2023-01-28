@@ -17,6 +17,8 @@ import { OrderEditComponent } from './components/orders/order-edit/order-edit.co
 import { OrderDetailsComponent } from './components/orders/order-details/order-details.component';
 import { OrderSearchComponent } from './components/orders/order-search/order-search.component';
 import { AutoCompleteComponent } from './components/common/auto-complete/auto-complete.component';
+import { StoreModule } from '@ngrx/store';
+import { ordersReducer } from './reducers/orders/orders-reducer';
 
 export function get_settings(initLoadService: InitLoadService) {
   return () => initLoadService.getSettings();
@@ -41,6 +43,7 @@ export function get_settings(initLoadService: InitLoadService) {
   imports: [
     SharedModule,
     CommonModule,
+    StoreModule.forFeature('orders', ordersReducer),
     RouterModule.forRoot([
       { path: 'customers', canDeactivate: [CanDeactivateGuard], canActivate: [AuthGuardService], component: CustomersListComponent },
       { path: 'orders', canActivate: [AuthGuardService], component: OrdersListComponent },

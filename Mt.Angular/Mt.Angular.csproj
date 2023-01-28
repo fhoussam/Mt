@@ -51,12 +51,15 @@
     <None Remove="ClientApp\src\app\main\reducers\orders-actions.ts" />
     <None Remove="ClientApp\src\app\main\reducers\orders-effects.ts" />
     <None Remove="ClientApp\src\app\main\reducers\orders-reducer.ts" />
+    <None Remove="ClientApp\src\app\shared\api-query-interceptor.ts" />
     <None Remove="ClientApp\src\app\shared\guards\can-deactivate.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Remove="ClientApp\src\app\main\models\customer-order-list-item.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\main\reducers\orders\orders-selectors.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\reducers\api-query\api-query-actions.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\reducers\api-query\api-query-reducer.ts" />
   </ItemGroup>
 
   <ItemGroup>
