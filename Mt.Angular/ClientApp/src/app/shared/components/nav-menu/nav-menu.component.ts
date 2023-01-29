@@ -9,13 +9,14 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavMenuComponent implements OnInit {
 
-  selectedLanguage: string = 'en';
+  defaultLanguage = 'en';
+  selectedLanguage: string = this.defaultLanguage;
 
   constructor(private authService: AuthService, private el: ElementRef) { }
 
   ngOnInit(): void {
     this.initUserInfo();
-    this.selectedLanguage = localStorage.getItem('language') || 'en';
+    this.selectedLanguage = localStorage.getItem('language') || this.defaultLanguage;
   }
 
   getCurrentLanguageLabel(): string {
@@ -24,8 +25,10 @@ export class NavMenuComponent implements OnInit {
         return 'FR';
       case 'ar':
         return 'AR';
+      case 'en':
+        return 'EN';
       default:
-        return 'EN'
+        return this.defaultLanguage;
     }
   }
 
