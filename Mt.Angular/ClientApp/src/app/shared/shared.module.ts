@@ -12,9 +12,15 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { apiQueryReducer } from './reducers/api-query/api-query-reducer';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiQueryInterceptor } from './api-query-interceptor';
 import { AlertComponent } from './components/alert/alert.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   exports: [
@@ -27,7 +33,9 @@ import { AlertComponent } from './components/alert/alert.component';
     ReactiveFormsModule,
     BsDatepickerModule,
     BrowserAnimationsModule,
-    AlertComponent
+    AlertComponent,
+    TranslateModule,
+    CommonModule
   ],
   declarations: [
     NavMenuComponent,
@@ -42,6 +50,13 @@ import { AlertComponent } from './components/alert/alert.component';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     BsDatepickerModule.forRoot(),
     StoreModule.forRoot({ apiQuery: apiQueryReducer }),
     BrowserAnimationsModule

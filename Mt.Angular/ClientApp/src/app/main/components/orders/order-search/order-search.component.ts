@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { State, Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { APP_SETTINGS } from '../../../models/APP_SETTINGS';
 import { OrderSearch } from '../../../models/order-search';
 import { AppFeatureState } from '../../../reducers/AppFeatureState';
@@ -17,7 +18,9 @@ export class OrderSearchComponent implements OnInit {
   customerSearch: OrderSearch;
   @ViewChild('f', { static: false }) editForm: NgForm;
 
-  constructor(private store: Store<AppFeatureState>) {}
+  constructor(private store: Store<AppFeatureState>, private translate: TranslateService) {
+    translate.setDefaultLang('en');
+  }
 
   ngOnInit(): void {
     this.countries = APP_SETTINGS.countries;
