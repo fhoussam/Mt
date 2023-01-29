@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { UserModel } from '../../models/UserModel';
 import { AuthService } from '../../services/auth.service';
 
@@ -9,10 +9,34 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavMenuComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  selectedLanguage: string = 'en';
+
+  constructor(private authService: AuthService, private el: ElementRef) { }
 
   ngOnInit(): void {
     this.initUserInfo();
+    this.selectedLanguage = localStorage.getItem('language') || 'en';
+  }
+
+  getCurrentLanguageLabel(): string {
+    switch (this.selectedLanguage) {
+      case 'fr':
+        return 'FR';
+      case 'ar':
+        return 'AR';
+      default:
+        return 'EN'
+    }
+  }
+
+  toggleDropdown() {
+    const dropdown = this.el.nativeElement.querySelector('.dropdown-menu');
+    dropdown.classList.toggle('show');
+  }
+
+  selectLanguage(language: string) {
+    localStorage.setItem('language', language);
+    window.location.reload();
   }
 
   user = new UserModel();

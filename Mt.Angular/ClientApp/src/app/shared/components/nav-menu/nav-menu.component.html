@@ -9,6 +9,14 @@
       <li *ngIf="user.role === 'admin'" [routerLinkActive]="['active']"><a [routerLink]="['/orders']">Orders</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="javascript:void(0)" (click)="toggleDropdown()">Language({{getCurrentLanguageLabel()}}) <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="javascript:void(0)" (click)="selectLanguage('ar')">عربي</a></li>
+          <li><a href="javascript:void(0)" (click)="selectLanguage('en')">English</a></li>
+          <li><a href="javascript:void(0)" (click)="selectLanguage('fr')">Français</a></li>
+        </ul>
+      </li>
       <li *ngIf="user.id.length !== 0"><a href="javascript:;">{{user.name}} ({{user.role}})</a></li>
       <li *ngIf="user.id.length === 0"><a (click)="login()" href="javascript:;">Login</a></li>
       <li *ngIf="user.id.length !== 0"><a (click)="logout()" href="javascript:;">Logout</a></li>
