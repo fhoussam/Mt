@@ -1,0 +1,7 @@
+<div class="backdrop" *ngIf="loading"></div>
+<div *ngIf="displayed" class="alert alert-{{alerType}} fixed-bottom text-right" style="margin-right:10px; opacity:0.7;">
+  <button (click)="dismiss()" type="button" class="close" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  {{message}}
+</div>

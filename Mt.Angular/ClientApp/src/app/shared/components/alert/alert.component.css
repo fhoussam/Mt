@@ -1,0 +1,15 @@
+.backdrop {
+  position: fixed; /* position the backdrop over the entire page */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* add a transparent black background color */
+  z-index: 1040; /* make sure the backdrop is on top of everything else */
+}
+
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}

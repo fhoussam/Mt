@@ -14,6 +14,7 @@ import { StoreModule } from '@ngrx/store';
 import { apiQueryReducer } from './reducers/api-query/api-query-reducer';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiQueryInterceptor } from './api-query-interceptor';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   exports: [
@@ -25,14 +26,16 @@ import { ApiQueryInterceptor } from './api-query-interceptor';
     FormsModule,
     ReactiveFormsModule,
     BsDatepickerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AlertComponent
   ],
   declarations: [
     NavMenuComponent,
     ModalComponent,
     PagerComponent,
     ConfirmationComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    AlertComponent
   ],
   imports: [
     CommonModule,

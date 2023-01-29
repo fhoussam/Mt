@@ -4,7 +4,7 @@ import { Store } from "@ngrx/store";
 import { EMPTY, of } from "rxjs";
 import { catchError, map, mergeMap, tap, withLatestFrom } from "rxjs/operators";
 import { MtService } from "../../services/mt-angular-http.service";
-import { AppState } from "../AppState";
+import { AppFeatureState } from "../AppFeatureState";
 import { pageOrdersBeginAction, searchOrdersBeginAction, searchOrdersEndAction, selectOrderForEditBeginAction, selectOrderForEditEndAction, sortOrdersBeginAction, updateOrderBeginAction } from "./orders-actions";
 
 @Injectable()
@@ -87,5 +87,5 @@ export class OrdersEffects {
       ))
   ));
 
-  constructor(private actions$: Actions, private mtService: MtService, private store: Store<AppState>) { }
+  constructor(private actions$: Actions, private mtService: MtService, private store: Store<AppFeatureState>) { }
 }

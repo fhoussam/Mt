@@ -1,5 +1,6 @@
 import { OrderState } from "./orders/orders-reducer";
 
-export class AppState {
+export class AppFeatureState {
+
   orders: OrderState;
 }

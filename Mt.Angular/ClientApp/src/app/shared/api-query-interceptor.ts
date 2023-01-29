@@ -1,29 +1,41 @@
+import { HttpErrorResponse, HttpEvent, HttpEventType, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { ApiQueryERRORResponseAction, ApiQueryOkResponseAction, ApiQuerySentAction } from './reducers/api-query/api-query-actions';
+import { Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { ApiQueryErrorResponseAction, ApiQueryOkResponseAction, ApiQuerySentAction } from './reducers/api-query/api-query-actions';
 
 @Injectable()
 export class ApiQueryInterceptor implements HttpInterceptor {
   constructor(private store: Store) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    this.store.dispatch(ApiQuerySentAction());
-    return next.handle(req).pipe(
-      tap(
-        event => {
-          if (event instanceof HttpResponse) {
+    if (req.method !== 'GET') {
+      this.store.dispatch(ApiQuerySentAction());
+    }
+    return next.handle(req).pipe(tap(event => {
+      if (req.method != 'GET') {
+        if (event.type === HttpEventType.Response) {
+          if (event.ok) {
             this.store.dispatch(ApiQueryOkResponseAction());
           }
-        },
-        error => {
-          if (error instanceof HttpErrorResponse) {
-            this.store.dispatch(ApiQueryERRORResponseAction());
+          else {
+            this.store.dispatch(ApiQueryErrorResponseAction());
           }
         }
-      )
-    );
+      }
+    }), catchError((error: HttpErrorResponse) => {
+      this.store.dispatch(ApiQueryErrorResponseAction());
+      let errorMsg = '';
+      if (error.error instanceof ErrorEvent) {
+        console.log('This is client side error');
+        errorMsg = `Error: ${error.error.message}`;
+      } else {
+        console.log('This is server side error');
+        errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
+      }
+      console.log(errorMsg);
+      return throwError(errorMsg);
+    }))
   }
 }

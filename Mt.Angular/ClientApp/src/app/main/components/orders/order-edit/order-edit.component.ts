@@ -5,7 +5,7 @@ import { delay, map, Observable, of, Subscription, switchMap } from 'rxjs';
 import { APP_SETTINGS } from '../../../models/APP_SETTINGS';
 import { OrderEdit } from '../../../models/order-edit';
 import { OrderEditUpdate } from '../../../models/order-edit-update';
-import { AppState } from '../../../reducers/AppState';
+import { AppFeatureState } from '../../../reducers/AppFeatureState';
 import { updateOrderBeginAction } from '../../../reducers/orders/orders-actions';
 import { orderForEditSelector } from '../../../reducers/orders/orders-selectors';
 import { MtService } from '../../../services/mt-angular-http.service';
@@ -17,7 +17,7 @@ import { MtService } from '../../../services/mt-angular-http.service';
 })
 export class OrderEditComponent implements OnInit, OnDestroy {
 
-  constructor(private store: Store<AppState>, private mtService: MtService) { }
+  constructor(private store: Store<AppFeatureState>, private mtService: MtService) { }
 
   previousState: OrderEdit;
   countries: string[];

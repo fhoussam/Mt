@@ -1,14 +1,14 @@
 import { createSelector } from "@ngrx/store";
-import { AppState } from "../AppState";
+import { AppFeatureState } from "../AppFeatureState";
 
-export const selectAppState = (state: AppState) => state;
+export const selectAppState = (state: AppFeatureState) => state;
 
 export const orderSearchResultSelector = createSelector(
   selectAppState,
-  (state: AppState) => state.orders.orderSearchResult
+  (state: AppFeatureState) => state.orders.orderSearchResult
 );
 
 export const orderForEditSelector = createSelector(
   selectAppState,
-  (state: AppState) => state.orders.orderForEdit
+  (state: AppFeatureState) => state.orders.orderForEdit
 );

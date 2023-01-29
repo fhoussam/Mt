@@ -3,8 +3,6 @@ using Mt.Application.Exceptions;
 using Mt.Application.Operations.Commands.RequestDtos;
 using Mt.Application.Operations.Queries;
 using Mt.Application.Persistence;
-using Mt.SeedWork;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -35,6 +33,9 @@ namespace Mt.Application.Operations.Commands
 
             public async Task<Unit> Handle(EditOrderCommand request, CancellationToken cancellationToken)
             {
+                //System.Threading.Thread.Sleep(1500);
+                throw new System.Exception();
+
                 var toEdit = _context.Orders.Find(request.OrderId);
 
                 if (toEdit == null)

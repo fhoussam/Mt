@@ -47,12 +47,13 @@
     <None Remove="ClientApp\src\app\main\models\order-search.ts" />
     <None Remove="ClientApp\src\app\main\models\order-tab-menu.ts" />
     <None Remove="ClientApp\src\app\main\models\SortSetting.ts" />
-    <None Remove="ClientApp\src\app\main\reducers\AppState.ts" />
+    <None Remove="ClientApp\src\app\main\reducers\AppFeatureState.ts" />
     <None Remove="ClientApp\src\app\main\reducers\orders-actions.ts" />
     <None Remove="ClientApp\src\app\main\reducers\orders-effects.ts" />
     <None Remove="ClientApp\src\app\main\reducers\orders-reducer.ts" />
     <None Remove="ClientApp\src\app\shared\api-query-interceptor.ts" />
     <None Remove="ClientApp\src\app\shared\guards\can-deactivate.ts" />
+    <None Remove="ClientApp\src\app\shared\reducers\AppRootState.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -60,6 +61,7 @@
     <TypeScriptCompile Remove="ClientApp\src\app\main\reducers\orders\orders-selectors.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\shared\reducers\api-query\api-query-actions.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\shared\reducers\api-query\api-query-reducer.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\reducers\api-query\api-query-selectors.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -67,6 +69,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Update="ClientApp\src\app\main\models\order-search.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Update="ClientApp\src\app\shared\reducers\AppRootState.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
   </ItemGroup>

@@ -7,7 +7,7 @@ import { OrderSearch } from '../../../models/order-search';
 import { OrderTabMenu } from '../../../models/order-tab-menu';
 import { PagedList } from '../../../models/PagedList';
 import { SortSetting } from '../../../models/SortSetting';
-import { AppState } from '../../../reducers/AppState';
+import { AppFeatureState } from '../../../reducers/AppFeatureState';
 import { pageOrdersBeginAction, selectOrderForEditBeginAction, sortOrdersBeginAction } from '../../../reducers/orders/orders-actions';
 import { orderSearchResultSelector } from '../../../reducers/orders/orders-selectors';
 import { OrderEditComponent } from '../order-edit/order-edit.component';
@@ -37,16 +37,18 @@ export class OrdersListComponent implements OnInit, OnDestroy {
 
   constructor(
     private renderer: Renderer2,
-    private store: Store<AppState>
+    private store: Store<AppFeatureState>
   ) { }
 
   ngOnInit() {
     this.searchResult$ = this.store.select(orderSearchResultSelector);
     this.searchResultSubscription = this.searchResult$.subscribe(x => {
-      this.orders = x?.content;
-      this.totalCount = x?.totalCount;
-      this.selectedId = x?.content[0].id;
-      this.selectOrder(this.selectedId);
+      if (x?.content != null) {
+        this.orders = x?.content;
+        this.totalCount = x?.totalCount;
+        this.selectedId = x?.content[0].id;
+        this.selectOrder(this.selectedId);
+      }
     });
   }
 
