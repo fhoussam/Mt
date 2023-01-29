@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Mt.Application.Abstractions;
 using Mt.Application.Exceptions;
 using Mt.Application.Operations.Commands.RequestDtos;
 using Mt.Application.Operations.Queries;
@@ -24,18 +25,17 @@ namespace Mt.Application.Operations.Commands
             private readonly INorthWindDbContext _context;
 
             private readonly IMediator _mediator;
+            public IUserContext _userContext { get; set; }
 
-            public EditOrderCommandHandler(INorthWindDbContext context, IMediator mediator)
+            public EditOrderCommandHandler(INorthWindDbContext context, IMediator mediator, IUserContext userContext)
             {
                 _context = context;
                 _mediator = mediator;
+                _userContext = userContext;
             }
 
             public async Task<Unit> Handle(EditOrderCommand request, CancellationToken cancellationToken)
             {
-                //System.Threading.Thread.Sleep(1500);
-                throw new System.Exception();
-
                 var toEdit = _context.Orders.Find(request.OrderId);
 
                 if (toEdit == null)

@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Mt.Api.Filters;
 using Mt.Api.Middlewares;
+using Mt.Application.Abstractions;
 using Mt.Application.Operations.Validators;
 using Mt.Application.Persistence;
 using Mt.Infra.Persistence;
@@ -32,6 +33,8 @@ namespace Mt.Api
         {
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<INorthWindDbContext, NorthWindDbContext>(o => o.UseSqlServer(connectionString));
+
+            services.AddScoped<IUserContext, UserContext>();
 
             services.AddMediatR();
 
@@ -87,7 +90,8 @@ namespace Mt.Api
 
             app.UseHttpsRedirection();
 
-            app.UseCustomExcptionHandler();
+            app.UseCustomExcptionMiddleware();
+            app.UseUserContextMiddleware();
 
             app.UseCors(x => x.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
 

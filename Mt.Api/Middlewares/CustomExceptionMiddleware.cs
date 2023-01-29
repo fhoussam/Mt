@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Mt.Api.Middlewares
 {
-    public class CustomExceptionHandler
+    public class CustomExceptionMiddleware
     {
         private readonly RequestDelegate _next;
 
-        public CustomExceptionHandler(RequestDelegate next)
+        public CustomExceptionMiddleware(RequestDelegate next)
         {
             _next = next;
         }
@@ -54,9 +54,9 @@ namespace Mt.Api.Middlewares
 
     public static class ExcptionHandlerExtensions
     {
-        public static IApplicationBuilder UseCustomExcptionHandler(this IApplicationBuilder builder)
+        public static IApplicationBuilder UseCustomExcptionMiddleware(this IApplicationBuilder builder)
         {
-            return builder.UseMiddleware<CustomExceptionHandler>();
+            return builder.UseMiddleware<CustomExceptionMiddleware>();
         }
     }
 }

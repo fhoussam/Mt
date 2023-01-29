@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { constants } from './constants';
 import { ApiQueryErrorResponseAction, ApiQueryOkResponseAction, ApiQuerySentAction } from './reducers/api-query/api-query-actions';
 
 @Injectable()
@@ -10,6 +11,14 @@ export class ApiQueryInterceptor implements HttpInterceptor {
   constructor(private store: Store) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
+    const lang = localStorage.getItem(constants.languageLocalStorageKey) || constants.defaultLanguage;
+    req = req.clone({
+      setHeaders: {
+        'accept-language': lang
+      }
+    });
+
     if (req.method !== 'GET') {
       this.store.dispatch(ApiQuerySentAction());
     }

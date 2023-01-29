@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
+import { constants } from '../../constants';
 import { UserModel } from '../../models/UserModel';
 import { AuthService } from '../../services/auth.service';
 
@@ -9,14 +10,13 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavMenuComponent implements OnInit {
 
-  defaultLanguage = 'en';
-  selectedLanguage: string = this.defaultLanguage;
+  selectedLanguage: string = constants.defaultLanguage;
 
   constructor(private authService: AuthService, private el: ElementRef) { }
 
   ngOnInit(): void {
     this.initUserInfo();
-    this.selectedLanguage = localStorage.getItem('language') || this.defaultLanguage;
+    this.selectedLanguage = localStorage.getItem(constants.languageLocalStorageKey) || constants.defaultLanguage;
   }
 
   getCurrentLanguageLabel(): string {
@@ -28,7 +28,7 @@ export class NavMenuComponent implements OnInit {
       case 'en':
         return 'EN';
       default:
-        return this.defaultLanguage;
+        return constants.defaultLanguage;
     }
   }
 
@@ -38,7 +38,7 @@ export class NavMenuComponent implements OnInit {
   }
 
   selectLanguage(language: string) {
-    localStorage.setItem('language', language);
+    localStorage.setItem(constants.languageLocalStorageKey, language);
     window.location.reload();
   }
 
