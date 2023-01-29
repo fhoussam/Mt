@@ -63,6 +63,7 @@
     <TypeScriptCompile Remove="ClientApp\src\app\shared\reducers\api-query\api-query-actions.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\shared\reducers\api-query\api-query-reducer.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\shared\reducers\api-query\api-query-selectors.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\services\my.translation.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
